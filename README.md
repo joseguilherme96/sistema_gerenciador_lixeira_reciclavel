@@ -7,7 +7,7 @@ Tembém tem objetivos de aprender e explorar um pouco mais a questão de projeta
 Os dados ainda apresentados estão mockados apenas servirão como base para construção da API definitiva que será desenvolvido em python posteriormente.
 
 # Tela inicial do projeto
-- [![Tela acompanhamento dos niveis de lixeira reciclavel](src/assets/public/imagens/tela_acompanhamento_lixeiras_reciclaveis.png "Logo, framework vue.js")](https://github.com/joseguilherme96/sistema_gerenciador_lixeira_reciclavel/blob/f8fddfa8650bf7573296a4d1f46f303a74648278/src/assets/tela_acompanhamento_lixeiras_reciclaveis.png)
+- [![Tela acompanhamento dos niveis de lixeira reciclavel](https://github.com/joseguilherme96/sistema_gerenciador_lixeira_reciclavel/blob/f8fddfa8650bf7573296a4d1f46f303a74648278/src/assets/tela_acompanhamento_lixeiras_reciclaveis.png "Tela acompanhamento dos niveis de lixeira reciclavel")](https://github.com/joseguilherme96/sistema_gerenciador_lixeira_reciclavel/blob/f8fddfa8650bf7573296a4d1f46f303a74648278/src/assets/tela_acompanhamento_lixeiras_reciclaveis.png)
 
 ## Configuração do projeto  
 
