@@ -2,16 +2,18 @@
 
 Este projeto está sendo desenvovido e tem objetivo de ser capaz gerenciar os niveis das lixeiras em tempo real em diversos pontos da cidade, seja por meio da sinalização por um morador ou ainda por meio de sensores que serão integrados ao sistema.
 
-Os dados ainda estão mockados e servirão como base para construção da API definitiva que será desenvolvido em python posteriormente.
+Tembém tem objetivos de apreder e explorar um pouco mais a questão de projetar sistemas seguindo as melhores práticas no desenvolvimento de software, como a criação de componentes, serviços, gerenciamentos de estados dos componentes, aplicação de diretivas, uso de websockets para informação em tempo real e outros tópicos que poderão ser explorados ao longo do projeto.
+
+Os dados ainda apresentados estão mockados apenas servirão como base para construção da API definitiva que será desenvolvido em python posteriormente.
 
 # Foto da primeira tela inicial do projeto
-- [![Tela acompanhamento dos niveis de lixeira reciclavel](src/assets/public/imagens/tela_acompanhamento_lixeiras_reciclaveis.png "Logo, framework vue.js")](src/assets/public/imagens/tela_acompanhamento_lixeiras_reciclaveis.png)
+- [![Tela acompanhamento dos niveis de lixeira reciclavel](src/assets/public/imagens/tela_acompanhamento_lixeiras_reciclaveis.png "Logo, framework vue.js")](https://github.com/joseguilherme96/sistema_gerenciador_lixeira_reciclavel/blob/main/src/assets/tela_acompanhamento_lixeiras_reciclaveis.png)
 
 ## Recommended IDE Setup
 
 [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
 
-## Configuração do projeto
+## Configuração do projeto  
 
 ## Intalação das depêndencias
 
