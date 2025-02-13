@@ -89,5 +89,23 @@
         },
         {id:'4',cidade:'Rio de Janeiro',estado:'Rio de Janeiro'
         }
+    ],
+    informativosLixeira: [
+        {
+            idInformativoLixeira:'1',
+            lixeiraId:'1',
+            nivelLixeira: 10,
+            observacao:'',
+            dataAtualizacao:'12/02/2025',
+            horaAtualizacao:'16: 38'
+        },
+        {
+            idInformativoLixeira:'2',
+            lixeiraId:'1',
+            nivelLixeira: 20,
+            observacao:'',
+            dataAtualizacao:'13/02/2025',
+            horaAtualizacao:'16: 38'
+        },
     ]
 }

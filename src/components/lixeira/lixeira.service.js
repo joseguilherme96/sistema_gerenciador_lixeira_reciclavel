@@ -5,8 +5,7 @@ import { lixeiraModel } from './lixeira.model.js'
 
 export const baseUrl = "http://localhost:3000";
 export const apiLixeirasUrl = `${baseUrl}/lixeiras`;
-
-
+export const lixeiraSelecionada = ref({});
 export const lixeira = ref([
     lixeiraModel
 ])
@@ -60,7 +59,7 @@ export async function getLixeiras() {
     fetch(apiLixeirasUrl)
         .then(res => res.json())
         .then(res => {
-            
+
             lixeira.value = res;
 
         })
@@ -85,6 +84,25 @@ export async function criarLixeira() {
     })
         .then(res => res.json())
         .then(res => res)
+        .catch(err => err)
+
+}
+
+export function selecionarLixeira(idLixeira) {
+
+    getLixeiraPorId(idLixeira)
+        .then((res) => lixeiraSelecionada.value = res)
+
+}
+
+export async function getLixeiraPorId(idLixeira) {
+
+    return fetch(`${apiLixeirasUrl}/${idLixeira}`)
+        .then(res => res.json())
+        .then(res =>
+            res
+
+        )
         .catch(err => err)
 
 }

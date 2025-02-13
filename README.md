@@ -2,7 +2,7 @@
 
 Este projeto está sendo desenvolvido e tem objetivo de ser capaz gerenciar os niveis das lixeiras em tempo real em diversos pontos da cidade, seja por meio da sinalização por um morador ou ainda por meio de sensores que serão integrados ao sistema.
 
-Também tem objetivos de aprender e explorar um pouco mais a questão de projetar sistemas seguindo as melhores práticas no desenvolvimento de software, como a criação de componentes, serviços, gerenciamentos de estados dos componentes, aplicação de diretivas personalizadas, uso de websockets para informação em tempo real e outros tópicos que poderão ser explorados ao longo do projeto.
+Também tem objetivo de aprender e explorar um pouco mais a questão de projetar sistemas seguindo as melhores práticas no desenvolvimento de software, como a criação de componentes, serviços, gerenciamentos de estados dos componentes, aplicação de diretivas personalizadas, uso de websockets para informação em tempo real e outros tópicos que poderão ser explorados ao longo do projeto.
 
 Os dados ainda apresentados estão mockados e apenas servirão como base para construção da API definitiva que será desenvolvido em python posteriormente.
 

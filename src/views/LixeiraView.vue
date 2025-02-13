@@ -9,6 +9,7 @@ import ModalCadastro from '../components/modal/ModalCadastro.vue'
 import FormularioCadastroLixeira from '../components/lixeira/FormularioCadastroLixeira.vue'
 import { mdiMagnify, mdiPlus } from '@mdi/js'
 import { getCidades, getEstados } from '../services/endereco.service.js'
+import ModalExibirDetalhesLixeira from '../components/lixeira/ModalExibirDetalhesLixeira.vue'
 
 onMounted(() => {
     getLixeiras();
@@ -26,6 +27,14 @@ const dados = ref({
     nivelLixeira: '',
     observacao: '',
     exibir: false
+})
+
+const modalDetalhesLixeira = ref({
+
+    titulo: 'Detalhes Lixeira',
+    exibir: false
+
+
 })
 const filtroEstaAberto = ref(false)
 
@@ -45,6 +54,12 @@ function cadastrarLixeira() {
         console.log(res);
         dados.value.exibir = false
     })
+}
+
+function abrirModalExibirDetalhesLixeiraModal() {
+
+    modalDetalhesLixeira.value.exibir = true;
+
 }
 
 </script>
@@ -84,5 +99,6 @@ function cadastrarLixeira() {
         </BarraSuperior>
         <FiltroPesquisa v-if="filtroEstaAberto"></FiltroPesquisa>
     </v-container>
-    <TabelaLixeiras></TabelaLixeiras>
+    <TabelaLixeiras @abrirModalExibirDetalhesLixeiraModal="abrirModalExibirDetalhesLixeiraModal"></TabelaLixeiras>
+    <ModalExibirDetalhesLixeira :data="modalDetalhesLixeira"></ModalExibirDetalhesLixeira>
 </template>

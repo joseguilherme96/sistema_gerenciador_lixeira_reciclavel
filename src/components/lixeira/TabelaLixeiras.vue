@@ -1,8 +1,18 @@
 <script setup lang="js">
 
-import { lixeira } from './lixeira.service'
+import { lixeira, selecionarLixeira } from './lixeira.service'
 
 import { vCorNivelLixeira } from '../../directives/cor.nivel.lixeira.diretiva.js'
+import { mdiViewDashboardOutline } from '@mdi/js'
+
+const emit = defineEmits(['abrirModalExibirDetalhesLixeiraModal'])
+
+const abrirModalExibirDetalhesLixeiraModal = (idLixeira) => {
+
+    selecionarLixeira(idLixeira)
+    emit("abrirModalExibirDetalhesLixeiraModal")
+
+}
 
 
 </script>
@@ -41,10 +51,13 @@ import { vCorNivelLixeira } from '../../directives/cor.nivel.lixeira.diretiva.js
                 <th class="text-left">
                     Cor
                 </th>
+                <th class="text-left">
+                    Ações
+                </th>
             </tr>
         </thead>
         <tbody>
-            <tr v-for="item in lixeira" :key="item.name">
+            <tr v-for="item in lixeira" :key="item.name" @click="abrirModalExibirDetalhesLixeiraModal(item.id)">
                 <td>{{ item.id }}</td>
                 <td>{{ item.endereco }}</td>
                 <td>{{ item.cidade }}</td>
@@ -57,6 +70,10 @@ import { vCorNivelLixeira } from '../../directives/cor.nivel.lixeira.diretiva.js
                 <td>{{ item.data }}</td>
                 <td>{{ item.hora }}</td>
                 <td>{{ item.cor }}</td>
+                <td><v-btn color="rgb(94, 93, 93)" @click="abrirModalExibirDetalhesLixeiraModal(item.id)">
+                        <svg-icon type="mdi" :path="mdiViewDashboardOutline"></svg-icon>
+                        Visualizar
+                    </v-btn></td>
             </tr>
         </tbody>
     </v-table>
