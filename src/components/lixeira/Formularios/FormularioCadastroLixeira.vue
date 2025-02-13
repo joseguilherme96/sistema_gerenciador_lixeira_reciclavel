@@ -6,13 +6,26 @@ import { materiaisReciclaveis } from '../materiais.reciclaveis.services.js'
 import {niveisLixeira} from '../nivel.lixeira.service.js'
 import BarraSuperior from '../BarraSuperior/BarraSuperior.vue'
 import {cidades,estados} from '../../../services/endereco.service.js'
+import TituloPagina from '../Titulo/TituloPagina.vue'
 
+const configuracaoTitulo = {
+
+nome: 'Cadastro Lixeira',
+icone:mdiTruck,
+
+}
 
 </script>
 
 <template>
     <v-container>
-                <BarraSuperior></BarraSuperior>
+                <BarraSuperior>
+
+                    <template v-slot:titulo>
+                        <TituloPagina :configuracaoTitulo="configuracaoTitulo"></TituloPagina>
+                    </template>
+
+                </BarraSuperior>
                 
                     <v-row>
 

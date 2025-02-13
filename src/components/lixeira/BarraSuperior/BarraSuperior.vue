@@ -23,7 +23,9 @@ function abrirModalFiltro() {
 <template>
 
     <v-toolbar class="mb-5">
-        <TituloPagina></TituloPagina>
+        <slot name="titulo">
+
+        </slot>
         <slot name="opcoes">
         </slot>
     </v-toolbar>

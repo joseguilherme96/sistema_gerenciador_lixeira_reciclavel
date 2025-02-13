@@ -2,13 +2,21 @@
 
 import { mdiTruck } from '@mdi/js'
 
+defineProps({
+
+    configuracaoTitulo: {
+        type: Object,
+        required: true
+    }
+})
+
 </script>
 
 <template>
 
     <v-toolbar-title>
-        <svg-icon type="mdi" :path="mdiTruck"></svg-icon>
-        <span>Acompanhamento dos Niveis de Lixos Recicláveis Nas Lixeiras</span>
+        <svg-icon type="mdi" :path="configuracaoTitulo.icone"></svg-icon>
+        <span>{{ configuracaoTitulo.nome }}</span>
     </v-toolbar-title>
 
 

@@ -5,6 +5,9 @@ import InformativoLixeira from '../InformativoLixeira/InformativoLixeira.vue';
 import QRCodeLixeira from '../QRCodeLixeira/QRCodeLixeira.vue'
 import { baseUrl } from '../lixeira.service.js'
 import { ref, watch } from 'vue'
+import BarraSuperior from '../BarraSuperior/BarraSuperior.vue';
+import TituloPagina from '../Titulo/TituloPagina.vue';
+import { mdiViewDashboardOutline } from '@mdi/js';
 
 defineProps({
     data: Object
@@ -26,6 +29,10 @@ watch(() => lixeiraSelecionada.value, (newValue) => {
 
 })
 
+const configuracaoTitulo = ref({
+    nome: 'Detalhes da Lixeira',
+    icone: mdiViewDashboardOutline
+})
 
 </script>
 
@@ -37,6 +44,16 @@ watch(() => lixeiraSelecionada.value, (newValue) => {
         <template v-slot:default="{ isActive }">
 
             <v-card>
+
+                <BarraSuperior>
+
+                    <template v-slot:titulo>
+
+                        <TituloPagina :configuracaoTitulo="configuracaoTitulo"></TituloPagina>
+
+                    </template>
+
+                </BarraSuperior>
 
                 <div class="d-flex flex-no-wrap justify-space-between">
 
@@ -60,6 +77,9 @@ watch(() => lixeiraSelecionada.value, (newValue) => {
 
                 <template v-slot:actions>
                     <v-btn variant="flat" color="rgb(94, 93, 93)" text="FECHAR" @click="data.exibir = false"></v-btn>
+                    <RouterLink :to="`/informar-status-lixeira/${lixeiraSelecionada.id}`" v-if="lixeiraSelecionada.id">
+                        <v-btn variant="flat" color="rgb(94, 93, 93)" text="INFORMAR STATUS LIXEIRA"></v-btn>
+                    </RouterLink>
                 </template>
 
             </v-card>

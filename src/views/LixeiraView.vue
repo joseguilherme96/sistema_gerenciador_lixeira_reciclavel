@@ -1,14 +1,15 @@
 <script setup lang="js">
 
 import BarraSuperior from '../components/lixeira/BarraSuperior/BarraSuperior.vue';
-import { getLixeiras} from '../components/lixeira/lixeira.service'
+import { getLixeiras } from '../components/lixeira/lixeira.service.js'
 import { onMounted, ref } from 'vue'
 import FiltroPesquisa from '@/components/lixeira/FIltroPesquisaLixeira/FiltroPesquisa.vue';
 import TabelaLixeiras from '@/components/lixeira/TabelaLixeira/TabelaLixeiras.vue';
 import ModalCadastro from '../components/lixeira/Modais/ModalCadastro.vue'
-import { mdiMagnify, mdiPlus } from '@mdi/js'
+import { mdiMagnify, mdiPlus, mdiTrashCan, mdiTruck } from '@mdi/js'
 import { getCidades, getEstados } from '../services/endereco.service.js'
 import ModalExibirDetalhesLixeira from '../components/lixeira/Modais/ModalExibirDetalhesLixeira.vue'
+import TituloPagina from '../components/lixeira/Titulo/TituloPagina.vue';
 
 onMounted(() => {
     getLixeiras();
@@ -45,11 +46,19 @@ function abrirModalExibirDetalhesLixeiraModal() {
 
 }
 
+const configuracaoTitulo = ref({
+    nome: 'Acompanhamento do Nível das Lixeiras',
+    icone: mdiTruck
+})
+
 </script>
 
 <template>
     <v-container>
         <BarraSuperior>
+            <template v-slot:titulo>
+                <TituloPagina :configuracaoTitulo="configuracaoTitulo"></TituloPagina>
+            </template>
             <template v-slot:opcoes>
                 <v-btn color="primary" @click="abrirModalCadastroLixeira()">
                     <svg-icon type="mdi" :path="mdiPlus"></svg-icon>
