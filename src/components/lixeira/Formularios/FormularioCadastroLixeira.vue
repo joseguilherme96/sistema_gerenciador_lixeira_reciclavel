@@ -7,11 +7,12 @@ import {niveisLixeira} from '../nivel.lixeira.service.js'
 import BarraSuperior from '../BarraSuperior/BarraSuperior.vue'
 import {cidades,estados} from '../../../services/endereco.service.js'
 import TituloPagina from '../Titulo/TituloPagina.vue'
+import { mdiAccount, mdiAccountPlus, mdiDatabase, mdiTruck } from '@mdi/js'
 
 const configuracaoTitulo = {
 
 nome: 'Cadastro Lixeira',
-icone:mdiTruck,
+icone:mdiAccountPlus
 
 }
 

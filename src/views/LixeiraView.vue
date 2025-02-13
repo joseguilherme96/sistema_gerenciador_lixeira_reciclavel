@@ -54,24 +54,24 @@ const configuracaoTitulo = ref({
 </script>
 
 <template>
-    <v-container>
-        <BarraSuperior>
-            <template v-slot:titulo>
-                <TituloPagina :configuracaoTitulo="configuracaoTitulo"></TituloPagina>
-            </template>
-            <template v-slot:opcoes>
-                <v-btn color="primary" @click="abrirModalCadastroLixeira()">
-                    <svg-icon type="mdi" :path="mdiPlus"></svg-icon>
-                    Cadastrar Lixeira
-                </v-btn>
-                <v-btn color="primary" @click="abrirFiltro()">
-                    <svg-icon type="mdi" :path="mdiMagnify"></svg-icon>
-                    Filtro Lixeiras
-                </v-btn>
-            </template>
-        </BarraSuperior>
-        <FiltroPesquisa v-if="filtroEstaAberto"></FiltroPesquisa>
-    </v-container>
+
+    <BarraSuperior>
+        <template v-slot:titulo>
+            <TituloPagina :configuracaoTitulo="configuracaoTitulo"></TituloPagina>
+        </template>
+        <template v-slot:opcoes>
+            <v-btn color="primary" @click="abrirModalCadastroLixeira()">
+                <svg-icon type="mdi" :path="mdiPlus"></svg-icon>
+                Cadastrar Lixeira
+            </v-btn>
+            <v-btn color="primary" @click="abrirFiltro()">
+                <svg-icon type="mdi" :path="mdiMagnify"></svg-icon>
+                Filtro Lixeiras
+            </v-btn>
+        </template>
+    </BarraSuperior>
+    <FiltroPesquisa v-if="filtroEstaAberto"></FiltroPesquisa>
+
 
     <TabelaLixeiras @abrirModalExibirDetalhesLixeiraModal="abrirModalExibirDetalhesLixeiraModal"></TabelaLixeiras>
 

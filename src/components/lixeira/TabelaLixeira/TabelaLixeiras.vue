@@ -1,9 +1,9 @@
 <script setup lang="js">
 
-import { lixeira, selecionarLixeira } from '../lixeira.service.js'
+import { lixeira, selecionarLixeira, getLixeiras } from '../lixeira.service.js'
 
 import { vCorNivelLixeira } from '../../../directives/cor.nivel.lixeira.diretiva.js'
-import { mdiViewDashboardOutline } from '@mdi/js'
+import { mdiUpdate, mdiViewDashboardOutline } from '@mdi/js'
 
 const emit = defineEmits(['abrirModalExibirDetalhesLixeiraModal'])
 
@@ -17,6 +17,12 @@ const abrirModalExibirDetalhesLixeiraModal = (idLixeira) => {
 
 </script>
 <template>
+
+    <v-row justify="end">
+        <v-btn color="rgb(94, 93, 93)" @click="getLixeiras()">
+            <svg-icon type="mdi" :path="mdiUpdate"></svg-icon>
+        </v-btn>
+    </v-row>
 
     <v-table>
         <thead>

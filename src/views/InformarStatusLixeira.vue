@@ -1,18 +1,19 @@
 <script setup lang="js">
 import BarraSuperior from '@/components/lixeira/BarraSuperior/BarraSuperior.vue';
 import TituloPagina from '@/components/lixeira/Titulo/TituloPagina.vue';
-import { mdiTruck } from '@mdi/js';
+import { mdiInformation, mdiTruck } from '@mdi/js';
 
 const configuracaoTitulo = {
 
     nome: 'Infomar Status Lixeira',
-    icone:mdiTruck,
+    icone: mdiInformation,
 
 }
 
 </script>
 
 <template>
+
 
     <BarraSuperior>
 
@@ -23,5 +24,6 @@ const configuracaoTitulo = {
         </template>
 
     </BarraSuperior>
-    
+
+
 </template>
