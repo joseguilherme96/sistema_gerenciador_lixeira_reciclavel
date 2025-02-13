@@ -1,11 +1,11 @@
 <script setup lang="js">
 
-import {form} from './lixeira.service.js'
-import {corLixeira} from './cor.lixeira.service'
-import { materiaisReciclaveis } from './materiais.reciclaveis.services'
-import {niveisLixeira} from './nivel.lixeira.service'
-import BarraSuperior from './BarraSuperior.vue'
-import {cidades,estados} from '../../services/endereco.service.js'
+import {form} from '../lixeira.service.js'
+import {corLixeira} from '../cor.lixeira.service.js'
+import { materiaisReciclaveis } from '../materiais.reciclaveis.services.js'
+import {niveisLixeira} from '../nivel.lixeira.service.js'
+import BarraSuperior from '../BarraSuperior/BarraSuperior.vue'
+import {cidades,estados} from '../../../services/endereco.service.js'
 
 
 </script>

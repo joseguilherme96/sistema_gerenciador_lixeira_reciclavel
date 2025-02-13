@@ -1,8 +1,8 @@
 <script setup lang="js">
 
-import { lixeira, selecionarLixeira } from './lixeira.service'
+import { lixeira, selecionarLixeira } from '../lixeira.service.js'
 
-import { vCorNivelLixeira } from '../../directives/cor.nivel.lixeira.diretiva.js'
+import { vCorNivelLixeira } from '../../../directives/cor.nivel.lixeira.diretiva.js'
 import { mdiViewDashboardOutline } from '@mdi/js'
 
 const emit = defineEmits(['abrirModalExibirDetalhesLixeiraModal'])

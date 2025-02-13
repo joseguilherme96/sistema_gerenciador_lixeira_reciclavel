@@ -1,6 +1,5 @@
 export const lixeiraModel = {
 
-    idLixeira: '',
     cep: '',
     endereco: '',
     cidade: '',

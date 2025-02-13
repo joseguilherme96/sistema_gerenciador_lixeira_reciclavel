@@ -61,6 +61,7 @@ export async function getLixeiras() {
         .then(res => {
 
             lixeira.value = res;
+            lixeira.value.sort((a, b) => new Date(b.data) - new Date(a.data))
 
         })
         .catch(err => err)

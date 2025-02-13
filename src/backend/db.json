@@ -1,0 +1,228 @@
+{
+  "lixeiras": [
+    {
+      "id": "1",
+      "cep": "18120000",
+      "endereco": "Rua 5",
+      "cidade": "Mairinque",
+      "estado": "SP",
+      "materialColetado": "Organico",
+      "capacidade": "100",
+      "nivelLixeira": "75",
+      "data": "2025-02-13T14:12:05.240Z",
+      "hora": 1739455925240,
+      "cor": "Verde",
+      "bairro": "Centro",
+      "observacao": "Tess"
+    },
+    {
+      "id": "2",
+      "cep": "18120000",
+      "endereco": "Rua 6",
+      "cidade": "Mairinque",
+      "estado": "SP",
+      "materialColetado": "Outros",
+      "capacidade": "10",
+      "nivelLixeira": "75",
+      "data": "2025-02-13T14:13:10.859Z",
+      "hora": 1739455990859,
+      "cor": "Verde",
+      "bairro": "Jardim G",
+      "observacao": "10"
+    },
+    {
+      "id": "483e",
+      "cep": "18120000",
+      "endereco": "Rua 7",
+      "cidade": "Mairinque",
+      "estado": "SP",
+      "materialColetado": "Organico",
+      "capacidade": "100",
+      "nivelLixeira": "25",
+      "data": "2025-02-13T14:16:39.195Z",
+      "hora": 1739456199196,
+      "cor": "Verde",
+      "bairro": "Jardim",
+      "observacao": "D"
+    }
+  ],
+  "estados": [
+    {
+      "id": "1",
+      "estado": "Acre",
+      "sigla": "AC"
+    },
+    {
+      "id": "2",
+      "estado": "Alagoas",
+      "sigla": "AL"
+    },
+    {
+      "id": "3",
+      "estado": "Amapá",
+      "sigla": "AP"
+    },
+    {
+      "id": "4",
+      "estado": "Amazonas",
+      "sigla": "AM"
+    },
+    {
+      "id": "5",
+      "estado": "Bahia",
+      "sigla": "BA"
+    },
+    {
+      "id": "6",
+      "estado": "Ceará",
+      "sigla": "CE"
+    },
+    {
+      "id": "7",
+      "estado": "Distrito Federal",
+      "sigla": "DF"
+    },
+    {
+      "id": "8",
+      "estado": "Espírito Santo",
+      "sigla": "ES"
+    },
+    {
+      "id": "9",
+      "estado": "Goiás",
+      "sigla": "GO"
+    },
+    {
+      "id": "10",
+      "estado": "Maranhão",
+      "sigla": "MA"
+    },
+    {
+      "id": "11",
+      "estado": "Mato Grosso",
+      "sigla": "MT"
+    },
+    {
+      "id": "12",
+      "estado": "Mato Grosso do Sul",
+      "sigla": "MS"
+    },
+    {
+      "id": "13",
+      "estado": "Minas Gerais",
+      "sigla": "MG"
+    },
+    {
+      "id": "14",
+      "estado": "Pará",
+      "sigla": "PA"
+    },
+    {
+      "id": "15",
+      "estado": "Paraíba",
+      "sigla": "PB"
+    },
+    {
+      "id": "16",
+      "estado": "Paraná",
+      "sigla": "PR"
+    },
+    {
+      "id": "17",
+      "estado": "Pernambuco",
+      "sigla": "PE"
+    },
+    {
+      "id": "18",
+      "estado": "Piauí",
+      "sigla": "PI"
+    },
+    {
+      "id": "19",
+      "estado": "Rio de Janeiro",
+      "sigla": "RJ"
+    },
+    {
+      "id": "20",
+      "estado": "Rio Grande do Norte",
+      "sigla": "RN"
+    },
+    {
+      "id": "21",
+      "estado": "Rio Grande do Sul",
+      "sigla": "RS"
+    },
+    {
+      "id": "22",
+      "estado": "Rondônia",
+      "sigla": "RO"
+    },
+    {
+      "id": "23",
+      "estado": "Roraima",
+      "sigla": "RR"
+    },
+    {
+      "id": "24",
+      "estado": "Santa Catarina",
+      "sigla": "SC"
+    },
+    {
+      "id": "25",
+      "estado": "São Paulo",
+      "sigla": "SP"
+    },
+    {
+      "id": "26",
+      "estado": "Sergipe",
+      "sigla": "SE"
+    },
+    {
+      "id": "27",
+      "estado": "Tocantins",
+      "sigla": "TO"
+    }
+  ],
+  "cidades": [
+    {
+      "id": "1",
+      "cidade": "São Paulo",
+      "estado": "São Paulo"
+    },
+    {
+      "id": "2",
+      "cidade": "Campo Grande",
+      "estado": "Mato Grosso do Sul"
+    },
+    {
+      "id": "3",
+      "cidade": "Salvador",
+      "estado": "Bahia"
+    },
+    {
+      "id": "4",
+      "cidade": "Rio de Janeiro",
+      "estado": "Rio de Janeiro"
+    }
+  ],
+  "informativosLixeira": [
+    {
+      "idInformativoLixeira": "1",
+      "lixeiraId": "6075",
+      "nivelLixeira": 10,
+      "observacao": "",
+      "dataAtualizacao": "12/02/2025",
+      "horaAtualizacao": "16: 38",
+      "id": "4c3e"
+    },
+    {
+      "idInformativoLixeira": "2",
+      "lixeiraId": "6075",
+      "nivelLixeira": 20,
+      "observacao": "",
+      "dataAtualizacao": "13/02/2025",
+      "horaAtualizacao": "16: 38",
+      "id": "d3a3"
+    }
+  ]
+}

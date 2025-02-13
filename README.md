@@ -29,6 +29,6 @@ Como os dados ainda estão mockados, é necessário a execução do servidor jso
 
 ```sh
 
-npx json-server src/backend/db.json5
+npx json-server src/backend/db.json
 
 ```

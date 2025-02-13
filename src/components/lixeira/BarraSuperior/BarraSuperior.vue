@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import TituloPagina from './TituloPagina.vue';
+import TituloPagina from '../Titulo/TituloPagina.vue'
 
 const emit = defineEmits(['abrirModalCadastroLixeira', 'abrirModalFiltro'])
 

@@ -1,15 +1,14 @@
 <script setup lang="js">
 
-import BarraSuperior from '@/components/lixeira/BarraSuperior.vue';
-import { getLixeiras, limparCampos, criarLixeira } from '../components/lixeira/lixeira.service'
+import BarraSuperior from '../components/lixeira/BarraSuperior/BarraSuperior.vue';
+import { getLixeiras} from '../components/lixeira/lixeira.service'
 import { onMounted, ref } from 'vue'
-import FiltroPesquisa from '@/components/lixeira/FiltroPesquisa.vue';
-import TabelaLixeiras from '@/components/lixeira/TabelaLixeiras.vue';
-import ModalCadastro from '../components/modal/ModalCadastro.vue'
-import FormularioCadastroLixeira from '../components/lixeira/FormularioCadastroLixeira.vue'
+import FiltroPesquisa from '@/components/lixeira/FIltroPesquisaLixeira/FiltroPesquisa.vue';
+import TabelaLixeiras from '@/components/lixeira/TabelaLixeira/TabelaLixeiras.vue';
+import ModalCadastro from '../components/lixeira/Modais/ModalCadastro.vue'
 import { mdiMagnify, mdiPlus } from '@mdi/js'
 import { getCidades, getEstados } from '../services/endereco.service.js'
-import ModalExibirDetalhesLixeira from '../components/lixeira/ModalExibirDetalhesLixeira.vue'
+import ModalExibirDetalhesLixeira from '../components/lixeira/Modais/ModalExibirDetalhesLixeira.vue'
 
 onMounted(() => {
     getLixeiras();
@@ -18,14 +17,8 @@ onMounted(() => {
 getEstados();
 getCidades();
 
-const dados = ref({
+const modalCadastroLixeira = ref({
     titulo: 'Cadastro de Lixeira',
-    nome: '',
-    localizacao: '',
-    capacidade: '',
-    tipo: '',
-    nivelLixeira: '',
-    observacao: '',
     exibir: false
 })
 
@@ -43,17 +36,7 @@ function abrirFiltro() {
 }
 
 function abrirModalCadastroLixeira() {
-    dados.value.exibir = true
-}
-
-function cadastrarLixeira() {
-    criarLixeira().then((res) => {
-
-        getLixeiras();
-
-        console.log(res);
-        dados.value.exibir = false
-    })
+    modalCadastroLixeira.value.exibir = true
 }
 
 function abrirModalExibirDetalhesLixeiraModal() {
@@ -66,27 +49,8 @@ function abrirModalExibirDetalhesLixeiraModal() {
 
 <template>
     <v-container>
-        <ModalCadastro :data="dados">
-            <template v-slot:conteudo>
-
-                <FormularioCadastroLixeira></FormularioCadastroLixeira>
-
-            </template>
-            <template v-slot:botoes>
-                <v-btn variant="flat" color="rgb(94, 93, 93)" @click="limparCampos()">
-                    Limpar Campos
-                </v-btn>
-                <v-btn variant="flat" color="rgb(94, 93, 93)" text="CADASTRAR LIXEIRA"
-                    @click="cadastrarLixeira()"></v-btn>
-                <v-btn variant="flat" color="rgb(94, 93, 93)" text="Fechar" @click="dados.exibir = false"></v-btn>
-            </template>
-
-        </ModalCadastro>
-
         <BarraSuperior>
             <template v-slot:opcoes>
-
-
                 <v-btn color="primary" @click="abrirModalCadastroLixeira()">
                     <svg-icon type="mdi" :path="mdiPlus"></svg-icon>
                     Cadastrar Lixeira
@@ -99,6 +63,9 @@ function abrirModalExibirDetalhesLixeiraModal() {
         </BarraSuperior>
         <FiltroPesquisa v-if="filtroEstaAberto"></FiltroPesquisa>
     </v-container>
+
     <TabelaLixeiras @abrirModalExibirDetalhesLixeiraModal="abrirModalExibirDetalhesLixeiraModal"></TabelaLixeiras>
+
+    <ModalCadastro :data="modalCadastroLixeira"></ModalCadastro>
     <ModalExibirDetalhesLixeira :data="modalDetalhesLixeira"></ModalExibirDetalhesLixeira>
 </template>

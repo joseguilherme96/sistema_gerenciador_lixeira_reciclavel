@@ -1,7 +1,7 @@
 <script setup lang="js">
 
-import { lixeiraSelecionada } from './lixeira.service.js'
-import InformativoLixeira from './InformativoLixeira/InformativoLixeira.vue';
+import { lixeiraSelecionada } from '../lixeira.service.js'
+import InformativoLixeira from '../InformativoLixeira/InformativoLixeira.vue';
 
 
 defineProps({
@@ -16,6 +16,7 @@ defineProps({
 
     <v-dialog v-model="data.exibir" max-width="900">
         <template v-slot:default="{ isActive }">
+            
             <v-card>
                 <v-card>
 
