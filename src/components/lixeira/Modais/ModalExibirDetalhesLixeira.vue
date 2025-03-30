@@ -2,7 +2,7 @@
 
 import { lixeiraSelecionada } from '../lixeira.service.js'
 import InformativoLixeira from '../InformativoLixeira/InformativoLixeira.vue';
-import { computed, onMounted, ref, watch } from 'vue'
+import { computed, ref } from 'vue'
 import BarraSuperior from '../BarraSuperior/BarraSuperior.vue';
 import TituloPagina from '../Titulo/TituloPagina.vue';
 import { mdiViewDashboardOutline } from '@mdi/js';
@@ -60,20 +60,22 @@ const voltarPagina = () => {
                 </BarraSuperior>
 
                 <v-card v-for="(lixeira, index) in lixeiraSelecionada.lixeiras" class="mt-5"
-                    v-show="indexPaginaAtual == index">
+                    v-show="indexPaginaAtual == index" style="overflow: scroll;">
 
                     <DetalheLixeira :lixeira="lixeira"></DetalheLixeira>
 
                     <InformativoLixeira :lixeiraSelecionada="lixeiraAtual"></InformativoLixeira>
 
                     <template v-slot:actions>
-                        <v-btn variant="flat" color="rgb(94, 93, 93)" text="ANTERIOR" @click="voltarPagina"></v-btn>
-                        <v-btn variant="flat" color="rgb(94, 93, 93)" text="PRÓXIMO" @click="avancarPagina"></v-btn>
-                        <v-btn variant="flat" color="rgb(94, 93, 93)" text="FECHAR"
-                            @click="data.exibir = false"></v-btn>
-                        <RouterLink :to="`/informar-status-lixeira/${lixeira.id}`" v-if="lixeira.id" target="_blank">
-                            <v-btn variant="flat" color="rgb(94, 93, 93)" text="INFORMAR STATUS LIXEIRA"></v-btn>
-                        </RouterLink>
+                        <div class="d-flex justify-end" style="width: 100%;">
+                            <v-btn variant="flat" color="rgb(94, 93, 93)" text="ANTERIOR" @click="voltarPagina" class="ml-1"></v-btn>
+                            <v-btn variant="flat" color="rgb(94, 93, 93)" text="PRÓXIMO" @click="avancarPagina" class="ml-1" ></v-btn>
+                            <v-btn variant="flat" color="rgb(94, 93, 93)" text="FECHAR"
+                                @click="data.exibir = false" class="ml-1"   ></v-btn>
+                            <RouterLink :to="`/informar-status-lixeira/${lixeira.id}`" v-if="lixeira.id">
+                                <v-btn variant="flat" color="rgb(94, 93, 93)" text="INFORMAR STATUS LIXEIRA" class="ml-1"></v-btn>
+                            </RouterLink>
+                        </div>
                     </template>
 
                 </v-card>
