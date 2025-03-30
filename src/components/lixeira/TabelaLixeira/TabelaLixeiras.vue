@@ -8,8 +8,11 @@ const emit = defineEmits(['abrirModalExibirDetalhesLixeiraModal'])
 
 const abrirModalExibirDetalhesLixeiraModal = (idLixeira) => {
 
-    selecionarLixeira(idLixeira)
-    emit("abrirModalExibirDetalhesLixeiraModal")
+    selecionarLixeira(idLixeira).then((res) => {
+
+        emit("abrirModalExibirDetalhesLixeiraModal")
+
+    })
 
 }
 
@@ -62,7 +65,9 @@ const abrirModalExibirDetalhesLixeiraModal = (idLixeira) => {
                 <td>{{ item.cidade }}</td>
                 <td>{{ item.estado }}</td>
                 <td>{{ item.capacidade }}</td>
-                <td><BarraProgressoNivelLixeira :item="item"></BarraProgressoNivelLixeira></td>
+                <td>
+                    <BarraProgressoNivelLixeira :item="item"></BarraProgressoNivelLixeira>
+                </td>
                 <td>{{ item.data }}</td>
                 <td>{{ item.hora }}</td>
                 <td><v-btn color="rgb(94, 93, 93)" @click="abrirModalExibirDetalhesLixeiraModal(item.id)">

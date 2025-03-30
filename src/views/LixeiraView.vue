@@ -76,5 +76,5 @@ const configuracaoTitulo = ref({
     <TabelaLixeiras @abrirModalExibirDetalhesLixeiraModal="abrirModalExibirDetalhesLixeiraModal"></TabelaLixeiras>
 
     <ModalCadastro :data="modalCadastroLixeira"></ModalCadastro>
-    <ModalExibirDetalhesLixeira :data="modalDetalhesLixeira"></ModalExibirDetalhesLixeira>
+    <ModalExibirDetalhesLixeira :data="modalDetalhesLixeira" v-if="modalDetalhesLixeira.exibir"></ModalExibirDetalhesLixeira>
 </template>

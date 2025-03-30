@@ -157,24 +157,20 @@ export async function cadastrarPontosDeLixo(localTemLixeira) {
 
 }
 
-export function selecionarLixeira(idLixeira) {
+export async function selecionarLixeira(idLixeira) {
 
-    getEnderecoLixeiraPorId(idLixeira)
-        .then((res) => {
+    return getEnderecoLixeiraPorId(idLixeira)
+        .then(async (res) => {
 
             lixeiraSelecionada.value = res
 
+            //Filtra Lixeiras por endereco_lixeira_id
+            await getLixeirasQuery({ endereco_lixeira_id: idLixeira }).then((res) => {
+
+                lixeiraSelecionada.value.lixeiras = res
+            })
+
         })
-
-
-    //Filtra Lixeiras por endereco_lixeira_id
-    getLixeirasQuery({endereco_lixeira_id:idLixeira}).then((res) => {
-
-        lixeiraSelecionada.value.lixeiras = res
-    })
-
-
-
 
 }
 
@@ -192,15 +188,15 @@ export async function getEnderecoLixeiraPorId(idLixeira) {
 
 export async function getLixeirasQuery(where) {
 
-    let  query = ``
+    let query = ``
 
-    if('endereco_lixeira_id' in where){
+    if ('endereco_lixeira_id' in where) {
 
         query = `endereco_lixeira_id=${where.endereco_lixeira_id}`
 
     }
 
-    if('ponto_lixo_id' in where){
+    if ('ponto_lixo_id' in where) {
         query = `&&ponto_lixo_id=${where.ponto_lixo_id}`
 
     }

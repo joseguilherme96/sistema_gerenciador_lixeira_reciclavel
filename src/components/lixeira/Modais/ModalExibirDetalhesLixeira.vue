@@ -2,14 +2,11 @@
 
 import { lixeiraSelecionada } from '../lixeira.service.js'
 import InformativoLixeira from '../InformativoLixeira/InformativoLixeira.vue';
-import QRCodeLixeira from '../QRCodeLixeira/QRCodeLixeira.vue'
-import { baseUrl } from '../lixeira.service.js'
-import { computed, ref, watch } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import BarraSuperior from '../BarraSuperior/BarraSuperior.vue';
 import TituloPagina from '../Titulo/TituloPagina.vue';
 import { mdiViewDashboardOutline } from '@mdi/js';
-
-import BarraProgressoNivelLixeira from '../NivelLixeira/BarraProgressoNivelLixeira.vue';
+import DetalheLixeira from '../DetalheLixeira/DetalheLixeira.vue';
 
 defineProps({
     data: Object
@@ -22,30 +19,10 @@ const configuracaoTitulo = ref({
 
 const indexPaginaAtual = ref(0)
 
-
-const configuracaoQRCode = ref({
-    width: 200,
-    height: 200,
-    valor: null
-
-})
-
 const lixeiraAtual = computed(() => {
     return lixeiraSelecionada.value.lixeiras[indexPaginaAtual.value]
 })
 
-const gerarUrlParaQRCode = ()=>{
-
-    configuracaoQRCode.value.valor = `${baseUrl}/lixeira/${lixeiraSelecionada.value.lixeiras[indexPaginaAtual.value].id}`
-}
-
-
-watch(() => indexPaginaAtual.value, () => {
-
-
-    gerarUrlParaQRCode();
-
-})
 
 const avancarPagina = () => {
 
@@ -60,7 +37,6 @@ const voltarPagina = () => {
         indexPaginaAtual.value--
     }
 }
-
 
 </script>
 
@@ -86,31 +62,7 @@ const voltarPagina = () => {
                 <v-card v-for="(lixeira, index) in lixeiraSelecionada.lixeiras" class="mt-5"
                     v-show="indexPaginaAtual == index">
 
-
-                    <div class="d-flex flex-no-wrap justify-space-between">
-                        <div>
-                            <v-card-title>ID</v-card-title>
-                            <v-card-subtitle>{{ lixeira.id }}</v-card-subtitle>
-                            <v-card-title>Descrição</v-card-title>
-                            <v-card-subtitle>{{ lixeira.descricaoLixeira }}</v-card-subtitle>
-                            <v-card-title>Material Coletado</v-card-title>
-                            <v-card-subtitle> {{ lixeira.materialColetado }}</v-card-subtitle>
-
-                        </div>
-                        <div>
-
-                            <v-card-title>Capacidade(L)</v-card-title>
-                            <v-card-subtitle>{{ lixeira.capacidade }}</v-card-subtitle>
-                            <v-card-title>Nivel Lixeira</v-card-title>
-                            <v-card-subtitle>
-                                <BarraProgressoNivelLixeira :item="lixeira"></BarraProgressoNivelLixeira>
-                            </v-card-subtitle>
-                        </div>
-                        <div>
-                            <QRCodeLixeira :configuracaoQRCode="configuracaoQRCode" v-if="indexPaginaAtual == index">
-                            </QRCodeLixeira>
-                        </div>
-                    </div>
+                    <DetalheLixeira :lixeira="lixeira"></DetalheLixeira>
 
                     <InformativoLixeira :lixeiraSelecionada="lixeiraAtual"></InformativoLixeira>
 
