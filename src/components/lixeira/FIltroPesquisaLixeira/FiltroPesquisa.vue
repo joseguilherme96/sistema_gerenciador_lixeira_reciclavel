@@ -1,10 +1,10 @@
 <script setup lang="js">
 
 import { ref, watch } from 'vue'
-import { form, filtrarLixeiras,limparCampos } from '../lixeira.service'
-import {niveisLixeira} from '../nivel.lixeira.service'
-import { estados,cidades } from '../../../services/endereco.service'
-import {materiaisReciclaveis} from '../materiais.reciclaveis.services'
+import { form, filtrarLixeiras, limparCampos } from '../lixeira.service'
+import { niveisLixeira } from '../nivel.lixeira.service'
+import { estados, cidades } from '../../../services/endereco.service'
+import { materiaisReciclaveis } from '../materiais.reciclaveis.services'
 
 const exibirCalendario = ref(false)
 const dataSelecionada = ref(null)
@@ -64,14 +64,15 @@ watch(() => dataSelecionada.value, (newValue, oldvalue) => {
             <v-select label="Estado" :items="estados" v-model="form.estado"></v-select>
         </v-col>
         <v-col cols="12" sm="5">
-            <v-select label="Materias Coletado"
-                :items="materiaisReciclaveis" v-model="form.materialColetado"></v-select>
+            <v-select label="Materias Coletado" :items="materiaisReciclaveis"
+                v-model="form.materialColetado"></v-select>
         </v-col>
         <v-col cols="12" sm="2">
             <v-text-field label="Capacidade(L)" v-model="form.capacidade" type="number"></v-text-field>
         </v-col>
         <v-col cols="12" sm="3">
-            <v-select label="Nivel Lixeira(menor/igual)" :items="niveisLixeira"
+            <v-select label="Nivel Lixeira(menor/igual)"
+                :items="niveisLixeira.map((nivel) => nivel.descricaoComPorcentagem)"
                 v-model="form.nivelLixeira"></v-select>
         </v-col>
     </v-row>

@@ -97,7 +97,7 @@ const criarEspacoParaArmazenamentoDaLixeira = () => {
                     <v-text-field label="Capacidade(L)" type="number" v-model="lixeira.capacidade"></v-text-field>
                 </v-col>
                 <v-col cols="4" sm="4">
-                    <v-select label="Nivel Lixeira" :items="niveisLixeira" v-model="lixeira.nivelLixeira"></v-select>
+                    <v-select label="Nivel Lixeira" :items="niveisLixeira.map((nivel)=>nivel.descricaoComPorcentagem)" v-model="lixeira.nivelLixeira"></v-select>
                 </v-col>
                 <v-col cols="12" sm="12">
                     <v-select label="Cor" :items="corLixeira" v-model="lixeira.cor"></v-select>
