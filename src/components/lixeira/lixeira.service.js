@@ -8,6 +8,7 @@ export const baseUrl = "http://localhost:3000";
 export const apiEnderecosLixeirasUrl = `${baseUrl}/enderecos_lixeiras`;
 export const apiPontosDeLixoComOuSemLixeira = `${baseUrl}/pontos_lixo`
 export const apiLixeiras = `${baseUrl}/lixeiras`;
+export const informativoLixeira = `${baseUrl}/informativosLixeira`
 
 
 export const lixeiraSelecionada = ref({});
@@ -104,7 +105,7 @@ export async function vincularLixeiraAoEnderecoCadastrado(endereco_lixeira_id) {
         lixeira.data = new Date();
         lixeira.hora = new Date().getTime();
         lixeira.nivelLixeira = lixeira.nivelLixeira.split("%")[0];
-        lixeira.endereco_lixeira_id = endereco_lixeira_id
+        lixeira.enderecoLixeiraId = endereco_lixeira_id
 
         return lixeira
 
@@ -113,8 +114,7 @@ export async function vincularLixeiraAoEnderecoCadastrado(endereco_lixeira_id) {
     form.value.lixeiras.forEach(async (lixeira, index) => {
 
         let ponto_lixo = await cadastrarPontosDeLixo(true)
-
-        form.value.lixeiras[index].ponto_lixo_id = ponto_lixo.id
+        form.value.lixeiras[index].pontoLixoId = ponto_lixo.id
 
         await fetch(apiLixeiras, {
             method: 'POST',
@@ -164,12 +164,6 @@ export async function selecionarLixeira(idLixeira) {
 
             lixeiraSelecionada.value = res
 
-            //Filtra Lixeiras por endereco_lixeira_id
-            await getLixeirasQuery({ endereco_lixeira_id: idLixeira }).then((res) => {
-
-                lixeiraSelecionada.value.lixeiras = res
-            })
-
         })
 
 }
@@ -192,24 +186,55 @@ export async function getLixeirasQuery(where) {
 
     if ('endereco_lixeira_id' in where) {
 
-        query = `endereco_lixeira_id=${where.endereco_lixeira_id}`
+        query = `enderecoLixeiraId=${where.endereco_lixeira_id}`
 
     }
 
     if ('ponto_lixo_id' in where) {
-        query = `&&ponto_lixo_id=${where.ponto_lixo_id}`
+        query = `&&pontoLixoId=${where.ponto_lixo_id}`
 
+    }
+
+    if ('id' in where) {
+
+        query = `&&id=${where.id}`
     }
 
     return fetch(`${apiLixeiras}?${query}`)
         .then(res => res.json())
-        .then(res => {
+        .then(res => res)
+        .catch(err => err)
 
-            return res
+}
 
-        }
+export async function atualizarNivelLixeira(lixeira) {
 
-        )
+    fetch(`${apiLixeiras}/${lixeira.id}`, {
+        method: 'PUT',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(lixeira)
+    })
+        .then(res => res.json())
+        .then(res => res)
+        .catch(err => err)
+
+}
+
+export async function cadastrarInformativoLixeira(informativo) {
+
+    return fetch(`${informativoLixeira}`, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(informativo)
+    })
+        .then(res => res.json())
+        .then(res => res)
         .catch(err => err)
 
 }

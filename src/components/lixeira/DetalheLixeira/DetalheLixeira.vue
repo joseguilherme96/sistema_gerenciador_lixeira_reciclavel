@@ -36,7 +36,7 @@ watchEffect(() => {
 
     <div class="d-flex flex-no-wrap justify-space-between">
         <div>
-            <v-card-title>ID</v-card-title>
+            <v-card-title>ID Lixeira</v-card-title>
             <v-card-subtitle>{{ lixeira.id }}</v-card-subtitle>
             <v-card-title>Descrição</v-card-title>
             <v-card-subtitle>{{ lixeira.descricaoLixeira }}</v-card-subtitle>
@@ -52,6 +52,8 @@ watchEffect(() => {
             <v-card-subtitle>
                 <BarraProgressoNivelLixeira :item="lixeira"></BarraProgressoNivelLixeira>
             </v-card-subtitle>
+            <v-card-title>Ponto Lixo ID</v-card-title>
+            <v-card-subtitle> {{ lixeira.pontoLixoId }}</v-card-subtitle>
         </div>
         <div>
             <QRCodeLixeira :configuracaoQRCode="lixeira.configuracaoQRCode" v-if="lixeira.configuracaoQRCode">

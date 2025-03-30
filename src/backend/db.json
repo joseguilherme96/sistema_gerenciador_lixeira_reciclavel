@@ -62,6 +62,51 @@
         }
       ],
       "bairro": "Centro"
+    },
+    {
+      "id": "8c2a",
+      "cep": "18020268",
+      "endereco": "Rua Teodoro Kaizel",
+      "cidade": "Sorocaba",
+      "estado": "SP",
+      "data": "2025-03-30T19:46:36.941Z",
+      "hora": 1743363996941,
+      "lixeiras": [
+        {
+          "materialColetado": "Papel",
+          "capacidade": "100",
+          "nivelLixeira": "25%",
+          "data": "",
+          "hora": "",
+          "cor": "Vermelho",
+          "exibirBotaoAdicionarLixeira": true,
+          "observacao": "",
+          "descricaoLixeira": "Lixeira 1"
+        }
+      ],
+      "bairro": "Vila Hortência"
+    },
+    {
+      "id": "b80b",
+      "cep": "18140000",
+      "endereco": "Rua José Benedito Rodrigues",
+      "cidade": "São Roque",
+      "estado": "SP",
+      "data": "2025-03-30T19:52:28.011Z",
+      "hora": 1743364348011,
+      "lixeiras": [
+        {
+          "materialColetado": "",
+          "capacidade": 0,
+          "nivelLixeira": 0,
+          "data": "",
+          "hora": "",
+          "cor": "",
+          "exibirBotaoAdicionarLixeira": true,
+          "observacao": ""
+        }
+      ],
+      "bairro": "Centro (São João Novo)"
     }
   ],
   "pontos_lixo": [
@@ -76,6 +121,18 @@
       "localTemLixeira": true,
       "data": "2025-02-23T22:06:16.464Z",
       "hora": 1740348376464
+    },
+    {
+      "id": "3204",
+      "localTemLixeira": true,
+      "data": "2025-02-23T22:06:16.464Z",
+      "hora": 1740348376464
+    },
+    {
+      "id": "3205",
+      "localTemLixeira": true,
+      "data": "2025-02-23T22:06:16.464Z",
+      "hora": 1740348376464
     }
   ],
   "lixeiras": [
@@ -85,13 +142,18 @@
       "descricaoLixeira": "Lixeira no banherio",
       "materialColetado": "Plástico",
       "capacidade": "100",
-      "nivelLixeira": "25",
+      "nivelLixeira": "50",
       "cor": "Verde",
       "observacao": "ss",
       "data": "2025-02-23T22:06:16.462Z",
       "hora": 1740348376462,
-      "endereco_lixeira_id": "e64a",
-      "ponto_lixo_id": "c949"
+      "enderecoLixeiraId": "e64a",
+      "pontoLixoId": "c949",
+      "configuracaoQRCode": {
+        "width": 200,
+        "height": 200,
+        "valor": "http://localhost:3000/lixeira/01fe"
+      }
     },
     {
       "id": "6ac6",
@@ -104,21 +166,27 @@
       "exibirBotaoAdicionarLixeira": false,
       "descricaoLixeira": "Lixeira Corredor",
       "observacao": "ss",
-      "endereco_lixeira_id": "e64a",
-      "ponto_lixo_id": "f1d2"
+      "enderecoLixeiraId": "e64a",
+      "pontoLixoId": "f1d2"
     },
     {
-      "id": "e861",
-      "exibirBotaoAdicionarLixeira": true,
-      "descricaoLixeira": "Metal",
-      "materialColetado": "Metal",
+      "materialColetado": "Organico",
       "capacidade": "100",
       "nivelLixeira": "50",
-      "cor": "Vermelho",
-      "data": "2025-03-30T13:09:47.679Z",
-      "hora": 1743340187679,
-      "endereco_lixeira_id": "aa34",
-      "ponto_lixo_id": "0f4c"
+      "data": "2025-02-23T22:06:16.462Z",
+      "hora": 1740348376462,
+      "cor": "Verde",
+      "exibirBotaoAdicionarLixeira": false,
+      "descricaoLixeira": "Lixeira Corredor",
+      "observacao": "ss",
+      "enderecoLixeiraId": "aa34",
+      "pontoLixoId": "3204",
+      "id": "e861",
+      "configuracaoQRCode": {
+        "width": 200,
+        "height": 200,
+        "valor": "http://localhost:3000/lixeira/e861"
+      }
     },
     {
       "id": "8caf",
@@ -131,8 +199,27 @@
       "exibirBotaoAdicionarLixeira": false,
       "descricaoLixeira": "Orgânico",
       "observacao": "Lixeira responsável por coletar materias orgâncios",
-      "endereco_lixeira_id": "aa34",
-      "ponto_lixo_id": "3204"
+      "enderecoLixeiraId": "aa34",
+      "pontoLixoId": "3205"
+    },
+    {
+      "id": "12ef",
+      "materialColetado": "Papel",
+      "capacidade": "100",
+      "nivelLixeira": "100",
+      "data": "2025-03-30T19:46:36.975Z",
+      "hora": 1743363996975,
+      "cor": "Vermelho",
+      "exibirBotaoAdicionarLixeira": true,
+      "observacao": "",
+      "descricaoLixeira": "Lixeira 1",
+      "enderecoLixeiraId": "8c2a",
+      "pontoLixoId": "2ff1",
+      "configuracaoQRCode": {
+        "width": 200,
+        "height": 200,
+        "valor": "http://localhost:3000/lixeira/12ef"
+      }
     }
   ],
   "estados": [
@@ -321,6 +408,75 @@
       "dataAtualizacao": "14/02/2025",
       "horaAtualizacao": "16: 38",
       "id": "d3a3"
+    },
+    {
+      "id": "2b0a",
+      "pontoLixoId": "3204",
+      "nivelLixeira": "0",
+      "observacao": "",
+      "dataAtualizacao": "2025-03-30",
+      "horaAtualizacao": "15:22:11",
+      "informadoPor": "Usuário"
+    },
+    {
+      "id": "53d8",
+      "pontoLixoId": "3204",
+      "nivelLixeira": "50",
+      "observacao": "",
+      "dataAtualizacao": "2025-03-30",
+      "horaAtualizacao": "16:44:13",
+      "informadoPor": "Usuário"
+    },
+    {
+      "id": "2810",
+      "pontoLixoId": "3204",
+      "nivelLixeira": 51,
+      "observacao": "",
+      "dataAtualizacao": "2025-03-30",
+      "horaAtualizacao": "14:44",
+      "informadoPor": "Microcontrolador ESP32"
+    },
+    {
+      "id": "9d5e",
+      "pontoLixoId": "2ff1",
+      "nivelLixeira": "25",
+      "observacao": "",
+      "dataAtualizacao": "2025-03-30",
+      "horaAtualizacao": "16:47:07",
+      "informadoPor": "Usuário"
+    },
+    {
+      "id": "e52e",
+      "nivelLixeira": "50",
+      "observacao": "",
+      "dataAtualizacao": "2025-03-30",
+      "horaAtualizacao": "17:12:05",
+      "informadoPor": "Usuário"
+    },
+    {
+      "id": "60f6",
+      "nivelLixeira": "75",
+      "observacao": "",
+      "dataAtualizacao": "2025-03-30",
+      "horaAtualizacao": "17:40:35",
+      "informadoPor": "Usuário"
+    },
+    {
+      "id": "5b8a",
+      "nivelLixeira": "100",
+      "observacao": "s",
+      "dataAtualizacao": "2025-03-30",
+      "horaAtualizacao": "17:49:30",
+      "informadoPor": "Usuário"
+    },
+    {
+      "id": "3f89",
+      "pontoLixoId": "2ff1",
+      "nivelLixeira": 100,
+      "observacao": "",
+      "dataAtualizacao": "2025-03-30",
+      "horaAtualizacao": "14:44",
+      "informadoPor": "Microcontrolador ESP32"
     }
   ]
 }

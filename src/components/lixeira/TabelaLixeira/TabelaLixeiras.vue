@@ -1,18 +1,29 @@
 <script setup lang="js">
 
-import { lixeira, selecionarLixeira, getEnderecosLixeiras } from '../lixeira.service.js'
+import { lixeira, selecionarLixeira, getEnderecosLixeiras, getLixeirasQuery, lixeiraSelecionada } from '../lixeira.service.js'
 import { mdiUpdate, mdiViewDashboardOutline } from '@mdi/js'
 import BarraProgressoNivelLixeira from '../NivelLixeira/BarraProgressoNivelLixeira.vue'
 
 const emit = defineEmits(['abrirModalExibirDetalhesLixeiraModal'])
 
-const abrirModalExibirDetalhesLixeiraModal = (idLixeira) => {
+const abrirModalExibirDetalhesLixeiraModal = async (idLixeira) => {
 
-    selecionarLixeira(idLixeira).then((res) => {
+    await selecionarLixeira(idLixeira);
 
-        emit("abrirModalExibirDetalhesLixeiraModal")
+    await getLixeirasQuery({ endereco_lixeira_id: idLixeira }).then((response) => {
+        
+        if(response.length == 0){
+            
+            return;
+            
+        }
+
+        lixeiraSelecionada.value.lixeiras = response
+
 
     })
+    
+    emit("abrirModalExibirDetalhesLixeiraModal")
 
 }
 
@@ -59,7 +70,7 @@ const abrirModalExibirDetalhesLixeiraModal = (idLixeira) => {
             </tr>
         </thead>
         <tbody>
-            <tr v-for="item in lixeira" :key="item.name" @click="abrirModalExibirDetalhesLixeiraModal(item.id)">
+            <tr v-for="item in lixeira" :key="item.name">
                 <td>{{ item.id }}</td>
                 <td>{{ item.endereco }}</td>
                 <td>{{ item.cidade }}</td>

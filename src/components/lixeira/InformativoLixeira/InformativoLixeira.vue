@@ -11,13 +11,13 @@ const props = defineProps({
     }
 })
 
-watch(()=>props.lixeiraSelecionada.ponto_lixo_id, () => {
+watch(()=>props.lixeiraSelecionada.pontoLixoId, () => {
 
-    getInformativoLixeiraPorPontoLixoId(props.lixeiraSelecionada.ponto_lixo_id);
+    getInformativoLixeiraPorPontoLixoId(props.lixeiraSelecionada.pontoLixoId);
 
 })
 
-getInformativoLixeiraPorPontoLixoId(props.lixeiraSelecionada.ponto_lixo_id);
+getInformativoLixeiraPorPontoLixoId(props.lixeiraSelecionada.pontoLixoId);
 
 </script>
 <template>
@@ -40,15 +40,19 @@ getInformativoLixeiraPorPontoLixoId(props.lixeiraSelecionada.ponto_lixo_id);
                 <th>
                     Data Atualização
                 </th>
+                <th>
+                    Atualizado Por :
+                </th>
 
             </tr>
         </thead>
         <tbody>
             <tr v-for="informativo in informativoLixeira" :key="informativo.id">
-                <td>{{ informativo.idInformativoLixeira }}</td>
+                <td>{{ informativo.id }}</td>
                 <td>{{ informativo.nivelLixeira }}</td>
                 <td>{{ informativo.observacao }}</td>
                 <td>{{ informativo.dataAtualizacao }}</td>
+                <td><v-chip>{{ informativo.informadoPor }}</v-chip></td>
             </tr>
         </tbody>
 
