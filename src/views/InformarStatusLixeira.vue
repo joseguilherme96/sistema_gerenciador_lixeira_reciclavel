@@ -1,7 +1,7 @@
 <script setup lang="js">
 import BarraSuperior from '@/components/lixeira/BarraSuperior/BarraSuperior.vue';
 import TituloPagina from '@/components/lixeira/Titulo/TituloPagina.vue';
-import { mdiInformation, mdiTruck } from '@mdi/js';
+import { mdiInformation } from '@mdi/js';
 
 const configuracaoTitulo = {
 

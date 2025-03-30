@@ -8,14 +8,13 @@ const apiInformativoLixeira = `${baseUrl}/informativosLixeira`;
 
 export const informativoLixeira = ref([])
 
-export async function getInformativoLixeiraPorIdLixeira() {
+export async function getInformativoLixeiraPorPontoLixoId(ponto_lixo_id) {
 
-    fetch(`${apiInformativoLixeira}`)
+    fetch(`${apiInformativoLixeira}?pontoLixoId=${ponto_lixo_id}`)
         .then(res => res.json())
         .then(res => {
-
-            informativoLixeira.value = res.filter((informativo) => `${informativo.lixeiraId}` == `${lixeiraSelecionada.value.id}`)
-
+            
+            informativoLixeira.value = res;
             informativoLixeira.value.sort((a, b) => b.idInformativoLixeira - a.idInformativoLixeira)
 
 

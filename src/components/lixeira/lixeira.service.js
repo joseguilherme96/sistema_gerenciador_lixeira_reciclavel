@@ -4,7 +4,12 @@ import { lixeiraModel } from './lixeira.model.js'
 
 
 export const baseUrl = "http://localhost:3000";
-export const apiLixeirasUrl = `${baseUrl}/lixeiras`;
+
+export const apiEnderecosLixeirasUrl = `${baseUrl}/enderecos_lixeiras`;
+export const apiPontosDeLixoComOuSemLixeira = `${baseUrl}/pontos_lixo`
+export const apiLixeiras = `${baseUrl}/lixeiras`;
+
+
 export const lixeiraSelecionada = ref({});
 export const lixeira = ref([
     lixeiraModel
@@ -27,7 +32,7 @@ export function formatarDataParaAmericano(data) {
 
 export function filtrarLixeiras(form) {
 
-    fetch(apiLixeirasUrl)
+    fetch(apiEnderecosLixeirasUrl)
         .then(res => res.json())
         .then(res => {
 
@@ -54,9 +59,9 @@ export function filtrarLixeiras(form) {
 }
 
 
-export async function getLixeiras() {
+export async function getEnderecosLixeiras() {
 
-    fetch(apiLixeirasUrl)
+    fetch(apiEnderecosLixeirasUrl)
         .then(res => res.json())
         .then(res => {
 
@@ -68,14 +73,13 @@ export async function getLixeiras() {
 
 }
 
-export async function criarLixeira() {
+export async function criarEnderecoLixeira() {
 
 
     form.value.data = new Date();
     form.value.hora = new Date().getTime();
-    form.value.nivelLixeira = form.value.nivelLixeira.split("%")[0];
 
-    return fetch(apiLixeirasUrl, {
+    let retorno = await fetch(apiEnderecosLixeirasUrl, {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -87,21 +91,127 @@ export async function criarLixeira() {
         .then(res => res)
         .catch(err => err)
 
+    vincularLixeiraAoEnderecoCadastrado(retorno.id);
+
+}
+
+
+export async function vincularLixeiraAoEnderecoCadastrado(endereco_lixeira_id) {
+
+
+    form.value.lixeiras = form.value.lixeiras.map((lixeira) => {
+
+        lixeira.data = new Date();
+        lixeira.hora = new Date().getTime();
+        lixeira.nivelLixeira = lixeira.nivelLixeira.split("%")[0];
+        lixeira.endereco_lixeira_id = endereco_lixeira_id
+
+        return lixeira
+
+    })
+
+    form.value.lixeiras.forEach(async (lixeira, index) => {
+
+        let ponto_lixo = await cadastrarPontosDeLixo(true)
+
+        form.value.lixeiras[index].ponto_lixo_id = ponto_lixo.id
+
+        await fetch(apiLixeiras, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(lixeira)
+        })
+            .then(res => res.json())
+            .then(res => res)
+            .catch(err => err)
+
+    });
+
+}
+
+export async function cadastrarPontosDeLixo(localTemLixeira) {
+
+    let dados = {
+
+        localTemLixeira: localTemLixeira,
+        data: new Date(),
+        hora: new Date().getTime(),
+
+    }
+
+    return fetch(apiPontosDeLixoComOuSemLixeira, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(dados)
+    })
+        .then(res => res.json())
+        .then(res => res)
+        .catch(err => err)
+
+
 }
 
 export function selecionarLixeira(idLixeira) {
 
-    getLixeiraPorId(idLixeira)
-        .then((res) => lixeiraSelecionada.value = res)
+    getEnderecoLixeiraPorId(idLixeira)
+        .then((res) => {
+
+            lixeiraSelecionada.value = res
+
+        })
+
+
+    //Filtra Lixeiras por endereco_lixeira_id
+    getLixeirasQuery({endereco_lixeira_id:idLixeira}).then((res) => {
+
+        lixeiraSelecionada.value.lixeiras = res
+    })
+
+
+
 
 }
 
-export async function getLixeiraPorId(idLixeira) {
+export async function getEnderecoLixeiraPorId(idLixeira) {
 
-    return fetch(`${apiLixeirasUrl}/${idLixeira}`)
+    return fetch(`${apiEnderecosLixeirasUrl}/${idLixeira}`)
         .then(res => res.json())
         .then(res =>
             res
+
+        )
+        .catch(err => err)
+
+}
+
+export async function getLixeirasQuery(where) {
+
+    let  query = ``
+
+    if('endereco_lixeira_id' in where){
+
+        query = `endereco_lixeira_id=${where.endereco_lixeira_id}`
+
+    }
+
+    if('ponto_lixo_id' in where){
+        query = `&&ponto_lixo_id=${where.ponto_lixo_id}`
+
+    }
+
+    return fetch(`${apiLixeiras}?${query}`)
+        .then(res => res.json())
+        .then(res => {
+
+            return res
+
+        }
 
         )
         .catch(err => err)

@@ -2,13 +2,19 @@
 
 
 import QRious from 'qrious';
-import { ref, watch } from 'vue';
+import { ref, watch, watchEffect } from 'vue';
 
 const props = defineProps({
 
     configuracaoQRCode: {
         type: Object
     }
+
+})
+
+watch(() => props.configuracaoQRCode, (newVal) => {
+
+    console.log(newVal)
 
 })
 

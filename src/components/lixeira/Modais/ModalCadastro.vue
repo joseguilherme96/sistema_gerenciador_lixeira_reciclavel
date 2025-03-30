@@ -1,18 +1,21 @@
 <script setup lang="js">
 
-import { getLixeiras, limparCampos, criarLixeira } from '../lixeira.service'
+import { getEnderecosLixeiras, limparCampos, criarEnderecoLixeira,vincularLixeiraAoEnderecoCadastrado,form } from '../lixeira.service'
 import FormularioCadastroLixeira from '../Formularios/FormularioCadastroLixeira.vue'
+import { ref } from 'vue'
 
 defineProps({
     data: Object
 })
 
-function cadastrarLixeira() {
-    criarLixeira().then((res) => {
+async function cadastrarLixeira() {
 
-        getLixeiras();
+    await criarEnderecoLixeira().then((res) => {
+
+        getEnderecosLixeiras();
         
     })
+    
 }
 
 </script>

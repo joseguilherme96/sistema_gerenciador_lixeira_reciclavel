@@ -1,9 +1,8 @@
 <script setup lang="js">
 
-import { lixeira, selecionarLixeira, getLixeiras } from '../lixeira.service.js'
-
-import { vCorNivelLixeira } from '../../../directives/cor.nivel.lixeira.diretiva.js'
+import { lixeira, selecionarLixeira, getEnderecosLixeiras } from '../lixeira.service.js'
 import { mdiUpdate, mdiViewDashboardOutline } from '@mdi/js'
+import BarraProgressoNivelLixeira from '../NivelLixeira/BarraProgressoNivelLixeira.vue'
 
 const emit = defineEmits(['abrirModalExibirDetalhesLixeiraModal'])
 
@@ -19,7 +18,7 @@ const abrirModalExibirDetalhesLixeiraModal = (idLixeira) => {
 <template>
 
     <v-row justify="end">
-        <v-btn color="rgb(94, 93, 93)" @click="getLixeiras()">
+        <v-btn color="rgb(94, 93, 93)" @click="getEnderecosLixeiras()">
             <svg-icon type="mdi" :path="mdiUpdate"></svg-icon>
         </v-btn>
     </v-row>
@@ -40,10 +39,7 @@ const abrirModalExibirDetalhesLixeiraModal = (idLixeira) => {
                     Estado
                 </th>
                 <th class="text-left">
-                    Material Coletado Lixeira
-                </th>
-                <th class="text-left">
-                    Capacidade(L)
+                    Capacidade Total(L)
                 </th>
                 <th class="text-left">
                     Nivel da Lixeira
@@ -53,9 +49,6 @@ const abrirModalExibirDetalhesLixeiraModal = (idLixeira) => {
                 </th>
                 <th class="text-left">
                     Hora Atualização
-                </th>
-                <th class="text-left">
-                    Cor
                 </th>
                 <th class="text-left">
                     Ações
@@ -68,14 +61,10 @@ const abrirModalExibirDetalhesLixeiraModal = (idLixeira) => {
                 <td>{{ item.endereco }}</td>
                 <td>{{ item.cidade }}</td>
                 <td>{{ item.estado }}</td>
-                <td>{{ item.materialColetado }}</td>
                 <td>{{ item.capacidade }}</td>
-                <td><v-progress-linear v-cor-nivel-lixeira="item.nivelLixeira" v-model:model-value="item.nivelLixeira"
-                        :height="30">{{ item.nivelLixeira
-                        }}%</v-progress-linear></td>
+                <td><BarraProgressoNivelLixeira :item="item"></BarraProgressoNivelLixeira></td>
                 <td>{{ item.data }}</td>
                 <td>{{ item.hora }}</td>
-                <td>{{ item.cor }}</td>
                 <td><v-btn color="rgb(94, 93, 93)" @click="abrirModalExibirDetalhesLixeiraModal(item.id)">
                         <svg-icon type="mdi" :path="mdiViewDashboardOutline"></svg-icon>
                         Visualizar

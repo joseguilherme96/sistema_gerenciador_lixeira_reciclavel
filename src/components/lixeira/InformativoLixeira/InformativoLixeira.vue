@@ -1,9 +1,23 @@
 <script setup lang="js">
 
-import { lixeiraSelecionada } from '../lixeira.service.js'
-import { informativoLixeira, getInformativoLixeiraPorIdLixeira } from './informativo.lixeira.service.js'
+import {watch} from 'vue'
 
-getInformativoLixeiraPorIdLixeira(lixeiraSelecionada.value.id);
+import {informativoLixeira,getInformativoLixeiraPorPontoLixoId } from './informativo.lixeira.service.js'
+
+const props = defineProps({
+    lixeiraSelecionada:{
+        type: Object,
+        required: true
+    }
+})
+
+watch(()=>props.lixeiraSelecionada.ponto_lixo_id, () => {
+
+    getInformativoLixeiraPorPontoLixoId(props.lixeiraSelecionada.ponto_lixo_id);
+
+})
+
+getInformativoLixeiraPorPontoLixoId(props.lixeiraSelecionada.ponto_lixo_id);
 
 </script>
 <template>

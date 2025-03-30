@@ -1,15 +1,23 @@
+import { lixeira } from "./lixeira.service";
+
 export const lixeiraModel = {
 
     cep: '',
     endereco: '',
     cidade: '',
     estado: '',
-    materialColetado: '',
-    capacidade: 0,
-    nivelLixeira: 0,
     data: '',
     hora: '',
-    cor: ''
+    lixeiras: [{
+        materialColetado: '',
+        capacidade: 0,
+        nivelLixeira: 0,
+        data: '',
+        hora: '',
+        cor: '',
+        exibirBotaoAdicionarLixeira: true
+    }]
+
 
 
 }
