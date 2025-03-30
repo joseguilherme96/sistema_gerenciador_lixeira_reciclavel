@@ -15,7 +15,11 @@ export const lixeiraModel = {
         data: '',
         hora: '',
         cor: '',
-        exibirBotaoAdicionarLixeira: true
+        exibirBotaoAdicionarLixeira: true,
+        descricaoLixeira:'',
+        observacao: '',
+        enderecoLixeiraId:'',
+        pontoLixoId:''
     }]
 
 
