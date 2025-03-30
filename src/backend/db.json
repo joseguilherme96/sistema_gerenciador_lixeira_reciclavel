@@ -206,7 +206,7 @@
       "id": "12ef",
       "materialColetado": "Papel",
       "capacidade": "100",
-      "nivelLixeira": "100",
+      "nivelLixeira": "0",
       "data": "2025-03-30T19:46:36.975Z",
       "hora": 1743363996975,
       "cor": "Vermelho",
@@ -446,24 +446,9 @@
       "informadoPor": "Usuário"
     },
     {
-      "id": "e52e",
-      "nivelLixeira": "50",
-      "observacao": "",
-      "dataAtualizacao": "2025-03-30",
-      "horaAtualizacao": "17:12:05",
-      "informadoPor": "Usuário"
-    },
-    {
-      "id": "60f6",
-      "nivelLixeira": "75",
-      "observacao": "",
-      "dataAtualizacao": "2025-03-30",
-      "horaAtualizacao": "17:40:35",
-      "informadoPor": "Usuário"
-    },
-    {
       "id": "5b8a",
       "nivelLixeira": "100",
+      "pontoLixoId": "2ff1",
       "observacao": "s",
       "dataAtualizacao": "2025-03-30",
       "horaAtualizacao": "17:49:30",

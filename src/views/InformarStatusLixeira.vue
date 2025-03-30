@@ -54,7 +54,7 @@ function atualizarLixeira() {
 
     const informativoLixeira = {
 
-        pontoLixoId:lixeira.value.ponto_lixo_id,
+        pontoLixoId:lixeira.value.pontoLixoId,
         nivelLixeira:lixeira.value.nivelLixeira,
         observacao:form.value.lixeiras[0].observacao,
         dataAtualizacao: new Date().toISOString().split('T')[0],
