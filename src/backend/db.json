@@ -206,7 +206,7 @@
       "id": "12ef",
       "materialColetado": "Papel",
       "capacidade": "100",
-      "nivelLixeira": "0",
+      "nivelLixeira": "50",
       "data": "2025-03-30T19:46:36.975Z",
       "hora": 1743363996975,
       "cor": "Vermelho",
@@ -462,6 +462,33 @@
       "dataAtualizacao": "2025-03-30",
       "horaAtualizacao": "14:44",
       "informadoPor": "Microcontrolador ESP32"
+    },
+    {
+      "id": "2032",
+      "pontoLixoId": "2ff1",
+      "nivelLixeira": "0",
+      "observacao": "Coleta",
+      "dataAtualizacao": "2025-03-30",
+      "horaAtualizacao": "18:32:25",
+      "informadoPor": "Usuário"
+    },
+    {
+      "id": "9e04",
+      "pontoLixoId": "2ff1",
+      "nivelLixeira": "25",
+      "observacao": "",
+      "dataAtualizacao": "2025-03-30",
+      "horaAtualizacao": "18:33:24",
+      "informadoPor": "Usuário"
+    },
+    {
+      "id": "318a",
+      "pontoLixoId": "2ff1",
+      "nivelLixeira": "50",
+      "observacao": "s",
+      "dataAtualizacao": "2025-04-12",
+      "horaAtualizacao": "10:08:53",
+      "informadoPor": "Usuário"
     }
   ]
 }
