@@ -28,3 +28,11 @@ coverage
 *.sw?
 
 *.tsbuildinfo
+
+src/backend/__pycache__
+src/backend/.venv
+src/backend/app/__pycache__
+src/backend/app/instance
+src/backend/app/migrations/
+src/backend/app/Models/__pycache__
+src/backend/app/Routes/__pycache__
