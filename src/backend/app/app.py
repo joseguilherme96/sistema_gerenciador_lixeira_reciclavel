@@ -7,6 +7,9 @@ from flask_migrate import Migrate
 from Models.ExtensionsModel import db
 from Models.GrupoLixeiraModel import GrupoLixeira
 from Models.PontoLixoModel import PontoLixo
+from Models.MaterialColetadoModel import MaterialColetado
+from Models.CorModel import Cor
+from Models.LixeiraModel import Lixeira
 
 # Routes(Rotas)
 from Routes.GrupoLixeira import lixeira
