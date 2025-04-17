@@ -1,8 +1,10 @@
 from Models.GrupoLixeiraModel import GrupoLixeira  # Importa o db e o modelo
 from flask import jsonify,Blueprint,request
 
-
-lixeira = Blueprint('user', __name__)
+# Blueprint é uma extensão do Flask que pode oferecer diversos recursos, onde permite criação de componentes, para que
+# depois estes componentes possam se integrar com o flask novamente. Como este projeto tem varias rotas para diferentes componentes. O Blueprint cria
+# e empacota varias rotas para depois acoplar a instancia principal do flask no arquivo app.py
+lixeira = Blueprint('lixeira', __name__)
 
 @lixeira.route('/grupo_lixeira', methods=['GET'])
 def select_lixeira():
