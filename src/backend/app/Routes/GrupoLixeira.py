@@ -15,7 +15,7 @@ def select_grupo_lixeira():
 
         dados_lixeira = {
 
-            "id_lixeira":lixeira.GrupoLixeira.id_lixeira,
+            "id_grupo_lixeira":lixeira.GrupoLixeira.id_lixeira,
             "nome":lixeira.GrupoLixeira.nome,
             "descricao":lixeira.GrupoLixeira.descricao,
             "cep":lixeira.GrupoLixeira.cep,

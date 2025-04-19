@@ -9,7 +9,7 @@ class Lixeira(db.Model):
     id_lixeira = mapped_column(Integer, primary_key=True)
     descricao = mapped_column(String(30))
     mat_colet_id = mapped_column(Integer,ForeignKey("material_coletado.id_mat_colet"))
-    grupo_lixeira_id = mapped_column(Integer,ForeignKey("grupo_lixeira.id_lixeira"))
+    grupo_lixeira_id = mapped_column(Integer,ForeignKey("grupo_lixeira.id_grupo_lixeira"))
     ponto_lixo_id = mapped_column(Integer,ForeignKey("ponto_lixo.id_ponto_lixo"))
     cor_id = mapped_column(Integer,ForeignKey("cor.id_cor"))
     capacidade = mapped_column(Float)

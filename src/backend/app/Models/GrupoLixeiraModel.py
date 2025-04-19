@@ -4,7 +4,7 @@ class GrupoLixeira(db.Model):
 
     __tablename__ = 'grupo_lixeira'
 
-    id_lixeira = db.Column(db.Integer, primary_key=True)
+    id_grupo_lixeira = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(128))
     descricao = db.Column(db.String(256))
     cep = db.Column(db.String(10))
