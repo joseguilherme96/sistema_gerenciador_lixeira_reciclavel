@@ -14,7 +14,8 @@ from Models.InformadoPorModel import InformadoPor
 from Models.InformativoLixeiraModel import InformativoLixeira
 
 # Routes(Rotas)
-from Routes.GrupoLixeira import lixeira
+from Routes.GrupoLixeira import grupo_lixeira
+from Routes.Lixeira import lixeira
 
 # Instância do Flask
 app = Flask(__name__)
@@ -31,6 +32,7 @@ with app.app_context():
     db.create_all()
 
 # Registra Rotas das APIs
+app.register_blueprint(grupo_lixeira)
 app.register_blueprint(lixeira)
 
 
