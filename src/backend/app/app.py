@@ -10,6 +10,8 @@ from Models.PontoLixoModel import PontoLixo
 from Models.MaterialColetadoModel import MaterialColetado
 from Models.CorModel import Cor
 from Models.LixeiraModel import Lixeira
+from Models.InformadoPorModel import InformadoPor
+from Models.InformativoLixeiraModel import InformativoLixeira
 
 # Routes(Rotas)
 from Routes.GrupoLixeira import lixeira

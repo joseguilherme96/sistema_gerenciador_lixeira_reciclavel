@@ -7,7 +7,7 @@ from flask import jsonify,Blueprint,request
 lixeira = Blueprint('lixeira', __name__)
 
 @lixeira.route('/grupo_lixeira', methods=['GET'])
-def select_lixeira():
+def select_grupo_lixeira():
 
     lixeiras = []
 
