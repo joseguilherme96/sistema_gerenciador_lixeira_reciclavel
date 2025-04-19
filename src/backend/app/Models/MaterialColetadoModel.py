@@ -3,7 +3,7 @@
 from Models.ExtensionsModel import db
 
 from sqlalchemy import Integer,Enum,DateTime
-from sqlalchemy.orm import mapped_column
+from sqlalchemy.orm import mapped_column    
 
 
 class MaterialColetado(db.Model):
@@ -14,3 +14,15 @@ class MaterialColetado(db.Model):
     nome = mapped_column(Enum("Plástico",'Papel','Metal','Orgânico','Vidro',
                               'Outros','Não Reciclável',name="nome_enum"),nullable=False)
     criado_em = mapped_column(DateTime)
+
+    def select(where):
+         
+        query =  db.select(MaterialColetado)
+
+        if where.get('mat_colet_id'):
+            
+            query = query.where(MaterialColetado.id_mat_colet == where['mat_colet_id'])
+
+        result = db.session.execute(query).all()
+
+        return result
