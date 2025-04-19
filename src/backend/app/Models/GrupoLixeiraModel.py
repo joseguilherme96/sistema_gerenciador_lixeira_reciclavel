@@ -1,17 +1,19 @@
 from Models.ExtensionsModel import db
+from sqlalchemy.orm import mapped_column
+from sqlalchemy import Integer,String
 
 class GrupoLixeira(db.Model):
 
     __tablename__ = 'grupo_lixeira'
 
-    id_grupo_lixeira = db.Column(db.Integer, primary_key=True)
-    nome = db.Column(db.String(128))
-    descricao = db.Column(db.String(256))
-    cep = db.Column(db.String(10))
-    endereco = db.Column(db.String(256))
-    cidade = db.Column(db.String(128))
-    estado = db.Column(db.String(128))
-    uf = db.Column(db.String(2))
+    id_grupo_lixeira = mapped_column(Integer, primary_key=True,nullable=False)
+    nome = mapped_column(String(128))
+    descricao = mapped_column(String(256))
+    cep = mapped_column(String(10))
+    endereco = mapped_column(String(256))
+    cidade = mapped_column(String(128))
+    estado = mapped_column(String(128))
+    uf = mapped_column(String(2))
 
     def insert(lixeira):
 
@@ -21,9 +23,11 @@ class GrupoLixeira(db.Model):
        
 
 
-    def select():
+    def select(where = []):
 
-        users = db.session.execute(db.select(GrupoLixeira)).all()
+        query = db.select(GrupoLixeira)
+        
+        stmt = db.session.execute(query).all()
 
-        return users
+        return stmt
 
