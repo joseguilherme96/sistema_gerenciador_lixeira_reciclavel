@@ -26,7 +26,13 @@ class GrupoLixeira(db.Model):
     def select(where = []):
 
         query = db.select(GrupoLixeira)
-        
+
+        for condicao in where:
+
+            if(condicao.get('grupo_lixeira_id')):
+
+                query = query.where(GrupoLixeira.id_grupo_lixeira == condicao['grupo_lixeira_id'])
+
         stmt = db.session.execute(query).all()
 
         return stmt

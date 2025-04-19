@@ -17,3 +17,23 @@ class Lixeira(db.Model):
     observacao = mapped_column(String(50))
     criado_em = mapped_column(DateTime)
     editado_em = mapped_column(DateTime)
+
+    def insert(Lixeira):
+
+        db.session.add(Lixeira)
+        db.session.commit()
+        return True
+    
+    def select(where = []):
+         
+        query =  db.select(Lixeira)
+
+        for condicao in where:
+
+            if condicao.get('cor_id'):
+            
+                query = query.where(Lixeira.id_lixeira == condicao['id_lixeira'])
+
+        result = db.session.execute(query).all()
+
+        return result
