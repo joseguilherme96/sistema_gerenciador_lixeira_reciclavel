@@ -7,5 +7,5 @@ class InformadoPor(db.Model):
 
     __tablename__ = "informado_por"
 
-    id_informador = mapped_column(Integer, primary_key= True)
+    id_informador = mapped_column(Integer, primary_key= True, autoincrement = True)
     informador = mapped_column(Enum("Usuário","Microcontrolador ESP32"))

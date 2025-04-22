@@ -6,7 +6,7 @@ class GrupoLixeira(db.Model):
 
     __tablename__ = 'grupo_lixeira'
 
-    id_grupo_lixeira = mapped_column(Integer, primary_key=True,nullable=False)
+    id_grupo_lixeira = mapped_column(Integer, primary_key=True,nullable=False,autoincrement=True)
     nome = mapped_column(String(128))
     descricao = mapped_column(String(256))
     cep = mapped_column(String(10))

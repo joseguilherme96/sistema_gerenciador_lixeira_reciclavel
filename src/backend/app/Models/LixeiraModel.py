@@ -6,7 +6,7 @@ class Lixeira(db.Model):
 
     __tablename__ = 'lixeira'
     
-    id_lixeira = mapped_column(Integer, primary_key=True)
+    id_lixeira = mapped_column(Integer, primary_key=True,autoincrement = True)
     descricao = mapped_column(String(30))
     mat_colet_id = mapped_column(Integer,ForeignKey("material_coletado.id_mat_colet"))
     grupo_lixeira_id = mapped_column(Integer,ForeignKey("grupo_lixeira.id_grupo_lixeira"))

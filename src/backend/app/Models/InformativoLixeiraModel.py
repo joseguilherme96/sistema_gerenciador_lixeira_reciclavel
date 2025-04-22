@@ -5,7 +5,7 @@ from sqlalchemy.orm import mapped_column
 
 class InformativoLixeira(db.Model):
 
-    id_informativo = mapped_column(Integer,primary_key=True)
+    id_informativo = mapped_column(Integer,primary_key=True,autoincrement = True)
     ponto_lixo_id = mapped_column(Integer,ForeignKey("ponto_lixo.id_ponto_lixo"))
     informado_por_id = mapped_column(Integer, ForeignKey("informado_por.id_informador"))
     nivel_lixeira = mapped_column(Float)

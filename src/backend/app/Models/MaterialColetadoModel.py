@@ -9,7 +9,7 @@ class MaterialColetado(db.Model):
 
     __tablename__= "material_coletado"
     
-    id_mat_colet = mapped_column(Integer, primary_key=True  )
+    id_mat_colet = mapped_column(Integer, primary_key=True,autoincrement = True)
     nome = mapped_column(Enum("Plástico",'Papel','Metal','Orgânico','Vidro',
                               'Outros','Não Reciclável',name="nome_enum"),nullable=False)
     criado_em = mapped_column(DateTime)
