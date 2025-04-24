@@ -1,6 +1,6 @@
 # Flask
 
-from flask import Flask
+from flask import Flask,request,jsonify
 from flask_migrate import Migrate
  
 # Models(Modelos)
@@ -36,4 +36,13 @@ app.register_blueprint(grupo_lixeira)
 app.register_blueprint(lixeira)
 
 
+# Personaliza mensagens de erro para códigos de respostas HTTP 404/405
+@app.errorhandler(405)
+def metodo_nao_permitido(e):
 
+    return jsonify({'message':"Metodo não permitido !"}),405
+
+@app.errorhandler(404)
+def pagina_nao_encontrada(e):
+
+    return jsonify({'message':"Página não encontrada !"}),404

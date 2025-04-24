@@ -25,7 +25,7 @@ def select_grupo_lixeira():
         }
         lixeiras.append(dados_lixeira)
 
-    return jsonify(lixeiras)
+    return jsonify(lixeiras),200
 
 @grupo_lixeira.route('/cadastrar_grupo_lixeira',methods=['POST'])
 def inserir_grupo_lixeira():
@@ -38,27 +38,27 @@ def inserir_grupo_lixeira():
 
             if(not data.get('nome')):
 
-                return jsonify({"message":"O nome é obrigatório ser enviado !"})
+                return jsonify({"message":"O nome é obrigatório ser enviado !"}),400
 
             if(not data.get('descricao')):
 
-                return jsonify({"message":"A descrição é obrigatória ser enviada !"})
+                return jsonify({"message":"A descrição é obrigatória ser enviada !"}),400
 
             if(not data.get('cep')):
 
-                return jsonify({"message":"O CEP é obrigatório ser enviado !"})
+                return jsonify({"message":"O CEP é obrigatório ser enviado !"}),400
 
             if(not data.get('endereco')):
 
-                return jsonify({"message":"O endereço é obrigatório ser enviado !"})
+                return jsonify({"message":"O endereço é obrigatório ser enviado !"}),400
 
             if(not data.get('cidade')):
 
-                return jsonify({"message":"A cidade é obrigatória ser enviada !"})
+                return jsonify({"message":"A cidade é obrigatória ser enviada !"}),400
 
             if(not data.get('estado')):
 
-                return jsonify({"message":"O estado é obrigatório ser enviado !"})
+                return jsonify({"message":"O estado é obrigatório ser enviado !"}),400
 
             grupo_lixeira = GrupoLixeira(
                 
@@ -75,9 +75,9 @@ def inserir_grupo_lixeira():
 
             if not inserir:
 
-                return jsonify({"message":"Erro ao inserir lixeira!"})
+                return jsonify({"message":"Erro ao inserir lixeira!"}),500
                 
-            return jsonify({"message":"Lixeira inserida com sucesso!"})
+            return jsonify({"message":"Lixeira inserida com sucesso!"}),201
         
         except EOFError as e:
 

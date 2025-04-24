@@ -8,6 +8,8 @@ from flask import request, jsonify, Blueprint
 from sqlalchemy import select
 from Models.ExtensionsModel import db
 
+import werkzeug
+
 
 lixeira = Blueprint('lixeira',__name__)
 
@@ -23,44 +25,44 @@ def cadastrar_lixeira():
 
             if not data.get('mat_colet_id'):
 
-                return jsonify({'message':'Por favor informe o material coletado pela lixeira !'})
+                return jsonify({'message':'Por favor informe o material coletado pela lixeira !'}),400
             
             result = MaterialColetado.select([{'mat_colet_id':data['mat_colet_id']}])
 
             if len(result) == 0:
 
-                return jsonify({'message':'O material coletado pela lixeira não está cadastrado no sistema !'})
+                return jsonify({'message':'O material coletado pela lixeira não está cadastrado no sistema !'}),404
             
             if not data.get('grupo_lixeira_id'):
 
-                return jsonify({'message':'O grupo de lixeira deve ser informado para lixeira !'})
+                return jsonify({'message':'O grupo de lixeira deve ser informado para lixeira !'}),400
             
             result = GrupoLixeira.select([{'grupo_lixeira_id':data['grupo_lixeira_id']}])
 
             if len(result) == 0 :
 
-                return jsonify({'message':'Por favor, o grupo informado para lixeira não está cadastrado no sistema !'})
+                return jsonify({'message':'Por favor, o grupo informado para lixeira não está cadastrado no sistema !'}),404
             
             if not data.get('ponto_lixo_id'):
 
-                return jsonify({'message':'O ponto de lixo da lixeira não foi informado !'})
+                return jsonify({'message':'O ponto de lixo da lixeira não foi informado !'}),400
             
             result = PontoLixo.select({'ponto_lixo_id':data['ponto_lixo_id']})
 
             if(len(result) == 0):
 
-                return jsonify({'message':'O ponto de lixo informado da lixeira não está cadastrado no sistema !'})
+                return jsonify({'message':'O ponto de lixo informado da lixeira não está cadastrado no sistema !'}),404
 
             if not data.get('cor_id'):
 
-                return jsonify({'message':'O id da cor da lixeira não foi informada !'})
+                return jsonify({'message':'O id da cor da lixeira não foi informada !'}),400
             
 
             result = Cor.select([{'cor_id':data['cor_id']}])
 
             if(len(result) == 0):
 
-                return jsonify({'message':'A cor da lixeira não está cadastrada no sistema !'})
+                return jsonify({'message':'A cor da lixeira não está cadastrada no sistema !'}),404
 
             lixeira = Lixeira(
                 mat_colet_id=data['mat_colet_id'],
@@ -77,7 +79,7 @@ def cadastrar_lixeira():
             Lixeira.insert(lixeira)
 
         
-            return jsonify({"message":"Lixeira cadastrada com sucesso !"})
+            return jsonify({"message":"Lixeira cadastrada com sucesso !"}),201
 
         except EOFError as e:
 
@@ -108,4 +110,5 @@ def get_lixeira():
 
         lixeiras.append(dados_lixeira)
 
-    return jsonify(lixeiras)
+    return jsonify(lixeiras),200
+
