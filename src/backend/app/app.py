@@ -16,6 +16,7 @@ from Models.InformativoLixeiraModel import InformativoLixeira
 # Routes(Rotas)
 from Routes.GrupoLixeira import grupo_lixeira
 from Routes.Lixeira import lixeira
+from Routes.InformativoLixeira import informativo_lixeira
 
 # Instância do Flask
 app = Flask(__name__)
@@ -34,9 +35,10 @@ with app.app_context():
 # Registra Rotas das APIs
 app.register_blueprint(grupo_lixeira)
 app.register_blueprint(lixeira)
+app.register_blueprint(informativo_lixeira)
 
 
-# Personaliza mensagens de erro para códigos de respostas HTTP 404/405
+# Personaliza mensagens de erro para códigos de respostas HTTP 404,405 e 415.
 @app.errorhandler(405)
 def metodo_nao_permitido(e):
 
@@ -46,3 +48,8 @@ def metodo_nao_permitido(e):
 def pagina_nao_encontrada(e):
 
     return jsonify({'message':"Página não encontrada !"}),404
+
+@app.errorhandler(415)
+def tipo_media(e):
+
+    return jsonify({'message':'O tipo de conteúdo enviado não é suportado pelo servidor !'}),415

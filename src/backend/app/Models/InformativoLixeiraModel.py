@@ -11,3 +11,40 @@ class InformativoLixeira(db.Model):
     nivel_lixeira = mapped_column(Float)
     observacao = mapped_column(String(50))
     criado_em = mapped_column(DateTime)
+
+    def select(where = []):
+
+        query = db.select(InformativoLixeira)
+
+        for condicao in where:
+
+            if condicao.get('id_informativo'):
+
+                query = query.where(InformativoLixeira.id_informativo == condicao['id_informativo'])
+
+            if condicao.get('ponto_lixo_id'):
+
+                query = query.where(InformativoLixeira.ponto_lixo_id == condicao['ponto_lixo_id'])
+            
+            if condicao.get('informado_por_id'):
+
+                query = query.where(InformativoLixeira.informado_por_id == condicao['informado_por_id'])
+
+            if condicao.get('nivel_lixeira'):
+                
+                query = query.where(InformativoLixeira.nivel_lixeira == condicao['nivel_lixeira'])
+            
+            if condicao.get('criado_em'):
+                
+                query = query.where(InformativoLixeira.criado_em == condicao['criado_em'])
+
+        
+        result = db.session.execute(query)
+
+        return result
+    
+    def insert(informativo_lixeira):
+
+        db.session.add(informativo_lixeira)
+        db.session.commit()
+        return True
