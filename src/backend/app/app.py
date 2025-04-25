@@ -17,6 +17,7 @@ from Models.InformativoLixeiraModel import InformativoLixeira
 from Routes.GrupoLixeira import grupo_lixeira
 from Routes.Lixeira import lixeira
 from Routes.InformativoLixeira import informativo_lixeira
+from Routes.MaterialColetado import material_coletado
 
 # Instância do Flask
 app = Flask(__name__)
@@ -36,6 +37,7 @@ with app.app_context():
 app.register_blueprint(grupo_lixeira)
 app.register_blueprint(lixeira)
 app.register_blueprint(informativo_lixeira)
+app.register_blueprint(material_coletado)
 
 
 # Personaliza mensagens de erro para códigos de respostas HTTP 404,405 e 415.
