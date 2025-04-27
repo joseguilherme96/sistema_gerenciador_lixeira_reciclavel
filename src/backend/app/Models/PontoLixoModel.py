@@ -1,5 +1,6 @@
 from Models.ExtensionsModel import db
 from sqlalchemy import Date,Time
+from datetime import datetime
 
 class PontoLixo(db.Model):
 
@@ -11,17 +12,49 @@ class PontoLixo(db.Model):
 
     def insert(PontoLixo):
 
-        db.session.add(PontoLixo)
-        db.session.commit()
-        return True
+        db.session.begin()
+
+        try:
+
+            data_hora = datetime.now()
+
+            PontoLixo.data = data_hora.date()
+            PontoLixo.time = data_hora.time()
+
+            db.session.add(PontoLixo)
+            db.session.commit()
+
+            return {
+
+                "id_ponto_lixo":PontoLixo.id_ponto_lixo,
+                "data":str(PontoLixo.data),
+                "hora":str(PontoLixo.time)
+
+                
+            }
+        
+        except Exception as e:
+
+            db.session.rollback()
+            return
     
     def select(where = []):
 
         query = db.select(PontoLixo)
 
-        if where.get('ponto_lixo_id'):
+        for condicao in where:
+
+            if condicao.get('ponto_lixo_id'):
             
-            query = query.where(PontoLixo.id_ponto_lixo == where['ponto_lixo_id'])
+                query = query.where(PontoLixo.id_ponto_lixo == condicao['ponto_lixo_id'])
+        
+            if condicao.get('data'):
+            
+                query = query.where(PontoLixo.data == condicao['data'])
+
+            if condicao.get('hora'):
+            
+                query = query.where(PontoLixo.time == condicao['hora'])
         
         result = db.session.execute(query).all()
 
