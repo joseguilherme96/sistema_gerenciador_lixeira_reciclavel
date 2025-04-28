@@ -112,3 +112,33 @@ def get_lixeira():
 
     return jsonify(lixeiras),200
 
+@lixeira.route('/atualizar_nivel_lixeira',methods=['PUT'])
+def atualizar_nivel_lixeira():
+
+    try:
+
+        data = request.get_json()
+
+        if not data.get('lixeira_id'):
+
+            return jsonify({'message':'Informe o id da lixeira !'}),400
+        
+        if not data.get('nivel_lixeira'):
+
+            return jsonify({'message':'O nivel da lixeira não foi informado !'}),400
+        
+        lixeira = Lixeira(
+
+            id_lixeira = data['lixeira_id'],
+            nivel_lixeira = data['nivel_lixeira']
+            
+        )
+
+        dados_inseridos = Lixeira.update(lixeira)
+            
+        return jsonify({"message":"Lixeira atualizada com sucesso !",'dados':dados_inseridos}),200
+    
+    except Exception as e:
+
+        return jsonify({'message':f'${str(e)}'})
+

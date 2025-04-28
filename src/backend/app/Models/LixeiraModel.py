@@ -37,3 +37,36 @@ class Lixeira(db.Model):
         result = db.session.execute(query).all()
 
         return result
+    
+    def update(lixeira):
+
+        db.session.begin()
+
+        try:
+
+            stmt = db.select(Lixeira).where(Lixeira.id_lixeira == lixeira.id_lixeira)
+            result = db.session.scalars(stmt).one()
+
+            result.nivel_lixeira = lixeira.nivel_lixeira
+            db.session.commit()
+
+            return [{
+                
+                "id_lixeira": result.id_lixeira,
+                "descricao" : result.descricao,
+                "grupo_lixeira_id" : result.grupo_lixeira_id,
+                "ponto_lixo_id" : result.ponto_lixo_id,
+                "cor_id" : result.cor_id,
+                "capacidade" : result.capacidade,
+                "mat_colet_id" : result.mat_colet_id,
+                "nivel_lixeira" : result.nivel_lixeira,
+                "observacao" : result.observacao,
+                "criado_em" : result.criado_em,
+                "editado_em" : result.editado_em
+            }]
+        
+        except Exception as e:
+
+            db.session.rollback()
+            raise
+
