@@ -47,7 +47,7 @@ def cadastrar_lixeira():
 
                 return jsonify({'message':'O ponto de lixo da lixeira não foi informado !'}),400
             
-            result = PontoLixo.select({'ponto_lixo_id':data['ponto_lixo_id']})
+            result = PontoLixo.select([{'ponto_lixo_id':data['ponto_lixo_id']}])
 
             if(len(result) == 0):
 
