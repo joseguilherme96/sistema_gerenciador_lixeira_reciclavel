@@ -46,7 +46,7 @@ watch(() => dataSelecionada.value, (newValue, oldvalue) => {
     </v-dialog>
     <v-row>
         <v-col cols="12" sm="2">
-            <v-text-field label="ID Lixeira" v-model="form.idLixeira"></v-text-field>
+            <v-text-field label="ID Lixeira" v-model="form.grupo_lixeira_id"></v-text-field>
         </v-col>
         <v-col cols="12" sm="4">
             <v-text-field label="Logradouro" v-model="form.endereco"></v-text-field>
@@ -65,7 +65,7 @@ watch(() => dataSelecionada.value, (newValue, oldvalue) => {
         </v-col>
         <v-col cols="12" sm="5">
             <v-select label="Materias Coletado" :items="materiaisReciclaveis"
-                v-model="form.materialColetado"></v-select>
+                v-model="form.material_coletado"></v-select>
         </v-col>
         <v-col cols="12" sm="2">
             <v-text-field label="Capacidade(L)" v-model="form.capacidade" type="number"></v-text-field>
@@ -73,7 +73,7 @@ watch(() => dataSelecionada.value, (newValue, oldvalue) => {
         <v-col cols="12" sm="3">
             <v-select label="Nivel Lixeira(menor/igual)"
                 :items="niveisLixeira.map((nivel) => nivel.descricaoComPorcentagem)"
-                v-model="form.nivelLixeira"></v-select>
+                v-model="form.nivel_lixeira"></v-select>
         </v-col>
     </v-row>
     <v-row>

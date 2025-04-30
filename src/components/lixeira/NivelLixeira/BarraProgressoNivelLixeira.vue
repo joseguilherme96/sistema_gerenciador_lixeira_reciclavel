@@ -15,9 +15,9 @@ defineProps({
 <template>
 
 
-    <v-progress-linear v-cor-nivel-lixeira="item.nivelLixeira" v-model:model-value="item.nivelLixeira" :height="30">{{
-        item.nivelLixeira
-        }}%</v-progress-linear>
+    <v-progress-linear v-cor-nivel-lixeira="item.nivel_lixeira" v-model:model-value="item.nivel_lixeira" :height="30">{{
+        item.nivel_lixeira
+    }}%</v-progress-linear>
 
 </template>
 

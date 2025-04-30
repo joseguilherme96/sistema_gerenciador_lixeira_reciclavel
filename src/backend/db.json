@@ -489,6 +489,14 @@
       "dataAtualizacao": "2025-04-12",
       "horaAtualizacao": "10:08:53",
       "informadoPor": "Usuário"
+    },
+    {
+      "id": "b41b",
+      "ponto_lixo_id": 29
+    },
+    {
+      "id": "373c",
+      "ponto_lixo_id": 29
     }
   ]
 }

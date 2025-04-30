@@ -3,7 +3,7 @@ import BarraSuperior from '@/components/lixeira/BarraSuperior/BarraSuperior.vue'
 import DetalheLixeira from '@/components/lixeira/DetalheLixeira/DetalheLixeira.vue';
 import TituloPagina from '@/components/lixeira/Titulo/TituloPagina.vue';
 import { mdiInformation } from '@mdi/js';
-import { getLixeirasQuery, form, atualizarNivelLixeira,cadastrarInformativoLixeira } from '../components/lixeira/lixeira.service.js'
+import { getLixeirasQuery, form, atualizarNivelLixeira, cadastrarInformativoLixeira } from '../components/lixeira/lixeira.service.js'
 import { onMounted, ref, watch } from 'vue';
 import { niveisLixeira } from '../components/lixeira/nivel.lixeira.service.js'
 
@@ -19,21 +19,20 @@ const lixeira = ref({});
 
 onMounted(() => {
 
-    getLixeirasQuery({ id: idLixeira }).then((res) => {
-
+    getLixeirasQuery({ lixeira_id: idLixeira }).then((res) => {
 
         lixeira.value = res[0];
 
 
     })
-    
+
 
 })
 
 function atualizarViewEmTempoRealAposSelectDeNovoNivelLixeira() {
 
     const nivel = niveisLixeira.filter((nivel) => nivel.descricaoComoTexto == form.value.lixeiras[0].nivelLixeira)
-    lixeira.value.nivelLixeira = `${nivel[0].valor}`
+    lixeira.value.nivel_lixeira = `${nivel[0].valor}`
 
 }
 
@@ -50,16 +49,14 @@ watch(() => monitarMudancasNoSelectNoNovoNivelLixeira(), () => {
 
 function atualizarLixeira() {
 
-    atualizarNivelLixeira(lixeira.value);
+    atualizarNivelLixeira({ nivel_lixeira: lixeira.value.nivel_lixeira, lixeira_id: lixeira.value.id_lixeira });
 
     const informativoLixeira = {
 
-        pontoLixoId:lixeira.value.pontoLixoId,
-        nivelLixeira:lixeira.value.nivelLixeira,
-        observacao:form.value.lixeiras[0].observacao,
-        dataAtualizacao: new Date().toISOString().split('T')[0],
-        horaAtualizacao: new Date().toLocaleTimeString('pt-BR', { hour12: false }).split(' ')[0],
-        informadoPor:"Usuário"
+        ponto_lixo_id: lixeira.value.ponto_lixo_id,
+        informado_por_id: "1",
+        nivel_lixeira: lixeira.value.nivel_lixeira,
+        observacao: form.value.lixeiras[0].observacao,
     }
 
     cadastrarInformativoLixeira(informativoLixeira);

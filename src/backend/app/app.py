@@ -2,6 +2,7 @@
 
 from flask import Flask,request,jsonify
 from flask_migrate import Migrate
+from flask_cors import CORS,cross_origin
  
 # Models(Modelos)
 from Models.ExtensionsModel import db
@@ -25,6 +26,8 @@ app = Flask(__name__)
 
 # Configuração SQLALCHEMY/Banco de dados
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
+
+CORS(app, origins=['http://localhost:5173']) # Permite URL que está sendo executada o front-end
 
 db.init_app(app)
 migrate = Migrate(app, db)

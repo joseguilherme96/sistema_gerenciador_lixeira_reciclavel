@@ -1,23 +1,24 @@
 <script setup lang="js">
 
-import {watch} from 'vue'
+import { watch } from 'vue'
 
-import {informativoLixeira,getInformativoLixeiraPorPontoLixoId } from './informativo.lixeira.service.js'
+import { informativoLixeira, getInformativoLixeiraPorPontoLixoId } from './informativo.lixeira.service.js'
 
 const props = defineProps({
-    lixeiraSelecionada:{
+    lixeiraSelecionada: {
         type: Object,
         required: true
     }
 })
 
-watch(()=>props.lixeiraSelecionada.pontoLixoId, () => {
+watch(() => props.lixeiraSelecionada.ponto_lixo_id, () => {
 
-    getInformativoLixeiraPorPontoLixoId(props.lixeiraSelecionada.pontoLixoId);
+
+    getInformativoLixeiraPorPontoLixoId(props.lixeiraSelecionada.ponto_lixo_id);
 
 })
 
-getInformativoLixeiraPorPontoLixoId(props.lixeiraSelecionada.pontoLixoId);
+getInformativoLixeiraPorPontoLixoId(props.lixeiraSelecionada.ponto_lixo_id);
 
 </script>
 <template>
@@ -48,11 +49,11 @@ getInformativoLixeiraPorPontoLixoId(props.lixeiraSelecionada.pontoLixoId);
         </thead>
         <tbody>
             <tr v-for="informativo in informativoLixeira" :key="informativo.id">
-                <td>{{ informativo.id }}</td>
-                <td>{{ informativo.nivelLixeira }}</td>
+                <td>{{ informativo.id_informativo }}</td>
+                <td>{{ informativo.nivel_lixeira }}</td>
                 <td>{{ informativo.observacao }}</td>
-                <td>{{ informativo.dataAtualizacao }}</td>
-                <td><v-chip>{{ informativo.informadoPor }}</v-chip></td>
+                <td>{{ informativo.criado_em }}</td>
+                <td><v-chip>{{ informativo.informado_por_id == 1 ? 'Usuário' : 'Microcontrolador ESP32' }}</v-chip></td>
             </tr>
         </tbody>
 

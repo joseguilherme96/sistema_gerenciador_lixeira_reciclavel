@@ -89,20 +89,32 @@ def cadastrar_lixeira():
 def get_lixeira():
 
     lixeiras = []
+    where = []
 
-    for lixeira in Lixeira.select():
+    data = request.get_json()
+
+    if data.get('grupo_lixeira_id'):
+
+        where.append({'grupo_lixeira_id':data['grupo_lixeira_id']})
+
+    if data.get('lixeira_id'):
+
+        where.append({'lixeira_id':data['lixeira_id']})
+        
+
+    for lixeira in Lixeira.select(where):
 
         dados_lixeira = {
 
                 "id_lixeira":lixeira.Lixeira.id_lixeira,
                 "mat_colet_id":lixeira.Lixeira.mat_colet_id,
                 "grupo_lixeira_id":lixeira.Lixeira.grupo_lixeira_id,
-                "ponto_lixo_id ": lixeira.Lixeira.ponto_lixo_id,
-                "cor_id ": lixeira.Lixeira.cor_id,
+                "ponto_lixo_id": lixeira.Lixeira.ponto_lixo_id,
+                "cor_id": lixeira.Lixeira.cor_id,
                 "descricao":lixeira.Lixeira.descricao,
-                "capacidade ": lixeira.Lixeira.capacidade,
-                "nivel_lixeira ": lixeira.Lixeira.nivel_lixeira,
-                "observacao ": lixeira.Lixeira.observacao,
+                "capacidade": lixeira.Lixeira.capacidade,
+                "nivel_lixeira": lixeira.Lixeira.nivel_lixeira,
+                "observacao": lixeira.Lixeira.observacao,
                 "criado_em":lixeira.Lixeira.criado_em,
                 "editado_em":lixeira.Lixeira.editado_em
 

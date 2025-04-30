@@ -34,6 +34,14 @@ class Lixeira(db.Model):
             
                 query = query.where(Lixeira.id_lixeira == condicao['id_lixeira'])
 
+            if condicao.get('grupo_lixeira_id'):
+            
+                query = query.where(Lixeira.grupo_lixeira_id == condicao['grupo_lixeira_id'])
+
+            if condicao.get('lixeira_id'):
+            
+                query = query.where(Lixeira.id_lixeira == condicao['lixeira_id'])
+
         result = db.session.execute(query).all()
 
         return result

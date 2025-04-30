@@ -6,12 +6,19 @@ from flask import jsonify,Blueprint,request
 # e empacota varias rotas para depois acoplar a instancia principal do flask no arquivo app.py
 grupo_lixeira = Blueprint('grupo_lixeira', __name__)
 
-@grupo_lixeira.route('/grupo_lixeira', methods=['GET'])
+@grupo_lixeira.route('/grupo_lixeira', methods=['POST'])
 def select_grupo_lixeira():
 
     lixeiras = []
+    where = []
 
-    for lixeira in GrupoLixeira.select():
+    data = request.get_json()
+
+    if data.get('grupo_lixeira_id'):
+
+        where.append({'grupo_lixeira_id':data['grupo_lixeira_id']})
+
+    for lixeira in GrupoLixeira.select(where):
 
         dados_lixeira = {
 

@@ -10,19 +10,19 @@ const abrirModalExibirDetalhesLixeiraModal = async (idLixeira) => {
 
     await selecionarLixeira(idLixeira);
 
-    await getLixeirasQuery({ endereco_lixeira_id: idLixeira }).then((response) => {
-        
-        if(response.length == 0){
-            
+    await getLixeirasQuery({ grupo_lixeira_id: idLixeira }).then((response) => {
+
+        if (response.length == 0) {
+
             return;
-            
+
         }
 
         lixeiraSelecionada.value.lixeiras = response
 
 
     })
-    
+
     emit("abrirModalExibirDetalhesLixeiraModal")
 
 }
@@ -71,7 +71,7 @@ const abrirModalExibirDetalhesLixeiraModal = async (idLixeira) => {
         </thead>
         <tbody>
             <tr v-for="item in lixeira" :key="item.name">
-                <td>{{ item.id }}</td>
+                <td>{{ item.id_grupo_lixeira }}</td>
                 <td>{{ item.endereco }}</td>
                 <td>{{ item.cidade }}</td>
                 <td>{{ item.estado }}</td>
@@ -81,7 +81,7 @@ const abrirModalExibirDetalhesLixeiraModal = async (idLixeira) => {
                 </td>
                 <td>{{ item.data }}</td>
                 <td>{{ item.hora }}</td>
-                <td><v-btn color="rgb(94, 93, 93)" @click="abrirModalExibirDetalhesLixeiraModal(item.id)">
+                <td><v-btn color="rgb(94, 93, 93)" @click="abrirModalExibirDetalhesLixeiraModal(item.id_grupo_lixeira)">
                         <svg-icon type="mdi" :path="mdiViewDashboardOutline"></svg-icon>
                         Visualizar
                     </v-btn></td>
