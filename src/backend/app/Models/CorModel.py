@@ -14,9 +14,22 @@ class Cor(db.Model):
     
     def insert(Cor):
 
-        db.session.add(Cor)
-        db.session.commit()
-        return True
+        db.session.begin()
+
+        try:
+
+            db.session.add(Cor)
+            db.session.commit()
+
+            return {
+                "id_cor":Cor.id_cor,
+                "nome":Cor.nome
+            }
+        
+        except Exception as e:
+            
+            db.session.rollback()
+            raise
     
     def select(where = []):
          
@@ -27,6 +40,10 @@ class Cor(db.Model):
             if condicao.get('cor_id'):
             
                 query = query.where(Cor.id_cor == condicao['cor_id'])
+
+            if condicao.get('nome'):
+            
+                query = query.where(Cor.id_cor == condicao['nome'])
 
         result = db.session.execute(query).all()
 
