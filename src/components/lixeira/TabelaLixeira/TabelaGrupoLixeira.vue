@@ -31,7 +31,16 @@ const abrirModalGrupoLixeira = async (grupoLixeiraId) => {
                     ID Grupo Lixeira
                 </th>
                 <th class="text-left">
+                    Nome
+                </th>
+                <th class="text-left">
+                    Descrição
+                </th>
+                <th class="text-left">
                     Endereço
+                </th>
+                <th class="text-left">
+                    Bairro
                 </th>
                 <th class="text-left">
                     Cidade
@@ -40,10 +49,13 @@ const abrirModalGrupoLixeira = async (grupoLixeiraId) => {
                     Estado
                 </th>
                 <th class="text-left">
+                    Cep
+                </th>
+                <th class="text-left">
                     Capacidade Total(L)
                 </th>
                 <th class="text-left">
-                    Nivel da Lixeira
+                    Nivel Total Lixeira
                 </th>
                 <th class="text-left">
                     Data Atualização
@@ -59,9 +71,13 @@ const abrirModalGrupoLixeira = async (grupoLixeiraId) => {
         <tbody>
             <tr v-for="item in lixeira" :key="item.name">
                 <td>{{ item.id_grupo_lixeira }}</td>
+                <td>{{ item.nome }}</td>
+                <td>{{ item.descricao }}</td>
                 <td>{{ item.endereco }}</td>
+                <td>{{ item.bairro }}</td>
                 <td>{{ item.cidade }}</td>
                 <td>{{ item.estado }}</td>
+                <td>{{ item.cep }}</td>
                 <td>{{ item.capacidade }}</td>
                 <td>
                     <BarraProgressoNivelLixeira :item="item"></BarraProgressoNivelLixeira>

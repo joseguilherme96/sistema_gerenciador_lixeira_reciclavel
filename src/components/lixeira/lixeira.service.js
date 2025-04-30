@@ -37,10 +37,7 @@ export function filtrarLixeiras(form) {
     fetch(apiEnderecosLixeirasUrl, {
 
         method: 'POST',
-        body: JSON.stringify({
-
-            grupo_lixeira_id: form.grupo_lixeira_id
-        }),
+        body: JSON.stringify(form),
         headers: {
             'Content-Type': 'application/json'
         },

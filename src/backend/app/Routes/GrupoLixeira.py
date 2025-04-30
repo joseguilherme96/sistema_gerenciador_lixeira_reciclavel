@@ -18,6 +18,46 @@ def select_grupo_lixeira():
 
         where.append({'grupo_lixeira_id':data['grupo_lixeira_id']})
 
+    if data.get('nome'):
+
+        where.append({'nome':data['nome']})
+
+    if data.get('descricao'):
+
+        where.append({'descricao':data['descricao']})
+
+    if data.get('logradouro'):
+
+        where.append({'logradouro':data['logradouro']})
+
+    if data.get('cidade'):
+
+        where.append({'cidade':data['cidade']})
+    
+    if data.get('cep'):
+
+        where.append({'cep':data['cep']})
+
+    if data.get('bairro'):
+
+        where.append({'bairro':data['bairro']})
+
+    if data.get('estado'):
+
+        where.append({'estado':data['estado']})
+
+    if data.get('uf'):
+
+        where.append({'uf':data['uf']})
+
+    if data.get('data'):
+
+        where.append({'data':data['data']})
+
+    if data.get('hora'):
+
+        where.append({'hora':data['hora']})
+
     for lixeira in GrupoLixeira.select(where):
 
         dados_lixeira = {
@@ -27,8 +67,12 @@ def select_grupo_lixeira():
             "descricao":lixeira.GrupoLixeira.descricao,
             "cep":lixeira.GrupoLixeira.cep,
             "endereco": lixeira.GrupoLixeira.endereco,
+            "bairro":lixeira.GrupoLixeira.bairro,
             "cidade":lixeira.GrupoLixeira.cidade,
-            "estado":lixeira.GrupoLixeira.estado
+            "estado":lixeira.GrupoLixeira.estado,
+            "uf":lixeira.GrupoLixeira.uf,
+            "data":str(lixeira.GrupoLixeira.data),
+            "hora":str(lixeira.GrupoLixeira.hora)
         }
         lixeiras.append(dados_lixeira)
 
@@ -58,6 +102,9 @@ def inserir_grupo_lixeira():
             if(not data.get('endereco')):
 
                 return jsonify({"message":"O endereço é obrigatório ser enviado !"}),400
+            
+            if(not data.get('bairro')):
+                return jsonify({"message":"O bairro é obrigatório ser enviado !"}),400
 
             if(not data.get('cidade')):
 
@@ -73,20 +120,17 @@ def inserir_grupo_lixeira():
                 descricao = data['descricao'],
                 cep = data['cep'],
                 endereco = data['endereco'],
+                bairro = data['bairro'],
                 cidade = data['cidade'],
                 estado = data['estado']
 
             )
 
-            inserir = GrupoLixeira.insert(grupo_lixeira)
+            dados_inseridos = GrupoLixeira.insert(grupo_lixeira)
 
-            if not inserir:
-
-                return jsonify({"message":"Erro ao inserir lixeira!"}),500
-                
-            return jsonify({"message":"Lixeira inserida com sucesso!"}),201
+            return jsonify({"message":"Grupo lixeira inserido com sucesso!",'dados':dados_inseridos}),201
         
-        except EOFError as e:
+        except Exception as e:
 
             return jsonify({'message':str(e)}),500
 

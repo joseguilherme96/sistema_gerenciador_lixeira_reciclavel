@@ -63,10 +63,6 @@ watch(() => dataSelecionada.value, (newValue, oldvalue) => {
         <v-col cols="12" sm="2">
             <v-select label="Estado" :items="estados" v-model="form.estado"></v-select>
         </v-col>
-        <v-col cols="12" sm="5">
-            <v-select label="Materias Coletado" :items="materiaisReciclaveis"
-                v-model="form.material_coletado"></v-select>
-        </v-col>
         <v-col cols="12" sm="2">
             <v-text-field label="Capacidade(L)" v-model="form.capacidade" type="number"></v-text-field>
         </v-col>
@@ -75,20 +71,20 @@ watch(() => dataSelecionada.value, (newValue, oldvalue) => {
                 :items="niveisLixeira.map((nivel) => nivel.descricaoComPorcentagem)"
                 v-model="form.nivel_lixeira"></v-select>
         </v-col>
-    </v-row>
-    <v-row>
         <v-col cols="12" sm="2">
             <v-text-field label="Data" v-model="form.data" @click="exibirCalendario = true"></v-text-field>
         </v-col>
         <v-col cols="12" sm="2">
             <v-text-field label="Hora" v-model="form.hora"></v-text-field>
         </v-col>
-        <v-col cols="6" sm="2">
+    </v-row>
+    <v-row class="d-flex justify-end">
+        <v-col cols="4" sm="2">
             <v-btn color="primary" @click="limparCampos()">
                 Limpar Filtro
             </v-btn>
         </v-col>
-        <v-col cols="6" sm="2">
+        <v-col cols="4" sm="2">
             <v-btn color="primary" @click="pesquisar()">
                 Pesquisar
             </v-btn>
