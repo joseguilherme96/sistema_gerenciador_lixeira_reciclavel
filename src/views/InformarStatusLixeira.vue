@@ -3,7 +3,7 @@ import BarraSuperior from '@/components/lixeira/BarraSuperior/BarraSuperior.vue'
 import DetalheLixeira from '@/components/lixeira/DetalheLixeira/DetalheLixeira.vue';
 import TituloPagina from '@/components/lixeira/Titulo/TituloPagina.vue';
 import { mdiInformation } from '@mdi/js';
-import { getLixeirasQuery, form, atualizarNivelLixeira, cadastrarInformativoLixeira } from '../components/lixeira/lixeira.service.js'
+import { getLixeira, form, atualizarNivelLixeira, cadastrarInformativoLixeira } from '../components/lixeira/lixeira.service.js'
 import { onMounted, ref, watch } from 'vue';
 import { niveisLixeira } from '../components/lixeira/nivel.lixeira.service.js'
 
@@ -19,7 +19,7 @@ const lixeira = ref({});
 
 onMounted(() => {
 
-    getLixeirasQuery({ lixeira_id: idLixeira }).then((res) => {
+    getLixeira({ lixeira_id: idLixeira }).then((res) => {
 
         lixeira.value = res[0];
 

@@ -1,29 +1,16 @@
 <script setup lang="js">
 
-import { lixeira, selecionarLixeira, getEnderecosLixeiras, getLixeirasQuery, lixeiraSelecionada } from '../lixeira.service.js'
+import { lixeira, selecionarGrupoLixeira, getEnderecosLixeiras } from '../lixeira.service.js'
 import { mdiUpdate, mdiViewDashboardOutline } from '@mdi/js'
 import BarraProgressoNivelLixeira from '../NivelLixeira/BarraProgressoNivelLixeira.vue'
 
-const emit = defineEmits(['abrirModalExibirDetalhesLixeiraModal'])
+const emit = defineEmits(['abrirModalGrupoLixeira'])
 
-const abrirModalExibirDetalhesLixeiraModal = async (idLixeira) => {
+const abrirModalGrupoLixeira = async (grupoLixeiraId) => {
 
-    await selecionarLixeira(idLixeira);
+    await selecionarGrupoLixeira(grupoLixeiraId);
 
-    await getLixeirasQuery({ grupo_lixeira_id: idLixeira }).then((response) => {
-
-        if (response.length == 0) {
-
-            return;
-
-        }
-
-        lixeiraSelecionada.value.lixeiras = response
-
-
-    })
-
-    emit("abrirModalExibirDetalhesLixeiraModal")
+    emit("abrirModalGrupoLixeira")
 
 }
 
@@ -41,7 +28,7 @@ const abrirModalExibirDetalhesLixeiraModal = async (idLixeira) => {
         <thead>
             <tr>
                 <th class="text-left">
-                    ID Lixeira
+                    ID Grupo Lixeira
                 </th>
                 <th class="text-left">
                     Endereço
@@ -81,7 +68,7 @@ const abrirModalExibirDetalhesLixeiraModal = async (idLixeira) => {
                 </td>
                 <td>{{ item.data }}</td>
                 <td>{{ item.hora }}</td>
-                <td><v-btn color="rgb(94, 93, 93)" @click="abrirModalExibirDetalhesLixeiraModal(item.id_grupo_lixeira)">
+                <td><v-btn color="rgb(94, 93, 93)" @click="abrirModalGrupoLixeira(item.id_grupo_lixeira)">
                         <svg-icon type="mdi" :path="mdiViewDashboardOutline"></svg-icon>
                         Visualizar
                     </v-btn></td>

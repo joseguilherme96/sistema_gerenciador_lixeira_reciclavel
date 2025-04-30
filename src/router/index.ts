@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import LixeiraView from '@/views/LixeiraView.vue';
+import GrupoLixeiraView from '@/views/GrupoLixeiraView.vue';
 import InformarStatusLixeira from '@/views/InformarStatusLixeira.vue';
 
 const router = createRouter({
@@ -22,11 +22,11 @@ const router = createRouter({
     {
       path: '/lixeiras',
       name: 'lixeiras',
-      component: LixeiraView
+      component: GrupoLixeiraView
     },
     {
-      path:'/informar-status-lixeira/:id',
-      name:'informar-status-lixeira',
+      path: '/informar-status-lixeira/:id',
+      name: 'informar-status-lixeira',
       component: InformarStatusLixeira
     }
   ],

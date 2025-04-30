@@ -1,6 +1,6 @@
 <script setup lang="js">
 
-import { lixeiraSelecionada } from '../lixeira.service.js'
+import { grupoSelecionadoLixeira } from '../lixeira.service.js'
 import InformativoLixeira from '../InformativoLixeira/InformativoLixeira.vue';
 import { computed, ref } from 'vue'
 import BarraSuperior from '../BarraSuperior/BarraSuperior.vue';
@@ -12,21 +12,29 @@ defineProps({
     data: Object
 })
 
-const configuracaoTitulo = ref({
-    nome: 'Detalhes da Lixeira',
-    icone: mdiViewDashboardOutline
-})
+
 
 const indexPaginaAtual = ref(0)
 
+const configuracaoTitulo = ref({
+    nome: `Detalhe Grupo Lixeira`,
+    icone: mdiViewDashboardOutline
+})
+
+const atualizarPaginacaoNoTitulo = () => {
+    const paginacao = `${indexPaginaAtual.value + 1}/${grupoSelecionadoLixeira.value.length}`
+    configuracaoTitulo.value.nome = `Detalhe Grupo Lixeira ${paginacao}`
+}
+
 const lixeiraAtual = computed(() => {
-    return lixeiraSelecionada.value[indexPaginaAtual.value]
+    atualizarPaginacaoNoTitulo();
+    return grupoSelecionadoLixeira.value[indexPaginaAtual.value]
 })
 
 
 const avancarPagina = () => {
 
-    if (indexPaginaAtual.value < lixeiraSelecionada.value.length - 1) {
+    if (indexPaginaAtual.value < grupoSelecionadoLixeira.value.length - 1) {
         indexPaginaAtual.value++
     }
 }
@@ -59,8 +67,8 @@ const voltarPagina = () => {
 
                 </BarraSuperior>
 
-                <v-card v-for="(lixeira, index) in lixeiraSelecionada" class="mt-5" v-show="indexPaginaAtual == index"
-                    style="overflow: scroll;">
+                <v-card v-for="(lixeira, index) in grupoSelecionadoLixeira" class="mt-5"
+                    v-show="indexPaginaAtual == index" style="overflow: scroll;">
 
                     <DetalheLixeira :lixeira="lixeira"></DetalheLixeira>
 

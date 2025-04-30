@@ -12,7 +12,7 @@ export const apiAtualizarLixeira = `${baseUrl}/atualizar_nivel_lixeira`;
 export const informativoLixeira = `${baseUrl}/cadastrar_informativo_lixeira`
 
 
-export const lixeiraSelecionada = ref({});
+export const grupoSelecionadoLixeira = ref({});
 export const lixeira = ref([
     lixeiraModel
 ])
@@ -162,23 +162,23 @@ export async function cadastrarPontosDeLixo(localTemLixeira) {
 
 }
 
-export async function selecionarLixeira(idLixeira) {
+export async function selecionarGrupoLixeira(grupoLixeiraId) {
 
-    return getEnderecoLixeiraPorId(idLixeira)
+    return getLixeira({ 'grupo_lixeira_id': grupoLixeiraId })
         .then(async (res) => {
 
-            lixeiraSelecionada.value = res
+            grupoSelecionadoLixeira.value = res
 
         })
 
 }
 
-export async function getEnderecoLixeiraPorId(idLixeira) {
+export async function getLixeira(data) {
 
     return fetch(`${apiLixeiras}`, {
 
         method: 'POST',
-        body: JSON.stringify({ 'grupo_lixeira_id': idLixeira }),
+        body: JSON.stringify(data),
         headers: {
             'Content-Type': 'application/json'
         }
@@ -193,22 +193,6 @@ export async function getEnderecoLixeiraPorId(idLixeira) {
 
 }
 
-export async function getLixeirasQuery(where) {
-
-    return fetch(`${apiLixeiras}`, {
-
-        method: 'POST',
-        body: JSON.stringify(where),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-
-    })
-        .then(res => res.json())
-        .then(res => res)
-        .catch(err => err)
-
-}
 
 export async function atualizarNivelLixeira(lixeira) {
 

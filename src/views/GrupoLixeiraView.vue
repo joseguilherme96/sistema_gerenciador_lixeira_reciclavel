@@ -4,11 +4,11 @@ import BarraSuperior from '../components/lixeira/BarraSuperior/BarraSuperior.vue
 import { getEnderecosLixeiras } from '../components/lixeira/lixeira.service.js'
 import { onMounted, ref } from 'vue'
 import FiltroPesquisa from '@/components/lixeira/FIltroPesquisaLixeira/FiltroPesquisa.vue';
-import TabelaLixeiras from '@/components/lixeira/TabelaLixeira/TabelaLixeiras.vue';
+import TabelaGrupoLixeira from '../components/lixeira/TabelaLixeira/TabelaGrupoLixeira.vue';
 import ModalCadastro from '../components/lixeira/Modais/ModalCadastro.vue'
-import { mdiMagnify, mdiPlus, mdiTrashCan, mdiTruck } from '@mdi/js'
+import { mdiMagnify, mdiPlus, mdiTruck } from '@mdi/js'
 import { getCidades, getEstados } from '../services/endereco.service.js'
-import ModalExibirDetalhesLixeira from '../components/lixeira/Modais/ModalExibirDetalhesLixeira.vue'
+import ModalExibirDetalhesGrupoLixeira from '../components/lixeira/Modais/ModalExibirDetalhesGrupoLixeira.vue'
 import TituloPagina from '../components/lixeira/Titulo/TituloPagina.vue';
 
 onMounted(() => {
@@ -23,7 +23,7 @@ const modalCadastroLixeira = ref({
     exibir: false
 })
 
-const modalDetalhesLixeira = ref({
+const modalDetalhesGrupoLixeira = ref({
 
     titulo: 'Detalhes Lixeira',
     exibir: false
@@ -40,14 +40,14 @@ function abrirModalCadastroLixeira() {
     modalCadastroLixeira.value.exibir = true
 }
 
-function abrirModalExibirDetalhesLixeiraModal() {
+function abrirModalGrupoLixeira() {
 
-    modalDetalhesLixeira.value.exibir = true;
+    modalDetalhesGrupoLixeira.value.exibir = true;
 
 }
 
 const configuracaoTitulo = ref({
-    nome: 'Acompanhamento do Nível das Lixeiras',
+    nome: 'Acompanhamento do nível das lixeiras por grupo',
     icone: mdiTruck
 })
 
@@ -62,7 +62,7 @@ const configuracaoTitulo = ref({
         <template v-slot:opcoes>
             <v-btn color="primary" @click="abrirModalCadastroLixeira()">
                 <svg-icon type="mdi" :path="mdiPlus"></svg-icon>
-                Cadastrar Lixeira
+                Cadastrar Grupo Lixeira / Lixeira
             </v-btn>
             <v-btn color="primary" @click="abrirFiltro()">
                 <svg-icon type="mdi" :path="mdiMagnify"></svg-icon>
@@ -73,8 +73,10 @@ const configuracaoTitulo = ref({
     <FiltroPesquisa v-if="filtroEstaAberto"></FiltroPesquisa>
 
 
-    <TabelaLixeiras @abrirModalExibirDetalhesLixeiraModal="abrirModalExibirDetalhesLixeiraModal"></TabelaLixeiras>
+    <TabelaGrupoLixeira @abrirModalGrupoLixeira="abrirModalGrupoLixeira">
+    </TabelaGrupoLixeira>
 
     <ModalCadastro :data="modalCadastroLixeira"></ModalCadastro>
-    <ModalExibirDetalhesLixeira :data="modalDetalhesLixeira" v-if="modalDetalhesLixeira.exibir"></ModalExibirDetalhesLixeira>
+    <ModalExibirDetalhesGrupoLixeira :data="modalDetalhesGrupoLixeira" v-if="modalDetalhesGrupoLixeira.exibir">
+    </ModalExibirDetalhesGrupoLixeira>
 </template>
