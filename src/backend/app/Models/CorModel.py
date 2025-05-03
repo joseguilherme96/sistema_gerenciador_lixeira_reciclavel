@@ -43,7 +43,7 @@ class Cor(db.Model):
 
             if condicao.get('nome'):
             
-                query = query.where(Cor.id_cor == condicao['nome'])
+                query = query.where(Cor.nome == condicao['nome'])
 
         result = db.session.execute(query).all()
 
