@@ -1,13 +1,18 @@
 import { ref, watch } from 'vue'
 import { getEnderecoPorCep } from '../../services/endereco.service'
 import { lixeiraModel } from './lixeira.model.js'
+import { corLixeira } from './cor.lixeira.service.js'
+import { materiaisReciclaveisComChaveValor } from './materiais.reciclaveis.services.js'
 
 
 export const baseUrl = "http://127.0.0.1:5000";
 
-export const apiEnderecosLixeirasUrl = `${baseUrl}/grupo_lixeira`;
-export const apiPontosDeLixoComOuSemLixeira = `${baseUrl}/pontos_lixo`
+export const apiGrupoLixeira = `${baseUrl}/grupo_lixeira`;
+export const apiCadastrarGrupoLixeira = `${baseUrl}/cadastrar_grupo_lixeira`
+export const apiPontosDeLixo = `${baseUrl}/cadastrar_ponto_lixo`
 export const apiLixeiras = `${baseUrl}/get_lixeira`;
+export const apiCadastrarLixeira = `${baseUrl}/cadastrar_lixeira`
+export const apiCadastrarGrupoLixeiraPontoLixoLixeira = `${baseUrl}/cadastrar_grupo_lixeira_ponto_lixo_lixeira`
 export const apiAtualizarLixeira = `${baseUrl}/atualizar_nivel_lixeira`;
 export const informativoLixeira = `${baseUrl}/cadastrar_informativo_lixeira`
 
@@ -34,7 +39,7 @@ export function formatarDataParaAmericano(data) {
 
 export function filtrarLixeiras(form) {
 
-    fetch(apiEnderecosLixeirasUrl, {
+    fetch(apiGrupoLixeira, {
 
         method: 'POST',
         body: JSON.stringify(form),
@@ -54,9 +59,9 @@ export function filtrarLixeiras(form) {
 }
 
 
-export async function getEnderecosLixeiras() {
+export async function getGrupoLixeira() {
 
-    fetch(apiEnderecosLixeirasUrl, {
+    fetch(apiGrupoLixeira, {
 
         method: 'POST',
         body: JSON.stringify({ "grupo_lixeira_id": "" }),
@@ -76,85 +81,146 @@ export async function getEnderecosLixeiras() {
 
 }
 
-export async function criarEnderecoLixeira() {
+export async function criarGrupoLixeira(GrupoLixeira) {
 
+    try {
 
-    form.value.data = new Date();
-    form.value.hora = new Date().getTime();
-
-    let retorno = await fetch(apiEnderecosLixeirasUrl, {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(form.value)
-    })
-        .then(res => res.json())
-        .then(res => res)
-        .catch(err => err)
-
-    vincularLixeiraAoEnderecoCadastrado(retorno.id);
-
-}
-
-
-export async function vincularLixeiraAoEnderecoCadastrado(endereco_lixeira_id) {
-
-
-    form.value.lixeiras = form.value.lixeiras.map((lixeira) => {
-
-        lixeira.data = new Date();
-        lixeira.hora = new Date().getTime();
-        lixeira.nivelLixeira = lixeira.nivelLixeira.split("%")[0];
-        lixeira.enderecoLixeiraId = endereco_lixeira_id
-
-        return lixeira
-
-    })
-
-    form.value.lixeiras.forEach(async (lixeira, index) => {
-
-        let ponto_lixo = await cadastrarPontosDeLixo(true)
-        form.value.lixeiras[index].pontoLixoId = ponto_lixo.id
-
-        await fetch(apiLixeiras, {
+        let retornoHeader = await fetch(apiCadastrarGrupoLixeira, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(lixeira)
+            body: JSON.stringify(form.value)
         })
-            .then(res => res.json())
-            .then(res => res)
-            .catch(err => err)
 
-    });
+        const retornoBody = await retornoHeader.json()
 
-}
+        if (!retornoHeader.ok) {
 
-export async function cadastrarPontosDeLixo(localTemLixeira) {
+            throw new Error(retornoBody.message)
 
-    let dados = {
+        }
 
-        localTemLixeira: localTemLixeira,
-        data: new Date(),
-        hora: new Date().getTime(),
+        return retornoBody;
+
+    } catch (e) {
+
+        alert(e)
+        return false;
 
     }
 
-    return fetch(apiPontosDeLixoComOuSemLixeira, {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(dados)
+}
+
+
+export async function cadastrarPontoDeLixo(PontoLixo) {
+
+    try {
+
+        const retornoHeader = await fetch(apiPontosDeLixo, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({})
+        })
+
+        const retornoBody = await retornoHeader.json();
+
+        if (!retornoHeader.ok) {
+
+            throw new Error(retornoBody.message)
+
+        }
+
+        return retornoBody;
+
+    } catch (e) {
+
+        alert(e)
+
+        return false;
+
+    }
+
+
+}
+
+export async function cadastrarLixeira(lixeiras) {
+
+    try {
+
+        const retornoHeader = await fetch(apiCadastrarLixeira, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(lixeiras)
+        })
+
+        const retornoBody = await retornoHeader.json();
+
+        if (!retornoHeader.ok) {
+
+            throw new Error(retornoBody.message)
+
+        }
+
+        return retornoBody;
+
+
+    } catch (e) {
+
+        alert(e)
+        return false;
+
+    }
+
+}
+
+export async function cadastrarGrupoPontoLixoLixeira(form) {
+
+    //Converte nivel_lixeira,nome cor e nome material para
+    form.lixeiras.forEach((lixeira, index) => {
+
+        lixeira.nivel_lixeira = lixeira.nivel_lixeira.split("%")[0]
+        lixeira.cor_id = corLixeira.filter((cor) => cor.nome == lixeira.cor)[0].cor_id
+        lixeira.mat_colet_id = materiaisReciclaveisComChaveValor.value.filter((material) => material.nome == lixeira.material)[0].mat_colet_id
+
     })
-        .then(res => res.json())
-        .then(res => res)
-        .catch(err => err)
+
+    try {
+
+        const retornoHeader = await fetch(apiCadastrarGrupoLixeiraPontoLixoLixeira, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(form)
+        })
+
+        const retornoBody = await retornoHeader.json();
+
+        if (!retornoHeader.ok) {
+
+            throw new Error(retornoBody.message)
+
+        }
+
+        alert(retornoBody.message)
+        return retornoBody;
+
+
+    } catch (e) {
+
+        alert(e)
+        return false;
+
+    }
 
 
 }
