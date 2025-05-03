@@ -19,10 +19,14 @@ class Lixeira(db.Model):
     editado_em = mapped_column(DateTime)
 
     def insert(Lixeira):
+        try:    
+            db.session.add_all(Lixeira)
+            db.session.flush()
 
-        db.session.add(Lixeira)
-        db.session.commit()
-        return True
+            return Lixeira
+
+        except Exception as e:
+            raise
     
     def select(where = []):
          

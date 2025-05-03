@@ -12,8 +12,6 @@ class PontoLixo(db.Model):
 
     def insert(PontoLixo):
 
-        db.session.begin()
-
         try:
 
             data_hora = datetime.now()
@@ -22,11 +20,11 @@ class PontoLixo(db.Model):
             PontoLixo.time = data_hora.time()
 
             db.session.add(PontoLixo)
-            db.session.commit()
+            db.session.flush()
 
             return {
 
-                "id_ponto_lixo":PontoLixo.id_ponto_lixo,
+                "ponto_lixo_id":PontoLixo.id_ponto_lixo,
                 "data":str(PontoLixo.data),
                 "hora":str(PontoLixo.time)
 
@@ -35,8 +33,7 @@ class PontoLixo(db.Model):
         
         except Exception as e:
 
-            db.session.rollback()
-            return
+            raise
     
     def select(where = []):
 

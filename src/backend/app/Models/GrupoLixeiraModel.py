@@ -21,8 +21,6 @@ class GrupoLixeira(db.Model):
 
     def insert(GrupoLixeira):
 
-        db.session.begin()
-
         try:
 
             data_hora = datetime.now()
@@ -31,7 +29,7 @@ class GrupoLixeira(db.Model):
             GrupoLixeira.hora = data_hora.time()
 
             db.session.add(GrupoLixeira)
-            db.session.commit()
+            db.session.flush()
 
             return [{
                 "id_grupo_lixeira":GrupoLixeira.id_grupo_lixeira,
@@ -50,7 +48,6 @@ class GrupoLixeira(db.Model):
         
         except Exception as e:
             
-            db.session.rollback()
             raise # Raise levanta uma exceção
        
 
