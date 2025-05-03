@@ -2,7 +2,7 @@
 
 import { form } from '../lixeira.service.js'
 import { corLixeira } from '../cor.lixeira.service.js'
-import { materiaisReciclaveis } from '../materiais.reciclaveis.services.js'
+import { materiaisReciclaveisComChaveValor } from '../materiais.reciclaveis.services.js'
 import { niveisLixeira } from '../nivel.lixeira.service.js'
 import BarraSuperior from '../BarraSuperior/BarraSuperior.vue'
 import { cidades, estados } from '../../../services/endereco.service.js'
@@ -55,6 +55,16 @@ const criarEspacoParaArmazenamentoDaLixeira = () => {
         <v-row>
 
             <v-col cols="4" sm="12">
+                <v-text-field label="Nome do Grupo" v-model="form.nome"></v-text-field>
+            </v-col>
+            <v-col cols="4" sm="12">
+                <v-text-field label="Descrição Grupo" v-model="form.descricao"></v-text-field>
+            </v-col>
+        </v-row>
+
+        <v-row>
+
+            <v-col cols="4" sm="12">
                 <v-text-field label="Cep" v-model="form.cep" :maxlength="9"></v-text-field>
             </v-col>
         </v-row>
@@ -87,20 +97,22 @@ const criarEspacoParaArmazenamentoDaLixeira = () => {
             </v-card-subtitle>
             <v-row>
                 <v-col cols="4" sm="8" class="m-4">
-                    <v-text-field label="Descricao" v-model="lixeira.descricaoLixeira"></v-text-field>
+                    <v-text-field label="Descricao" v-model="lixeira.descricao"></v-text-field>
                 </v-col>
                 <v-col cols="4" sm="4">
-                    <v-select label="Material Coletado" :items="materiaisReciclaveis"
-                        v-model="lixeira.materialColetado"></v-select>
+                    <v-select label="Material Coletado"
+                        :items="materiaisReciclaveisComChaveValor.map((material) => material.nome)"
+                        v-model="lixeira.material"></v-select>
                 </v-col>
                 <v-col cols="4" sm="4">
                     <v-text-field label="Capacidade(L)" type="number" v-model="lixeira.capacidade"></v-text-field>
                 </v-col>
                 <v-col cols="4" sm="4">
-                    <v-select label="Nivel Lixeira" :items="niveisLixeira.map((nivel)=>nivel.descricaoComPorcentagem)" v-model="lixeira.nivelLixeira"></v-select>
+                    <v-select label="Nivel Lixeira" :items="niveisLixeira.map((nivel) => nivel.descricaoComPorcentagem)"
+                        v-model="lixeira.nivel_lixeira"></v-select>
                 </v-col>
                 <v-col cols="12" sm="12">
-                    <v-select label="Cor" :items="corLixeira" v-model="lixeira.cor"></v-select>
+                    <v-select label="Cor" :items="corLixeira.map((cor) => cor.nome)" v-model="lixeira.cor"></v-select>
                 </v-col>
                 <v-col cols="4" sm="12">
                     <v-text-field label="Observação" v-model="lixeira.observacao"></v-text-field>

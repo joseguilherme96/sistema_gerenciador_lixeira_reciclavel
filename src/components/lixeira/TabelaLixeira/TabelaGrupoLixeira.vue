@@ -1,6 +1,6 @@
 <script setup lang="js">
 
-import { lixeira, selecionarGrupoLixeira, getEnderecosLixeiras } from '../lixeira.service.js'
+import { lixeira, selecionarGrupoLixeira, getGrupoLixeira } from '../lixeira.service.js'
 import { mdiUpdate, mdiViewDashboardOutline } from '@mdi/js'
 import BarraProgressoNivelLixeira from '../NivelLixeira/BarraProgressoNivelLixeira.vue'
 
@@ -19,7 +19,7 @@ const abrirModalGrupoLixeira = async (grupoLixeiraId) => {
 <template>
 
     <v-row justify="end">
-        <v-btn color="rgb(94, 93, 93)" @click="getEnderecosLixeiras()">
+        <v-btn color="rgb(94, 93, 93)" @click="getGrupoLixeira()">
             <svg-icon type="mdi" :path="mdiUpdate"></svg-icon>
         </v-btn>
     </v-row>

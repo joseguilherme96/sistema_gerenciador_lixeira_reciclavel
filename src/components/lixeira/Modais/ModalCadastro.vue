@@ -1,6 +1,6 @@
 <script setup lang="js">
 
-import { getEnderecosLixeiras, limparCampos, criarEnderecoLixeira,vincularLixeiraAoEnderecoCadastrado,form } from '../lixeira.service'
+import { getGrupoLixeira, limparCampos, cadastrarGrupoPontoLixoLixeira, form } from '../lixeira.service'
 import FormularioCadastroLixeira from '../Formularios/FormularioCadastroLixeira.vue'
 import { ref } from 'vue'
 
@@ -10,12 +10,15 @@ defineProps({
 
 async function cadastrarLixeira() {
 
-    await criarEnderecoLixeira().then((res) => {
+    const retorno = await cadastrarGrupoPontoLixoLixeira(form.value);
 
-        getEnderecosLixeiras();
-        
-    })
-    
+    if (retorno) {
+
+        getGrupoLixeira();
+
+    }
+
+
 }
 
 </script>

@@ -1,7 +1,7 @@
 <script setup lang="js">
 
 import BarraSuperior from '../components/lixeira/BarraSuperior/BarraSuperior.vue';
-import { getEnderecosLixeiras } from '../components/lixeira/lixeira.service.js'
+import { getGrupoLixeira } from '../components/lixeira/lixeira.service.js'
 import { onMounted, ref } from 'vue'
 import FiltroPesquisa from '@/components/lixeira/FIltroPesquisaLixeira/FiltroPesquisa.vue';
 import TabelaGrupoLixeira from '../components/lixeira/TabelaLixeira/TabelaGrupoLixeira.vue';
@@ -12,7 +12,7 @@ import ModalExibirDetalhesGrupoLixeira from '../components/lixeira/Modais/ModalE
 import TituloPagina from '../components/lixeira/Titulo/TituloPagina.vue';
 
 onMounted(() => {
-    getEnderecosLixeiras();
+    getGrupoLixeira();
 })
 
 getEstados();

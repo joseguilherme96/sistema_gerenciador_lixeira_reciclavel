@@ -6,20 +6,15 @@ export const lixeiraModel = {
     endereco: '',
     cidade: '',
     estado: '',
-    data: '',
-    hora: '',
+    descricao: '',
     lixeiras: [{
-        materialColetado: '',
+        material: '',
+        descricao: '',
         capacidade: 0,
         nivelLixeira: 0,
-        data: '',
-        hora: '',
         cor: '',
         exibirBotaoAdicionarLixeira: true,
-        descricaoLixeira:'',
         observacao: '',
-        enderecoLixeiraId:'',
-        pontoLixoId:''
     }]
 
 
