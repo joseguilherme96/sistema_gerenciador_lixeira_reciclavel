@@ -1,19 +1,28 @@
 from flask import request, jsonify, Blueprint
 from Models.PontoLixoModel import PontoLixo
+from Models.ExtensionsModel import db
 
 ponto_lixo = Blueprint('ponto_lixo',__name__)
 
 @ponto_lixo.route('/cadastrar_ponto_lixo',methods=['POST'])
-def insert():
+def insert(data = [],chamada_interna_api = False):
 
     try:
 
-        data = request.get_json()
+        realizar_commit = False
+
+        # A responsabilidade da transação fica com a função que chamou a api caso seja uma chamada interna
+        if not chamada_interna_api:
+
+            db.session.begin()
+            realizar_commit = True
+            data = request.get_json()
 
         dados_inseridos = PontoLixo.insert(PontoLixo())
+        
+        db.session.commit() if realizar_commit else ''
 
         return jsonify({'message':'O ponto de lixo foi inserido com sucesso !',"dados":dados_inseridos}),201
-
 
     except Exception as e:
 
