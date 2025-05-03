@@ -30,7 +30,7 @@ def insert():
     
     except Exception as e:
 
-        return jsonify({'message':f'${str(e)}'})
+        return jsonify({'message':f'${str(e)}','status':'error'})
 
 @cor.route('/cor',methods=['POST'])
 def select_cor():
@@ -39,7 +39,7 @@ def select_cor():
         data = request.get_json()
 
         where = []
-        cor = []
+        cores = []
 
         if data.get('cor_id'):
 
@@ -49,26 +49,30 @@ def select_cor():
 
             where.append({"nome":data['nome']})
 
+        dados_encontrados = Cor.select(where)
+
+        if(len(dados_encontrados) == 0):
+
+            return jsonify({'message':'Nenhuma cor encontrada !'}),404
+
         for cor in Cor.select(where):
 
             encontrado = {
 
-                "cor_id" : cor.Cor.cor_id,
+                "cor_id" : cor.Cor.id_cor,
                 "nome": cor.Cor.nome,
                 
             }
 
-            cor.append(encontrado)
+            cores.append(encontrado)
 
-        if(len(cor) == 0):
-
-            return jsonify({'message':'Nenhuma cor encontrada !'}),404
         
-        return jsonify(cor)
+        
+        return jsonify(cores)
 
     except Exception as e:
 
-        return jsonify({'message':f'${str(e)}'}),400
+        return jsonify({'message':f'${str(e)}'}),500
 
 
 
