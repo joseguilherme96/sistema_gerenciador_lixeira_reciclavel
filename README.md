@@ -36,6 +36,8 @@ Também tem objetivo de aprender e explorar um pouco mais a questão de projetar
 
 - [![Tela que mostra as atualizações dos niveis da lixeira sinalizadas pelos os usuários ou por microcontrolador](https://github.com/joseguilherme96/sistema_gerenciador_lixeira_reciclavel/blob/25f74f8c33a1e9f190f744726051cedc35b58d23/src/assets/atualizacao_lixeira.png "Tela que mostra as atualizações dos niveis da lixeira sinalizadas pelos os usuários ou por microcontrolador")](https://github.com/joseguilherme96/sistema_gerenciador_lixeira_reciclavel/blob/25f74f8c33a1e9f190f744726051cedc35b58d23/src/assets/atualizacao_lixeira.png)
 
+- [![Tela utilizada pelo usuário para informar o nivel da lixeira](https://github.com/joseguilherme96/sistema_gerenciador_lixeira_reciclavel/blob/4757e4a78eb1e3e1431d8539587ac248c5fdc1c8/src/assets/tela_de_atualizacao_nivel_lixeira.png "Tela utilizada pelo usuário para informar o nivel da lixeira")](https://github.com/joseguilherme96/sistema_gerenciador_lixeira_reciclavel/blob/4757e4a78eb1e3e1431d8539587ac248c5fdc1c8/src/assets/tela_de_atualizacao_nivel_lixeira.png)
+
 ## Configuração do projeto  
 
 ## Intalação das depêndencias
@@ -63,9 +65,18 @@ Instale as dependencias com o seguinte comando :
 
 Ativar ambiente virtual na pasta src/backend/.venv/scripts/activate
 
-### Execute o servidor Flask
+### Execute o banco de dados
 
 Dentro da pasta app. Execute :
+
+```sh
+    flask db init
+
+```
+
+### Execute o servidor Flask
+
+Ainda dentro da pasta app. Execute :
 
 ```sh
     flask --app app run
