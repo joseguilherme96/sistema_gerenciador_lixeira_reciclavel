@@ -81,7 +81,7 @@ function atualizarLixeira() {
     </BarraSuperior>
     <DetalheLixeira :lixeira="lixeira" v-if="lixeira"></DetalheLixeira>
 
-    <BarraSuperior>
+    <BarraSuperior class="mt-5">
 
         <template v-slot:titulo>
 
