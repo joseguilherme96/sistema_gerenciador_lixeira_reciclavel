@@ -1,10 +1,10 @@
 <script setup lang="js">
 
 import { ref, watch } from 'vue'
-import { form, filtrarLixeiras, limparCampos } from '../lixeira.service'
-import { niveisLixeira } from '../nivel.lixeira.service'
+import { form, filtrarLixeiras, limparCampos } from '../../../services/lixeira.service'
+import { niveisLixeira } from '../../../services/nivel.lixeira.service'
 import { estados, cidades } from '../../../services/endereco.service'
-import { materiaisReciclaveis } from '../materiais.reciclaveis.services'
+import { materiaisReciclaveis } from '../../../services/materiais.reciclaveis.services'
 
 const exibirCalendario = ref(false)
 const dataSelecionada = ref(null)

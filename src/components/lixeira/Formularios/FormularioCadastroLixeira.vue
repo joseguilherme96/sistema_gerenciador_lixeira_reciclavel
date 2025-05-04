@@ -1,9 +1,9 @@
 <script setup lang="js">
 
-import { form } from '../lixeira.service.js'
-import { corLixeira } from '../cor.lixeira.service.js'
-import { materiaisReciclaveisComChaveValor } from '../materiais.reciclaveis.services.js'
-import { niveisLixeira } from '../nivel.lixeira.service.js'
+import { form } from '../../../services/lixeira.service.js'
+import { corLixeira } from '../../../services/cor.lixeira.service.js'
+import { materiaisReciclaveisComChaveValor } from '../../../services/materiais.reciclaveis.services.js'
+import { niveisLixeira } from '../../../services/nivel.lixeira.service.js'
 import BarraSuperior from '../BarraSuperior/BarraSuperior.vue'
 import { cidades, estados } from '../../../services/endereco.service.js'
 import TituloPagina from '../Titulo/TituloPagina.vue'

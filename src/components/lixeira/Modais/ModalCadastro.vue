@@ -1,6 +1,6 @@
 <script setup lang="js">
 
-import { getGrupoLixeira, limparCampos, cadastrarGrupoPontoLixoLixeira, form } from '../lixeira.service'
+import { getGrupoLixeira, limparCampos, cadastrarGrupoPontoLixoLixeira, form } from '../../../services/lixeira.service'
 import FormularioCadastroLixeira from '../Formularios/FormularioCadastroLixeira.vue'
 import { ref } from 'vue'
 

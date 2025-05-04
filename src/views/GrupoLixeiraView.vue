@@ -1,7 +1,7 @@
 <script setup lang="js">
 
 import BarraSuperior from '../components/lixeira/BarraSuperior/BarraSuperior.vue';
-import { getGrupoLixeira } from '../components/lixeira/lixeira.service.js'
+import { getGrupoLixeira } from '../services/lixeira.service.js'
 import { onMounted, ref } from 'vue'
 import FiltroPesquisa from '@/components/lixeira/FIltroPesquisaLixeira/FiltroPesquisa.vue';
 import TabelaGrupoLixeira from '../components/lixeira/TabelaLixeira/TabelaGrupoLixeira.vue';

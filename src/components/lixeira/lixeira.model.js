@@ -1,5 +1,3 @@
-import { lixeira } from "./lixeira.service";
-
 export const lixeiraModel = {
 
     cep: '',

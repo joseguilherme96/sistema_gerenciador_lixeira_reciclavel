@@ -1,6 +1,6 @@
 import { ref, watch } from 'vue'
-import { getEnderecoPorCep } from '../../services/endereco.service'
-import { lixeiraModel } from './lixeira.model.js'
+import { getEnderecoPorCep } from './endereco.service.js'
+import { lixeiraModel } from '../components/lixeira/lixeira.model.js'
 import { corLixeira } from './cor.lixeira.service.js'
 import { materiaisReciclaveisComChaveValor } from './materiais.reciclaveis.services.js'
 

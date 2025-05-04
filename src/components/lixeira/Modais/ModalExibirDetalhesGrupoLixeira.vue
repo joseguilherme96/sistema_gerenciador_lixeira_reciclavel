@@ -1,6 +1,6 @@
 <script setup lang="js">
 
-import { grupoSelecionadoLixeira } from '../lixeira.service.js'
+import { grupoSelecionadoLixeira } from '../../../services/lixeira.service.js'
 import InformativoLixeira from '../InformativoLixeira/InformativoLixeira.vue';
 import { computed, ref } from 'vue'
 import BarraSuperior from '../BarraSuperior/BarraSuperior.vue';

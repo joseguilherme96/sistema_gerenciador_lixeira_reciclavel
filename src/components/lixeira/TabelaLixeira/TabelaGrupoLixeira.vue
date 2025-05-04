@@ -1,6 +1,6 @@
 <script setup lang="js">
 
-import { lixeira, selecionarGrupoLixeira, getGrupoLixeira } from '../lixeira.service.js'
+import { lixeira, selecionarGrupoLixeira, getGrupoLixeira } from '../../../services/lixeira.service.js'
 import { mdiUpdate, mdiViewDashboardOutline } from '@mdi/js'
 import BarraProgressoNivelLixeira from '../NivelLixeira/BarraProgressoNivelLixeira.vue'
 
