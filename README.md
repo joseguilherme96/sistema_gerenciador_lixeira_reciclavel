@@ -1,10 +1,35 @@
 # Gerenciador de Lixeira Reciclável
 
-Este projeto está sendo desenvolvido e tem objetivo de ser capaz gerenciar os niveis das lixeiras em tempo real em diversos pontos da cidade, seja por meio da sinalização por um morador ou ainda por meio de sensores que serão integrados ao sistema.
+Este projeto está sendo desenvolvido e tem objetivo de ser capaz gerenciar os níveis das lixeiras em tempo real em diversos pontos da cidade, seja por meio da sinalização por um morador ou ainda por meio de sensores que serão integrados ao sistema.
 
-Também tem objetivo de aprender e explorar um pouco mais a questão de projetar sistemas seguindo as melhores práticas no desenvolvimento de software, como a criação de componentes, serviços, gerenciamentos de estados dos componentes, aplicação de diretivas personalizadas, uso de websockets para informação em tempo real e outros tópicos que poderão ser explorados ao longo do projeto.
+A empresa pode gerenciar a coleta de lixos recicláveis de uma maneira mais eficiente, se programando antecipadamente, realizando a coleta em pontos 
+estratégicos. Também pode reduzir os custos traçando a melhor rota antecipadamente, coletando lixos recicláveis em pontos mais críticos. Pois o sistema será capaz de apresentar diversos dados que ajudam na tomada de decisão como, regiões com mais ou menos lixo.
 
-Os dados ainda apresentados estão mockados e apenas servirão como base para construção da API definitiva que será desenvolvido em python posteriormente.
+Também tem objetivo de aprender e explorar um pouco mais a questão de projetar sistemas seguindo as melhores práticas no desenvolvimento de software, como a criação de componentes, serviços, gerenciamentos de estados dos componentes, aplicação de diretivas personalizadas, criação de APis, uso de websockets para informação em tempo real, trabalhar com microcontrolador ESP32 utilizando micropython e outros tópicos que poderão ser explorados ao longo do projeto.
+
+## Funcionalidades já desenvolvidas
+
+- Criação de grupos de lixeiras recicláveis
+- Criação de lixeiras para coletas de papel, metal, vidro, orgânico.....
+- Usuário pode informar niveis das lixeiras manualmente
+- Usuário consegue acessar link através de QRCode gerado na tela para cada lixeira para informar status da lixeira.
+- Empresa consegue visualizar grupos de lixeiras criados.
+- Empresa consegue visualizar as lixeiras cadastradas por grupo
+- Empresa consegue visualizar observações deixadas por cada usuário que informa o nivel da lixeiras, como também informação sobre coletas já realizadas.
+- Empresa consegue visualizar se as sinalizações das lixeiras estão sendo informadas por uma pessoa, ou ainda por um dispositivo instalado nas lixeiras.
+- Empresa consegue filtrar e visualizar grupos de lixeira por id_grupo, endereço(rua, bairro, cidade, estado ou cep), capacidades de cada lixeiras em litros ou ainda niveis de lixo que cada uma se encontra.
+
+## Futuras
+- Ajustes
+- Integração do sistema com microcontroladores ESP32 que enviará dados para o sistema informando o nivel das lixeiras.
+
+## Principais Tecnologias
+- Vue.js
+- Vuetify
+- Python
+- Micropython
+- Microcontrolador ESP32
+
 
 # Telas do projeto
 - [![Tela acompanhamento dos niveis de lixeira reciclavel](https://github.com/joseguilherme96/sistema_gerenciador_lixeira_reciclavel/blob/f8fddfa8650bf7573296a4d1f46f303a74648278/src/assets/tela_acompanhamento_lixeiras_reciclaveis.png "Tela acompanhamento dos niveis de lixeira reciclavel")](https://github.com/joseguilherme96/sistema_gerenciador_lixeira_reciclavel/blob/f8fddfa8650bf7573296a4d1f46f303a74648278/src/assets/tela_acompanhamento_lixeiras_reciclaveis.png)
@@ -25,12 +50,25 @@ npm install
 npm run dev
 ```
 
-### Iniciar servidor json-server
+## Instalação
 
-Como os dados ainda estão mockados, é necessário a execução do servidor json com o seguinte comando abaixo.
+Instale as dependencias com o seguinte comando :
 
 ```sh
-
-npx json-server src/backend/db.json
+    pip install -r requirements.txt
 
 ```
+
+### Ative o ambiente virtual
+
+Ativar ambiente virtual na pasta src/backend/.venv/scripts/activate
+
+### Execute o servidor Flask
+
+Dentro da pasta app. Execute :
+
+```sh
+    flask --app app run
+
+```
+
