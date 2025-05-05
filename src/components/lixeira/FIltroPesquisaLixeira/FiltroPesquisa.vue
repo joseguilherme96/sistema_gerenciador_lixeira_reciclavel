@@ -1,14 +1,22 @@
 <script setup lang="js">
 
+// Vue
 import { ref, watch } from 'vue'
+
+// Serviços
 import { form, filtrarLixeiras, limparCampos } from '../../../services/lixeira.service'
 import { niveisLixeira } from '../../../services/nivel.lixeira.service'
-import { estados, cidades } from '../../../services/endereco.service'
-import { materiaisReciclaveis } from '../../../services/materiais.reciclaveis.services'
+
+// Gerenciadores de Estado
+import { useEstadoStore } from '@/stores/estado'
+import { useCidadeStore } from '@/stores/cidade'
+
 
 const exibirCalendario = ref(false)
 const dataSelecionada = ref(null)
 
+const estados = ref(useEstadoStore().estados)
+const cidades = ref(useCidadeStore().cidades)
 
 
 function pesquisar() {

@@ -17,7 +17,7 @@ import App from './App.vue'
 import router from './router'
 
 // Translations provided by Vuetify
-import { pt} from 'vuetify/locale'
+import { pt } from 'vuetify/locale'
 
 const app = createApp(App)
 
@@ -29,7 +29,7 @@ app.use(createVuetify({
   locale: {
     locale: 'pt',
     fallback: 'pt',
-    messages: { pt},
+    messages: { pt },
   },
 }))
 

@@ -1,22 +1,36 @@
 <script setup lang="js">
 
-import BarraSuperior from '../components/lixeira/BarraSuperior/BarraSuperior.vue';
-import { getGrupoLixeira } from '../services/lixeira.service.js'
+// Vue
 import { onMounted, ref } from 'vue'
+
+// Componentes
+import BarraSuperior from '../components/lixeira/BarraSuperior/BarraSuperior.vue';
 import FiltroPesquisa from '@/components/lixeira/FIltroPesquisaLixeira/FiltroPesquisa.vue';
 import TabelaGrupoLixeira from '../components/lixeira/TabelaLixeira/TabelaGrupoLixeira.vue';
 import ModalCadastro from '../components/lixeira/Modais/ModalCadastro.vue'
-import { mdiMagnify, mdiPlus, mdiTruck } from '@mdi/js'
-import { getCidades, getEstados } from '../services/endereco.service.js'
 import ModalExibirDetalhesGrupoLixeira from '../components/lixeira/Modais/ModalExibirDetalhesGrupoLixeira.vue'
 import TituloPagina from '../components/lixeira/Titulo/TituloPagina.vue';
 
+//Icones
+import { mdiMagnify, mdiPlus, mdiTruck } from '@mdi/js'
+
+//Serviços
+import { getCidades, getEstados } from '../services/endereco.service.js'
+import { getGrupoLixeira } from '../services/lixeira.service.js'
+
+
+// Gerenciadores de Estado
+import { useEstadoStore } from '@/stores/estado.js'
+import { useCidadeStore } from '@/stores/cidade.js'
+
 onMounted(() => {
+
     getGrupoLixeira();
+    getEstados(useEstadoStore);
+    getCidades(useCidadeStore);
+
 })
 
-getEstados();
-getCidades();
 
 const modalCadastroLixeira = ref({
     titulo: 'Cadastro de Lixeira',

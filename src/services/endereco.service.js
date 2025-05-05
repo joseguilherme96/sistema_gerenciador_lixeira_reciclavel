@@ -1,5 +1,3 @@
-import { ref } from 'vue'
-
 const {
 
     VITE_API_ESTADO,
@@ -9,35 +7,27 @@ const {
 } = import.meta.env
 
 
-export const estados = ref([
-])
-
-export const cidades = ref([
-])
-
-
-
-export function getEstados() {
+export function getEstados(useEstadoStore) {
 
     fetch(VITE_API_ESTADO)
         .then(res => res.json())
         .then(res => {
 
-            estados.value = res.map((linha) => linha.estado)
+            useEstadoStore().addEstado(res.map((linha) => linha.estado))
+
         })
         .catch(err => err)
 
 }
 
-export function getCidades() {
+export function getCidades(useCidadeStore) {
 
     fetch(VITE_API_CIDADE)
         .then(res => res.json())
         .then(res => {
 
-            cidades.value = res.map((linha) => linha.nome)
-
-            cidades.value.sort()
+            useCidadeStore().addCidade(res.map((linha) => linha.nome))
+            useCidadeStore().cidades.sort()
         })
         .catch(err => err)
 

@@ -1,14 +1,29 @@
 <script setup lang="js">
 
+// Vue
+import { ref } from 'vue'
+
+// Componentes
+import BarraSuperior from '../BarraSuperior/BarraSuperior.vue'
+import TituloPagina from '../Titulo/TituloPagina.vue'
+
+// Serviços
 import { form } from '../../../services/lixeira.service.js'
 import { corLixeira } from '../../../services/cor.lixeira.service.js'
-import { materiaisReciclaveisComChaveValor } from '../../../services/materiais.reciclaveis.services.js'
 import { niveisLixeira } from '../../../services/nivel.lixeira.service.js'
-import BarraSuperior from '../BarraSuperior/BarraSuperior.vue'
-import { cidades, estados } from '../../../services/endereco.service.js'
-import TituloPagina from '../Titulo/TituloPagina.vue'
+import { materiaisReciclaveisComChaveValor } from '../../../services/materiais.reciclaveis.services.js'
+
+// Gerenciadores de estado
+import { useEstadoStore } from '@/stores/estado'
+import { useCidadeStore } from '@/stores/cidade'
+
+// Icones
 import { mdiAccount, mdiAccountPlus, mdiDatabase, mdiPlus, mdiTruck } from '@mdi/js'
-import { ref } from 'vue'
+
+
+//Gerenciadores de estado
+const estados = ref(useEstadoStore().estados)
+const cidades = ref(useCidadeStore().cidades)
 
 const configuracaoTitulo = {
 
