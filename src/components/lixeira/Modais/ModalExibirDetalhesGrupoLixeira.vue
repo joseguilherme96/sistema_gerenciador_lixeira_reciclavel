@@ -1,17 +1,25 @@
 <script setup lang="js">
 
-import { grupoSelecionadoLixeira } from '../../../services/lixeira.service.js'
+// Vue
+import { onMounted, ref } from 'vue'
+
+// Componentes
 import InformativoLixeira from '../InformativoLixeira/InformativoLixeira.vue';
-import { computed, ref } from 'vue'
 import BarraSuperior from '../BarraSuperior/BarraSuperior.vue';
 import TituloPagina from '../Titulo/TituloPagina.vue';
 import { mdiViewDashboardOutline } from '@mdi/js';
 import DetalheLixeira from '../DetalheLixeira/DetalheLixeira.vue';
 
+//Serviços
+import { getInformativoLixeiraPorPontoLixoId } from '../../../services/informativo.lixeira.service.js'
+import { grupoSelecionadoLixeira } from '../../../services/lixeira.service.js'
+
+//Gerenciadores de estado
+import { useInformativoLixeiraStore } from '@/stores/informativoLixeira'
+
 defineProps({
     data: Object
 })
-
 
 
 const indexPaginaAtual = ref(0)
@@ -26,16 +34,19 @@ const atualizarPaginacaoNoTitulo = () => {
     configuracaoTitulo.value.nome = `Detalhe Grupo Lixeira ${paginacao}`
 }
 
-const lixeiraAtual = computed(() => {
-    atualizarPaginacaoNoTitulo();
-    return grupoSelecionadoLixeira.value[indexPaginaAtual.value]
-})
+const getInformativo = async () => {
 
+    await getInformativoLixeiraPorPontoLixoId(useInformativoLixeiraStore, grupoSelecionadoLixeira.value[indexPaginaAtual.value].ponto_lixo_id);
+
+}
 
 const avancarPagina = () => {
 
     if (indexPaginaAtual.value < grupoSelecionadoLixeira.value.length - 1) {
         indexPaginaAtual.value++
+
+        atualizarPaginacaoNoTitulo();
+        getInformativo();
     }
 }
 
@@ -43,8 +54,16 @@ const voltarPagina = () => {
 
     if (indexPaginaAtual.value > 0) {
         indexPaginaAtual.value--
+
+        atualizarPaginacaoNoTitulo();
+        getInformativo();
     }
 }
+
+onMounted(() => {
+    atualizarPaginacaoNoTitulo();
+    getInformativo();
+})
 
 </script>
 
@@ -72,7 +91,7 @@ const voltarPagina = () => {
 
                     <DetalheLixeira :lixeira="lixeira"></DetalheLixeira>
 
-                    <InformativoLixeira :lixeiraSelecionada="lixeiraAtual"></InformativoLixeira>
+                    <InformativoLixeira></InformativoLixeira>
 
                     <template v-slot:actions>
                         <div class="d-flex justify-end" style="width: 100%;">

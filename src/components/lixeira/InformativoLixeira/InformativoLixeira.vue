@@ -1,24 +1,12 @@
 <script setup lang="js">
 
-import { watch } from 'vue'
+//Pinia
+import { storeToRefs } from 'pinia'
 
-import { informativoLixeira, getInformativoLixeiraPorPontoLixoId } from '../../../services/informativo.lixeira.service.js'
-
-const props = defineProps({
-    lixeiraSelecionada: {
-        type: Object,
-        required: true
-    }
-})
-
-watch(() => props.lixeiraSelecionada.ponto_lixo_id, () => {
-
-
-    getInformativoLixeiraPorPontoLixoId(props.lixeiraSelecionada.ponto_lixo_id);
-
-})
-
-getInformativoLixeiraPorPontoLixoId(props.lixeiraSelecionada.ponto_lixo_id);
+//Gerenciadores de estado
+import { useInformativoLixeiraStore } from '@/stores/informativoLixeira'
+const informativoLixeiraStore = useInformativoLixeiraStore()
+const { informativosLixeira } = storeToRefs(informativoLixeiraStore)
 
 </script>
 <template>
@@ -48,7 +36,7 @@ getInformativoLixeiraPorPontoLixoId(props.lixeiraSelecionada.ponto_lixo_id);
             </tr>
         </thead>
         <tbody>
-            <tr v-for="informativo in informativoLixeira" :key="informativo.id">
+            <tr v-for="informativo in informativosLixeira" :key="informativo.id_informativo">
                 <td>{{ informativo.id_informativo }}</td>
                 <td>{{ informativo.nivel_lixeira }}</td>
                 <td>{{ informativo.observacao }}</td>

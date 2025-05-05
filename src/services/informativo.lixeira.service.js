@@ -1,34 +1,53 @@
-
-import { ref } from 'vue'
-
 const {
 
     VITE_API_INFORMATIVO_LIXEIRA
 
 } = import.meta.env
 
-export const informativoLixeira = ref([])
+export async function getInformativoLixeiraPorPontoLixoId(informativoLixeiraStore, ponto_lixo_id) {
 
-export async function getInformativoLixeiraPorPontoLixoId(ponto_lixo_id) {
 
-    fetch(`${VITE_API_INFORMATIVO_LIXEIRA}`, {
+    try {
 
-        method: 'POST',
-        body: JSON.stringify({ ponto_lixo_id }),
-        headers: {
-            'Content-Type': 'application/json'
-        }
+        const retornoHeader = await fetch(`${VITE_API_INFORMATIVO_LIXEIRA}`, {
 
-    })
-        .then(res => res.json())
-        .then(res => {
-
-            informativoLixeira.value = res;
-            informativoLixeira.value.sort((a, b) => b.id_informativo - a.id_informativo)
-
+            method: 'POST',
+            body: JSON.stringify({ ponto_lixo_id }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
 
         })
-        .catch(err => err)
+
+        const retornoBody = await retornoHeader.json()
+
+        if (retornoHeader.status !== 200 && retornoHeader.status !== 404) {
+
+            throw new Error(retornoBody.message)
+
+        }
+
+        if (retornoHeader.status == 200) {
+
+            informativoLixeiraStore().addInformativo(retornoBody);
+            informativoLixeiraStore().informativosLixeira.sort((a, b) => b.id_informativo - a.id_informativo)
+
+        }
+
+        if (retornoHeader.status == 404) {
+
+            informativoLixeiraStore().limparInformativo()
+
+        }
+
+        return true;
+
+    } catch (err) {
+
+        alert(err)
+        return false;
+
+    }
 
 }
 

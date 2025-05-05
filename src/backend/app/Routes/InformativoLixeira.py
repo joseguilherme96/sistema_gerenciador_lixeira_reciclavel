@@ -58,7 +58,7 @@ def select_informativo_lixeira():
     
     else:
 
-        return jsonify({'message':"Nenhum dado encontrado !"})
+        return jsonify({'message':"Nenhum dado encontrado !"}),404
 
 @informativo_lixeira.route('/cadastrar_informativo_lixeira',methods=['POST'])
 def insert():

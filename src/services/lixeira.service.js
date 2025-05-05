@@ -204,13 +204,12 @@ export async function cadastrarGrupoPontoLixoLixeira(form) {
 
         const retornoBody = await retornoHeader.json();
 
-        if (!retornoHeader.ok) {
+        if (retornoHeader.status !== 201) {
 
             throw new Error(retornoBody.message)
 
         }
 
-        alert(retornoBody.message)
         return retornoBody;
 
 
