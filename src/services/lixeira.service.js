@@ -4,18 +4,17 @@ import { lixeiraModel } from '../components/lixeira/lixeira.model.js'
 import { corLixeira } from './cor.lixeira.service.js'
 import { materiaisReciclaveisComChaveValor } from './materiais.reciclaveis.services.js'
 
-
-export const baseUrl = "http://127.0.0.1:5000";
-
-export const apiGrupoLixeira = `${baseUrl}/grupo_lixeira`;
-export const apiCadastrarGrupoLixeira = `${baseUrl}/cadastrar_grupo_lixeira`
-export const apiPontosDeLixo = `${baseUrl}/cadastrar_ponto_lixo`
-export const apiLixeiras = `${baseUrl}/get_lixeira`;
-export const apiCadastrarLixeira = `${baseUrl}/cadastrar_lixeira`
-export const apiCadastrarGrupoLixeiraPontoLixoLixeira = `${baseUrl}/cadastrar_grupo_lixeira_ponto_lixo_lixeira`
-export const apiAtualizarLixeira = `${baseUrl}/atualizar_nivel_lixeira`;
-export const informativoLixeira = `${baseUrl}/cadastrar_informativo_lixeira`
-
+const {
+    VITE_API_GRUPO_LIXEIRA,
+    VITE_API_CADASTRAR_GRUPO_LIXEIRA,
+    VITE_API_CADASTRAR_PONTO_LIXO,
+    VITE_API_LIXEIRA,
+    VITE_API_CADASTRAR_LIXEIRA,
+    VITE_API_CADASTRAR_GRUPO_LIXEIRA_PONTO_LIXO_LIXEIRA,
+    VITE_API_ATUALIZAR_LIXEIRA,
+    VITE_API_CADASTRAR_INFORMATIVO_LIXEIRA
+}
+    = import.meta.env
 
 export const grupoSelecionadoLixeira = ref({});
 export const lixeira = ref([
@@ -39,7 +38,7 @@ export function formatarDataParaAmericano(data) {
 
 export function filtrarLixeiras(form) {
 
-    fetch(apiGrupoLixeira, {
+    fetch(VITE_API_GRUPO_LIXEIRA, {
 
         method: 'POST',
         body: JSON.stringify(form),
@@ -61,7 +60,7 @@ export function filtrarLixeiras(form) {
 
 export async function getGrupoLixeira() {
 
-    fetch(apiGrupoLixeira, {
+    fetch(VITE_API_GRUPO_LIXEIRA, {
 
         method: 'POST',
         body: JSON.stringify({ "grupo_lixeira_id": "" }),
@@ -85,7 +84,7 @@ export async function criarGrupoLixeira(GrupoLixeira) {
 
     try {
 
-        let retornoHeader = await fetch(apiCadastrarGrupoLixeira, {
+        let retornoHeader = await fetch(VITE_API_CADASTRAR_GRUPO_LIXEIRA, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -118,7 +117,7 @@ export async function cadastrarPontoDeLixo(PontoLixo) {
 
     try {
 
-        const retornoHeader = await fetch(apiPontosDeLixo, {
+        const retornoHeader = await fetch(VITE_API_CADASTRAR_PONTO_LIXO, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -152,7 +151,7 @@ export async function cadastrarLixeira(lixeiras) {
 
     try {
 
-        const retornoHeader = await fetch(apiCadastrarLixeira, {
+        const retornoHeader = await fetch(VITE_API_CADASTRAR_LIXEIRA, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -194,7 +193,7 @@ export async function cadastrarGrupoPontoLixoLixeira(form) {
 
     try {
 
-        const retornoHeader = await fetch(apiCadastrarGrupoLixeiraPontoLixoLixeira, {
+        const retornoHeader = await fetch(VITE_API_CADASTRAR_GRUPO_LIXEIRA_PONTO_LIXO_LIXEIRA, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -238,7 +237,7 @@ export async function selecionarGrupoLixeira(grupoLixeiraId) {
 
 export async function getLixeira(data) {
 
-    return fetch(`${apiLixeiras}`, {
+    return fetch(`${VITE_API_LIXEIRA}`, {
 
         method: 'POST',
         body: JSON.stringify(data),
@@ -259,7 +258,7 @@ export async function getLixeira(data) {
 
 export async function atualizarNivelLixeira(lixeira) {
 
-    fetch(`${apiAtualizarLixeira}`, {
+    fetch(`${VITE_API_ATUALIZAR_LIXEIRA}`, {
         method: 'PUT',
         headers: {
             'Accept': 'application/json',
@@ -275,7 +274,7 @@ export async function atualizarNivelLixeira(lixeira) {
 
 export async function cadastrarInformativoLixeira(informativo) {
 
-    return fetch(`${informativoLixeira}`, {
+    return fetch(`${VITE_API_CADASTRAR_INFORMATIVO_LIXEIRA}`, {
         method: 'POST',
         headers: {
             'Accept': 'application/json',

@@ -3,7 +3,8 @@
 import { ref, watchEffect } from 'vue';
 import BarraProgressoNivelLixeira from '../NivelLixeira/BarraProgressoNivelLixeira.vue';
 import QRCodeLixeira from '../QRCodeLixeira/QRCodeLixeira.vue';
-import { baseUrl } from '../../../services/lixeira.service.js'
+
+const baseUrl = import.meta.env.VITE_APP_BASE_URL
 
 const props = defineProps({
     lixeira: Object

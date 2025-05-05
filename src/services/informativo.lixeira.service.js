@@ -1,15 +1,17 @@
 
 import { ref } from 'vue'
 
+const {
 
-const baseUrl = "http://127.0.0.1:5000";
-const apiInformativoLixeira = `${baseUrl}/get_informativo_lixeira`;
+    VITE_API_INFORMATIVO_LIXEIRA
+
+} = import.meta.env
 
 export const informativoLixeira = ref([])
 
 export async function getInformativoLixeiraPorPontoLixoId(ponto_lixo_id) {
 
-    fetch(`${apiInformativoLixeira}`, {
+    fetch(`${VITE_API_INFORMATIVO_LIXEIRA}`, {
 
         method: 'POST',
         body: JSON.stringify({ ponto_lixo_id }),

@@ -1,9 +1,12 @@
 import { ref } from 'vue'
 
+const {
 
-export const baseUrl = "http://localhost:3000";
-export const apiCidadesUrl = "https://servicodados.ibge.gov.br/api/v1/localidades/distritos"
-export const apiCepUrl = "https://brasilapi.com.br/api/cep/v1"
+    VITE_API_ESTADO,
+    VITE_API_CIDADE,
+    VITE_API_ENDERECO_POR_CEP
+
+} = import.meta.env
 
 
 export const estados = ref([
@@ -16,7 +19,7 @@ export const cidades = ref([
 
 export function getEstados() {
 
-    fetch(baseUrl + "/estados")
+    fetch(VITE_API_ESTADO)
         .then(res => res.json())
         .then(res => {
 
@@ -28,7 +31,7 @@ export function getEstados() {
 
 export function getCidades() {
 
-    fetch(apiCidadesUrl)
+    fetch(VITE_API_CIDADE)
         .then(res => res.json())
         .then(res => {
 
@@ -42,11 +45,11 @@ export function getCidades() {
 
 export async function getEnderecoPorCep(cep) {
 
- 
-        return fetch(`${apiCepUrl}/${cep}`)
-            .then(res => res.json())
-            .then(res => res)
-            .catch(err => err)
 
-    
+    return fetch(`${VITE_API_ENDERECO_POR_CEP}/${cep}`)
+        .then(res => res.json())
+        .then(res => res)
+        .catch(err => err)
+
+
 }

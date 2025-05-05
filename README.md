@@ -83,3 +83,13 @@ Ainda dentro da pasta app. Execute :
 
 ```
 
+### Incie o servidor json-server
+
+Incie o servidor json-server para carregar os estados automaticamente dentro dos forms de pesquisa e cadastro de grupo lixeira. Está é a ultima api que ainda está mockada, mas em breve será criada definitivamente com python. Assim com já foram feitas as outras APIs que já foram migradas.
+
+```sh
+
+    npx json-server src/backend/db.json
+
+```
+

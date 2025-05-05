@@ -2,7 +2,7 @@
 
 import { watch } from 'vue'
 
-import { informativoLixeira, getInformativoLixeiraPorPontoLixoId } from './informativo.lixeira.service.js'
+import { informativoLixeira, getInformativoLixeiraPorPontoLixoId } from '../../../services/informativo.lixeira.service.js'
 
 const props = defineProps({
     lixeiraSelecionada: {
@@ -53,7 +53,9 @@ getInformativoLixeiraPorPontoLixoId(props.lixeiraSelecionada.ponto_lixo_id);
                 <td>{{ informativo.nivel_lixeira }}</td>
                 <td>{{ informativo.observacao }}</td>
                 <td>{{ informativo.criado_em }}</td>
-                <td><v-chip>{{ informativo.informado_por_id == 1 ? 'Usuário' : 'Microcontrolador ESP32' }}</v-chip></td>
+                <td><v-chip v-if="informativo.informado_por_id">{{ informativo.informado_por_id == 1 ? 'Usuário' :
+                    informativo.informado_por_id == 2 ?
+                        'Microcontrolador ESP32' : '' }}</v-chip></td>
             </tr>
         </tbody>
 
