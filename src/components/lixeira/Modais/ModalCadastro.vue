@@ -1,20 +1,32 @@
 <script setup lang="js">
 
-import { getGrupoLixeira, limparCampos, cadastrarGrupoPontoLixoLixeira, form } from '../../../services/lixeira.service'
+//Componentes
 import FormularioCadastroLixeira from '../Formularios/FormularioCadastroLixeira.vue'
-import { ref } from 'vue'
+
+//Serviços
+import { limparCampos } from '../../../services/lixeira.service'
+import { cadastrarGrupoPontoLixoLixeira } from '../../../services/grupo.ponto.lixo.lixeira.js'
+
+// Gerenciadores de estado
+import { useGrupoLixeiraStore } from '@/stores/grupoLixeira.js'
+import { useLixeiraStore } from '@/stores/lixeira.js'
+
+const useGrupoLixeira = useGrupoLixeiraStore()
+const useLixeira = useLixeiraStore()
 
 defineProps({
     data: Object
 })
 
-async function cadastrarLixeira() {
+async function cadastrarGrupoLixeiraLixeira() {
 
-    const retorno = await cadastrarGrupoPontoLixoLixeira(form.value);
+    const formGrupoLixeiraLixeiras = { lixeiras: useLixeira.lixeiras, ...useGrupoLixeira.grupoLixeira }
+
+    const retorno = await cadastrarGrupoPontoLixoLixeira(formGrupoLixeiraLixeiras);
 
     if (retorno) {
 
-        getGrupoLixeira();
+        useGrupoLixeira.addGrupo(retorno.dados_grupo_criado)
 
     }
 
@@ -38,7 +50,7 @@ async function cadastrarLixeira() {
                         Limpar Campos
                     </v-btn>
                     <v-btn variant="flat" color="rgb(94, 93, 93)" text="CADASTRAR LIXEIRA"
-                        @click="cadastrarLixeira()"></v-btn>
+                        @click="cadastrarGrupoLixeiraLixeira()"></v-btn>
                     <v-btn variant="flat" color="rgb(94, 93, 93)" text="Fechar" @click="data.exibir = false"></v-btn>
                 </template>
 
