@@ -1,11 +1,29 @@
 <script setup lang="js">
+
+import { onMounted, ref, watch } from 'vue';
+import { storeToRefs } from 'pinia';
+
+//Componentes
 import BarraSuperior from '@/components/lixeira/BarraSuperior/BarraSuperior.vue';
 import DetalheLixeira from '@/components/lixeira/DetalheLixeira/DetalheLixeira.vue';
 import TituloPagina from '@/components/lixeira/Titulo/TituloPagina.vue';
+
+//Icones
 import { mdiInformation } from '@mdi/js';
-import { getLixeira, form, atualizarNivelLixeira, cadastrarInformativoLixeira } from '../services/lixeira.service.js'
-import { onMounted, ref, watch } from 'vue';
+
+//Services
+import { form } from '../services/lixeira.service.js'
 import { niveisLixeira } from '../services/nivel.lixeira.service.js'
+
+//Gerenciadores de estado
+import { useLixeiraStore } from '@/stores/lixeira'
+import { useInformativoLixeiraStore } from '@/stores/informativoLixeira'
+
+const useLixeira = useLixeiraStore()
+const { cadastrarInformativo } = useInformativoLixeiraStore()
+
+const { carregarLixeira, atualizarNivelLixeira } = useLixeira
+const { lixeira } = storeToRefs(useLixeira)
 
 const configuracaoTitulo = {
 
@@ -14,18 +32,15 @@ const configuracaoTitulo = {
 
 }
 
-const idLixeira = window.location.href.split("/").pop();
-const lixeira = ref({});
+const idLixeira = parseInt(window.location.href.split("/").pop());
 
-onMounted(() => {
+onMounted(async () => {
 
-    getLixeira({ lixeira_id: idLixeira }).then((res) => {
+    if (lixeira.value.id_lixeira === "" || lixeira.value.id_lixeira !== idLixeira) {
 
-        lixeira.value = res[0];
+        await carregarLixeira({ lixeira_id: idLixeira })
 
-
-    })
-
+    }
 
 })
 
@@ -47,9 +62,9 @@ watch(() => monitarMudancasNoSelectNoNovoNivelLixeira(), () => {
 
 })
 
-function atualizarLixeira() {
+async function atualizarLixeira() {
 
-    atualizarNivelLixeira({ nivel_lixeira: lixeira.value.nivel_lixeira, lixeira_id: lixeira.value.id_lixeira });
+    const retorno = await atualizarNivelLixeira({ nivel_lixeira: lixeira.value.nivel_lixeira, lixeira_id: lixeira.value.id_lixeira });
 
     const informativoLixeira = {
 
@@ -59,7 +74,9 @@ function atualizarLixeira() {
         observacao: form.value.lixeiras[0].observacao,
     }
 
-    cadastrarInformativoLixeira(informativoLixeira);
+    cadastrarInformativo(informativoLixeira);
+
+
 
 
 }
@@ -79,7 +96,7 @@ function atualizarLixeira() {
         </template>
 
     </BarraSuperior>
-    <DetalheLixeira :lixeira="lixeira" v-if="lixeira"></DetalheLixeira>
+    <DetalheLixeira :lixeira="lixeira" v-if="lixeira.id_lixeira !== ''"></DetalheLixeira>
 
     <BarraSuperior class="mt-5">
 
