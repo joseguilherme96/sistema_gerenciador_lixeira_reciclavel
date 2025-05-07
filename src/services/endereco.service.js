@@ -36,10 +36,26 @@ export function getCidades(useCidadeStore) {
 export async function getEnderecoPorCep(cep) {
 
 
-    return fetch(`${VITE_API_ENDERECO_POR_CEP}/${cep}`)
-        .then(res => res.json())
-        .then(res => res)
-        .catch(err => err)
+    try {
+
+        const retorno = await fetch(`${VITE_API_ENDERECO_POR_CEP}/${cep}`)
+
+        const retornoBody = await retorno.json()
+
+        if (retorno.status !== 200 && retorno.status !== 404) {
+
+
+            throw new Error(retorno.messsage)
+
+        }
+
+        return retornoBody;
+
+    } catch (e) {
+
+        return false;
+
+    }
 
 
 }
