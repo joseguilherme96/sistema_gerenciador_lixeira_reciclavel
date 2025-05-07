@@ -16,8 +16,6 @@ import { mdiMagnify, mdiPlus, mdiTruck } from '@mdi/js'
 
 //Serviços
 import { getCidades, getEstados } from '../services/endereco.service.js'
-import { getGrupoLixeira } from '../services/lixeira.service.js'
-
 
 // Gerenciadores de Estado
 import { useEstadoStore } from '@/stores/estado.js'
@@ -25,7 +23,6 @@ import { useCidadeStore } from '@/stores/cidade.js'
 
 onMounted(() => {
 
-    getGrupoLixeira();
     getEstados(useEstadoStore);
     getCidades(useCidadeStore);
 
@@ -54,7 +51,7 @@ function abrirModalCadastroLixeira() {
     modalCadastroLixeira.value.exibir = true
 }
 
-function abrirModalGrupoLixeira() {
+function abrirModalLixeira() {
 
     modalDetalhesGrupoLixeira.value.exibir = true;
 
@@ -87,7 +84,7 @@ const configuracaoTitulo = ref({
     <FiltroPesquisa v-if="filtroEstaAberto"></FiltroPesquisa>
 
 
-    <TabelaGrupoLixeira @abrirModalGrupoLixeira="abrirModalGrupoLixeira">
+    <TabelaGrupoLixeira @abrirModalLixeirasDoGrupoLixeiraSelecionado="abrirModalLixeira">
     </TabelaGrupoLixeira>
 
     <ModalCadastro :data="modalCadastroLixeira"></ModalCadastro>

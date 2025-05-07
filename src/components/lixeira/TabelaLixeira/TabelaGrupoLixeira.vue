@@ -1,25 +1,45 @@
 <script setup lang="js">
 
-import { lixeira, selecionarGrupoLixeira, getGrupoLixeira } from '../../../services/lixeira.service.js'
+import { storeToRefs } from 'pinia'
+import { onMounted } from 'vue'
+
+// Icones
 import { mdiUpdate, mdiViewDashboardOutline } from '@mdi/js'
+
+//Componentes
 import BarraProgressoNivelLixeira from '../NivelLixeira/BarraProgressoNivelLixeira.vue'
 
-const emit = defineEmits(['abrirModalGrupoLixeira'])
+//Gerenciadores de estado
+import { useGrupoLixeiraStore } from '@/stores/grupoLixeira.js'
+import { useLixeiraStore } from '@/stores/lixeira'
 
-const abrirModalGrupoLixeira = async (grupoLixeiraId) => {
+const useGrupoLixeira = useGrupoLixeiraStore()
+const { lista } = storeToRefs(useGrupoLixeira)
 
-    await selecionarGrupoLixeira(grupoLixeiraId);
+const useLixeira = useLixeiraStore()
 
-    emit("abrirModalGrupoLixeira")
+const emit = defineEmits(['abrirModalLixeirasDoGrupoLixeiraSelecionado'])
+
+const abrirModalLixeirasDoGrupoLixeiraSelecionado = async (grupoLixeiraId) => {
+
+    await useLixeira.carregarListaLixeira({ grupo_lixeira_id: grupoLixeiraId })
+
+    emit("abrirModalLixeirasDoGrupoLixeiraSelecionado")
 
 }
+
+onMounted(async () => {
+
+    useGrupoLixeira.carregarLista()
+
+})
 
 
 </script>
 <template>
 
     <v-row justify="end">
-        <v-btn color="rgb(94, 93, 93)" @click="getGrupoLixeira()">
+        <v-btn color="rgb(94, 93, 93)" @click="useGrupoLixeira.carregarLista()">
             <svg-icon type="mdi" :path="mdiUpdate"></svg-icon>
         </v-btn>
     </v-row>
@@ -69,7 +89,7 @@ const abrirModalGrupoLixeira = async (grupoLixeiraId) => {
             </tr>
         </thead>
         <tbody>
-            <tr v-for="item in lixeira" :key="item.name">
+            <tr v-for="item in lista" :key="item.name">
                 <td>{{ item.id_grupo_lixeira }}</td>
                 <td>{{ item.nome }}</td>
                 <td>{{ item.descricao }}</td>
@@ -84,7 +104,8 @@ const abrirModalGrupoLixeira = async (grupoLixeiraId) => {
                 </td>
                 <td>{{ item.data }}</td>
                 <td>{{ item.hora }}</td>
-                <td><v-btn color="rgb(94, 93, 93)" @click="abrirModalGrupoLixeira(item.id_grupo_lixeira)">
+                <td><v-btn color="rgb(94, 93, 93)"
+                        @click="abrirModalLixeirasDoGrupoLixeiraSelecionado(item.id_grupo_lixeira)">
                         <svg-icon type="mdi" :path="mdiViewDashboardOutline"></svg-icon>
                         Visualizar
                     </v-btn></td>
