@@ -1,7 +1,8 @@
 <script setup lang="js">
 
 // Vue
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
+import { storeToRefs } from 'pinia';
 
 // Componentes
 import InformativoLixeira from '../InformativoLixeira/InformativoLixeira.vue';
@@ -12,10 +13,14 @@ import DetalheLixeira from '../DetalheLixeira/DetalheLixeira.vue';
 
 //Serviços
 import { getInformativoLixeiraPorPontoLixoId } from '../../../services/informativo.lixeira.service.js'
-import { grupoSelecionadoLixeira } from '../../../services/lixeira.service.js'
 
 //Gerenciadores de estado
 import { useInformativoLixeiraStore } from '@/stores/informativoLixeira'
+import { useLixeiraStore } from '@/stores/lixeira'
+
+const { listaLixeira, setLixeira } = useLixeiraStore()
+const { lixeira } = storeToRefs(useLixeiraStore())
+
 
 defineProps({
     data: Object
@@ -30,19 +35,19 @@ const configuracaoTitulo = ref({
 })
 
 const atualizarPaginacaoNoTitulo = () => {
-    const paginacao = `${indexPaginaAtual.value + 1}/${grupoSelecionadoLixeira.value.length}`
+    const paginacao = `${indexPaginaAtual.value + 1}/${listaLixeira.length}`
     configuracaoTitulo.value.nome = `Detalhe Grupo Lixeira ${paginacao}`
 }
 
 const getInformativo = async () => {
 
-    await getInformativoLixeiraPorPontoLixoId(useInformativoLixeiraStore, grupoSelecionadoLixeira.value[indexPaginaAtual.value].ponto_lixo_id);
+    await getInformativoLixeiraPorPontoLixoId(useInformativoLixeiraStore, listaLixeira[indexPaginaAtual.value].ponto_lixo_id);
 
 }
 
 const avancarPagina = () => {
 
-    if (indexPaginaAtual.value < grupoSelecionadoLixeira.value.length - 1) {
+    if (indexPaginaAtual.value < listaLixeira.length - 1) {
         indexPaginaAtual.value++
 
         atualizarPaginacaoNoTitulo();
@@ -63,7 +68,15 @@ const voltarPagina = () => {
 onMounted(() => {
     atualizarPaginacaoNoTitulo();
     getInformativo();
+    setLixeira(listaLixeira[0])
 })
+
+watch(() => indexPaginaAtual.value, (index) => {
+
+    setLixeira(listaLixeira[index])
+
+})
+
 
 </script>
 
@@ -86,8 +99,7 @@ onMounted(() => {
 
                 </BarraSuperior>
 
-                <v-card v-for="(lixeira, index) in grupoSelecionadoLixeira" class="mt-5"
-                    v-show="indexPaginaAtual == index" style="overflow: scroll;">
+                <v-card class="mt-5" style="overflow: scroll;">
 
                     <DetalheLixeira :lixeira="lixeira"></DetalheLixeira>
 

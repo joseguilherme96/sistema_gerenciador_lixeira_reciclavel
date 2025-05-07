@@ -1,19 +1,21 @@
 <script setup lang="js">
 
 // Vue
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 
 // Componentes
 import BarraSuperior from '../BarraSuperior/BarraSuperior.vue'
 import TituloPagina from '../Titulo/TituloPagina.vue'
 
 // Serviços
-import { form } from '../../../services/lixeira.service.js'
 import { corLixeira } from '../../../services/cor.lixeira.service.js'
 import { niveisLixeira } from '../../../services/nivel.lixeira.service.js'
 import { materiaisReciclaveisComChaveValor } from '../../../services/materiais.reciclaveis.services.js'
+import { getEnderecoPorCep } from '../../../services/endereco.service'
 
 // Gerenciadores de estado
+import { useGrupoLixeiraStore } from '@/stores/grupoLixeira'
+import { useLixeiraStore } from '@/stores/lixeira'
 import { useEstadoStore } from '@/stores/estado'
 import { useCidadeStore } from '@/stores/cidade'
 
@@ -24,6 +26,8 @@ import { mdiAccount, mdiAccountPlus, mdiDatabase, mdiPlus, mdiTruck } from '@mdi
 //Gerenciadores de estado
 const estados = ref(useEstadoStore().estados)
 const cidades = ref(useCidadeStore().cidades)
+const { grupoLixeira } = useGrupoLixeiraStore()
+const { lixeiras } = useLixeiraStore()
 
 const configuracaoTitulo = {
 
@@ -41,7 +45,7 @@ const quantidadeLixeira = ref(1)
 
 const ocultarBotaoAdicionarLixeira = (index) => {
 
-    form.value.lixeiras[index].exibirBotaoAdicionarLixeira = false
+    lixeiras[index].exibirBotaoAdicionarLixeira = false
 
 }
 
@@ -50,10 +54,31 @@ const criarEspacoParaArmazenamentoDaLixeira = () => {
     ocultarBotaoAdicionarLixeira(quantidadeLixeira.value - 1);
 
     quantidadeLixeira.value++
-    form.value.lixeiras.push({ exibirBotaoAdicionarLixeira: true })
+    lixeiras.push({ exibirBotaoAdicionarLixeira: true })
 
 
 }
+
+watch(() => grupoLixeira.cep, async (cep) => {
+
+    if (cep !== undefined && cep.length == 8) {
+
+        let cepLimpo = cep.replace(/[^0-9]/g, '')
+
+        const retorno = await getEnderecoPorCep(cepLimpo)
+
+        if (retorno) {
+
+            grupoLixeira.endereco = retorno.street
+            grupoLixeira.bairro = retorno.neighborhood
+            grupoLixeira.cidade = retorno.city
+            grupoLixeira.estado = retorno.state
+
+        }
+
+    }
+
+})
 
 </script>
 
@@ -70,31 +95,31 @@ const criarEspacoParaArmazenamentoDaLixeira = () => {
         <v-row>
 
             <v-col cols="4" sm="12">
-                <v-text-field label="Nome do Grupo" v-model="form.nome"></v-text-field>
+                <v-text-field label="Nome do Grupo" v-model="grupoLixeira.nome"></v-text-field>
             </v-col>
             <v-col cols="4" sm="12">
-                <v-text-field label="Descrição Grupo" v-model="form.descricao"></v-text-field>
+                <v-text-field label="Descrição Grupo" v-model="grupoLixeira.descricao"></v-text-field>
             </v-col>
         </v-row>
 
         <v-row>
 
             <v-col cols="4" sm="12">
-                <v-text-field label="Cep" v-model="form.cep" :maxlength="9"></v-text-field>
+                <v-text-field label="Cep" v-model="grupoLixeira.cep" :maxlength="9"></v-text-field>
             </v-col>
         </v-row>
         <v-row>
             <v-col cols="4" sm="6">
-                <v-text-field label="Endereço" v-model="form.endereco"></v-text-field>
+                <v-text-field label="Endereço" v-model="grupoLixeira.endereco"></v-text-field>
             </v-col>
             <v-col cols="4" sm="6">
-                <v-text-field label="Bairro" v-model="form.bairro"></v-text-field>
+                <v-text-field label="Bairro" v-model="grupoLixeira.bairro"></v-text-field>
             </v-col>
             <v-col cols="4" sm="4">
-                <v-select label="Cidade" :items="cidades" v-model="form.cidade"></v-select>
+                <v-select label="Cidade" :items="cidades" v-model="grupoLixeira.cidade"></v-select>
             </v-col>
             <v-col cols="4" sm="4">
-                <v-select label="Estado" :items="estados" v-model="form.estado"></v-select>
+                <v-select label="Estado" :items="estados" v-model="grupoLixeira.estado"></v-select>
             </v-col>
         </v-row>
 
@@ -106,7 +131,7 @@ const criarEspacoParaArmazenamentoDaLixeira = () => {
 
         </BarraSuperior>
 
-        <v-card v-for="(lixeira, index) in form.lixeiras" class="pl-5 pr-5 mt-10">
+        <v-card v-for="(lixeira, index) in lixeiras" class="pl-5 pr-5 mt-10">
             <v-card-subtitle>
                 Lixeira {{ index + 1 }}
             </v-card-subtitle>

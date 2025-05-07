@@ -8,7 +8,7 @@ import BarraSuperior from '../components/lixeira/BarraSuperior/BarraSuperior.vue
 import FiltroPesquisa from '@/components/lixeira/FIltroPesquisaLixeira/FiltroPesquisa.vue';
 import TabelaGrupoLixeira from '../components/lixeira/TabelaLixeira/TabelaGrupoLixeira.vue';
 import ModalCadastro from '../components/lixeira/Modais/ModalCadastro.vue'
-import ModalExibirDetalhesGrupoLixeira from '../components/lixeira/Modais/ModalExibirDetalhesGrupoLixeira.vue'
+import ModalExibirDetalhesLixeirasDoGrupo from '../components/lixeira/Modais/ModalExibirDetalhesLixeirasDoGrupo.vue'
 import TituloPagina from '../components/lixeira/Titulo/TituloPagina.vue';
 
 //Icones
@@ -88,6 +88,6 @@ const configuracaoTitulo = ref({
     </TabelaGrupoLixeira>
 
     <ModalCadastro :data="modalCadastroLixeira"></ModalCadastro>
-    <ModalExibirDetalhesGrupoLixeira :data="modalDetalhesGrupoLixeira" v-if="modalDetalhesGrupoLixeira.exibir">
-    </ModalExibirDetalhesGrupoLixeira>
+    <ModalExibirDetalhesLixeirasDoGrupo :data="modalDetalhesGrupoLixeira" v-if="modalDetalhesGrupoLixeira.exibir">
+    </ModalExibirDetalhesLixeirasDoGrupo>
 </template>
