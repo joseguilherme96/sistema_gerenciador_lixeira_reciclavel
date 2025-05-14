@@ -63,3 +63,5 @@ def pagina_nao_encontrada(e):
 def tipo_media(e):
 
     return jsonify({'message':'O tipo de conteúdo enviado não é suportado pelo servidor !'}),415
+
+

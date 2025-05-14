@@ -1,1 +1,0 @@
-# Script que será criado para importação np EP32 usando adafruit-ampy.
