@@ -3,6 +3,7 @@
 from flask import Flask,request,jsonify
 from flask_migrate import Migrate
 from flask_cors import CORS,cross_origin
+from Routes.Socketio import socketio
  
 # Models(Modelos)
 from Models.ExtensionsModel import db
@@ -23,6 +24,7 @@ from Routes.PontoLixo import ponto_lixo
 from Routes.Cor import cor
 from Routes.GrupoLixeiraPontoLixoLixeira import grupo_lixeira_ponto_lixo_lixeira
 
+
 # Instância do Flask
 app = Flask(__name__)
 
@@ -30,6 +32,8 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 
 CORS(app, origins=['http://localhost:5173']) # Permite URL que está sendo executada o front-end
+
+socketio.init_app(app)
 
 db.init_app(app)
 migrate = Migrate(app, db)
@@ -63,5 +67,9 @@ def pagina_nao_encontrada(e):
 def tipo_media(e):
 
     return jsonify({'message':'O tipo de conteúdo enviado não é suportado pelo servidor !'}),415
+
+if __name__ == '__main__':
+    app.run(debug=False)
+    socketio.run(app)
 
 

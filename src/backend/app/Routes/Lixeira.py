@@ -6,11 +6,10 @@ from Models.PontoLixoModel import PontoLixo
 from Models.ExtensionsModel import db
 from flask import request, jsonify, Blueprint
 
-from sqlalchemy import select
+from Routes.SocketioEnviarAtualizacaoNivelLixeira import enviar_atualizacao_nivel_lixeira
+from Routes.Socketio import socketio
+
 from Models.ExtensionsModel import db
-
-import werkzeug
-
 
 lixeira = Blueprint('lixeira',__name__)
 
@@ -187,7 +186,8 @@ def atualizar_nivel_lixeira():
         )
 
         dados_inseridos = Lixeira.update(lixeira)
-            
+        
+        enviar_atualizacao_nivel_lixeira(socketio,dados_inseridos) 
         return jsonify({"message":"Lixeira atualizada com sucesso !",'dados':dados_inseridos}),200
     
     except Exception as e:

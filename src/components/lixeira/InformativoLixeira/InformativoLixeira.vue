@@ -6,7 +6,7 @@ import { storeToRefs } from 'pinia'
 //Gerenciadores de estado
 import { useInformativoLixeiraStore } from '@/stores/informativoLixeira'
 const informativoLixeiraStore = useInformativoLixeiraStore()
-const { informativosLixeira } = storeToRefs(informativoLixeiraStore)
+const { informativosLixeira } = storeToRefs(useInformativoLixeiraStore())
 
 </script>
 <template>

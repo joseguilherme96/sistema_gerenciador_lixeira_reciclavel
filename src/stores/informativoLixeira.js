@@ -15,7 +15,19 @@ export const useInformativoLixeiraStore = defineStore('informativo_lixeira', {
 
         addInformativo(informativo) {
 
-            this.informativosLixeira = informativo
+            this.informativosLixeira.unshift(informativo)
+
+        },
+
+        ordernarPorOrdemDecrescente() {
+
+            this.informativosLixeira.sort((a, b) => b.id_informativo - a.id_informativo)
+
+        },
+
+        carregarTodosInformativos(informativos) {
+
+            this.informativosLixeira = informativos
 
         },
 
@@ -29,7 +41,6 @@ export const useInformativoLixeiraStore = defineStore('informativo_lixeira', {
 
 
             const retorno = await cadastrarInformativoLixeira(informativoLixeira)
-
 
         }
 

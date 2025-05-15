@@ -1,6 +1,7 @@
 from flask import jsonify, request, Blueprint
 from Models.InformativoLixeiraModel import InformativoLixeira
-
+from Routes.Socketio import socketio
+from Routes.SocketioEnviarObservacao import enviar_observacao_lixeira
 
 informativo_lixeira = Blueprint('informativo_lixeira',__name__)
 
@@ -87,11 +88,16 @@ def insert():
             observacao = data['observacao'],
         )
 
-        inserir = InformativoLixeira.insert(informativo_lixeira)
+        dados_inseridos = InformativoLixeira.insert(informativo_lixeira)
 
-        if not inserir:
+        if not dados_inseridos:
 
             return jsonify({"message":"Erro ao inserir informativo lixeira !"}),500
+
+        data['criado_em'] = ''
+        data['id_informativo']=100
+        
+        enviar_observacao_lixeira(socketio,data)
                 
         return jsonify({"message":"Informativo realizado com sucesso!"}),201
 

@@ -21,6 +21,9 @@ import { getCidades, getEstados } from '../services/endereco.service.js'
 import { useEstadoStore } from '@/stores/estado.js'
 import { useCidadeStore } from '@/stores/cidade.js'
 
+
+import '../services/socket.service'
+
 onMounted(() => {
 
     getEstados(useEstadoStore);

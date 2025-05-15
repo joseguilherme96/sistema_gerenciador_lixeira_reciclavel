@@ -45,6 +45,11 @@ class InformativoLixeira(db.Model):
     
     def insert(informativo_lixeira):
 
-        db.session.add(informativo_lixeira)
-        db.session.commit()
-        return True
+        try:
+            db.session.add(informativo_lixeira)
+            db.session.commit()
+            return informativo_lixeira
+
+        except Exception as e:
+            print(str(e))
+            return False

@@ -30,8 +30,8 @@ export async function getInformativoLixeiraPorPontoLixoId(informativoLixeiraStor
 
         if (retornoHeader.status == 200) {
 
-            informativoLixeiraStore().addInformativo(retornoBody);
-            informativoLixeiraStore().informativosLixeira.sort((a, b) => b.id_informativo - a.id_informativo)
+            informativoLixeiraStore().carregarTodosInformativos(retornoBody);
+            informativoLixeiraStore().ordernarPorOrdemDecrescente()
 
         }
 
