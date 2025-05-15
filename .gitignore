@@ -36,3 +36,6 @@ src/backend/app/instance
 src/backend/app/migrations/__pycache__
 src/backend/app/Models/__pycache__
 src/backend/app/Routes/__pycache__
+
+.env.development
+.env.production
