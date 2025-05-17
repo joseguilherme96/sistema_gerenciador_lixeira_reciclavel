@@ -4,10 +4,11 @@ import requests
 
 dados = { "lixeira_id" : LIXEIRA_ID}
 
-def atualizar_nivel_lixeira(nivel_lixeira):
+def atualizar_lixeira(nivel_lixeira,esta_aberta):
 
     dados['nivel_lixeira'] = int(nivel_lixeira)
-    
+    dados['esta_aberta'] = esta_aberta
+
     try:
         
         print("Enviando dados para o servidor....")

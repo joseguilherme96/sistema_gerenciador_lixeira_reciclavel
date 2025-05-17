@@ -42,7 +42,7 @@ watchEffect(() => {
             <v-card-title>ID Lixeira</v-card-title>
             <v-card-subtitle>{{ lixeira.id_lixeira }}</v-card-subtitle>
             <v-card-title>Descrição</v-card-title>
-            <v-card-subtitle>{{ lixeira.descricao }}</v-card-subtitle>
+            <v-card-subtitle>{{ lixeira.observacao }}</v-card-subtitle>
 
         </div>
         <div>

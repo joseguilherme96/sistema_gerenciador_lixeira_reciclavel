@@ -3,6 +3,8 @@ from Models.ExtensionsModel import db
 from sqlalchemy import Integer, String, DateTime, Float, ForeignKey
 from sqlalchemy.orm import mapped_column
 
+from datetime import datetime
+
 class InformativoLixeira(db.Model):
 
     id_informativo = mapped_column(Integer,primary_key=True,autoincrement = True)
@@ -44,6 +46,8 @@ class InformativoLixeira(db.Model):
         return result
     
     def insert(informativo_lixeira):
+
+        informativo_lixeira.criado_em = datetime.now()
 
         try:
             db.session.add(informativo_lixeira)

@@ -2,6 +2,7 @@ from flask import jsonify, request, Blueprint
 from Models.InformativoLixeiraModel import InformativoLixeira
 from Routes.Socketio import socketio
 from Routes.SocketioEnviarObservacao import enviar_observacao_lixeira
+from datetime import datetime
 
 informativo_lixeira = Blueprint('informativo_lixeira',__name__)
 
@@ -93,13 +94,21 @@ def insert():
         if not dados_inseridos:
 
             return jsonify({"message":"Erro ao inserir informativo lixeira !"}),500
-
-        data['criado_em'] = ''
-        data['id_informativo']=100
         
-        enviar_observacao_lixeira(socketio,data)
+        retorno_dados_inseridos = {
+
+            "id_informativo":dados_inseridos.id_informativo,
+            "ponto_lixo_id": dados_inseridos.ponto_lixo_id,
+            "informado_por_id": dados_inseridos.informado_por_id,
+            "nivel_lixeira": dados_inseridos.nivel_lixeira,
+            "observacao": dados_inseridos.observacao,
+            "criado_em": datetime.strftime(dados_inseridos.criado_em, "%d/%m/%Y %H:%M:%S")
+
+        }
+        
+        enviar_observacao_lixeira(socketio,retorno_dados_inseridos)
                 
-        return jsonify({"message":"Informativo realizado com sucesso!"}),201
+        return jsonify({"message":"Informativo realizado com sucesso!","dados":retorno_dados_inseridos}),201
 
 
     except EOFError as e:

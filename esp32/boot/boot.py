@@ -4,7 +4,7 @@ from configuracao import ESTAGIO_LIXEIRA_NIVEL_1,ESTAGIO_LIXEIRA_NIVEL_2,ESTAGIO
 
 # Services
 from services.informativo_service import informar_nivel_lixeira
-from services.lixeira_service import atualizar_nivel_lixeira
+from services.lixeira_service import atualizar_lixeira
 from services.wifi_service import conectar_wifi, verificar_conectividade_wifi
 
 # Classes
@@ -15,7 +15,13 @@ from utils.obter_distancia import get_distancia_entre_sensor_lixo
 from utils.converte_nivel_lixeira_em_porcentagem import calcular_nivel_lixeira_em_porcentagem
 from utils.calibrar_lixeira import Calibracao
 
+import time
+
 conectar_wifi()
+
+guardar_ultimo_nivel_lixeira_valido = 0
+ja_foi_informado_sobre_lixeira_aberta_no_loop_anterior = False
+lixeira_esta_aberta = None
 
 try:
 
@@ -39,64 +45,82 @@ try:
 
             profundidade_lixeira = int(Calibracao.__getattribute__(Calibracao,'profundidade_calibrada'))
         
-        nivel_lixeira = calcular_nivel_lixeira_em_porcentagem(distancia_entre_sensor_lixo)
 
-        if distancia_entre_sensor_lixo >= DISTANCIA_LIXEIRA_ABERTA_SEM_PESSOA_OU_OBJETO_NA_FRENTE:
+        if distancia_entre_sensor_lixo >= profundidade_lixeira:
+
 
             print("Lixeira Aberta !")
+            lixeira_esta_aberta = True
+            if not ja_foi_informado_sobre_lixeira_aberta_no_loop_anterior:
+                
+                retorno = atualizar_lixeira(guardar_ultimo_nivel_lixeira_valido,esta_aberta=lixeira_esta_aberta)
 
-        elif distancia_entre_sensor_lixo >= profundidade_lixeira:
+                if retorno:
 
-            print("Lixeira aberta com pessoa ou objeto na frente da lixeira  !")
+                    informar_nivel_lixeira(nivel_lixeira=guardar_ultimo_nivel_lixeira_valido, observacao="Lixeira Aberta !")
+
+            ja_foi_informado_sobre_lixeira_aberta_no_loop_anterior = True
 
         elif distancia_entre_sensor_lixo <= profundidade_lixeira:
+
+            ja_foi_informado_sobre_lixeira_aberta_no_loop_anterior = False
+            lixeira_esta_aberta = False
+
+            nivel_lixeira = calcular_nivel_lixeira_em_porcentagem(distancia_entre_sensor_lixo)
+            guardar_ultimo_nivel_lixeira_valido = nivel_lixeira
 
             print('Nível Lixeira : ',nivel_lixeira,'%')
 
             if nivel_lixeira <= ESTAGIO_LIXEIRA_NIVEL_1:
 
-                print("Lixeira esta vazia !")
-                retorno = atualizar_nivel_lixeira(nivel_lixeira)
+                mensagem= "Lixeira esta vazia !"
+                print(mensagem)
+                retorno = atualizar_lixeira(nivel_lixeira,esta_aberta=lixeira_esta_aberta)
 
                 if retorno:
 
-                    informar_nivel_lixeira(nivel_lixeira)
+                    informar_nivel_lixeira(nivel_lixeira,observacao=mensagem)
 
             elif nivel_lixeira <= ESTAGIO_LIXEIRA_NIVEL_2:
 
-                print("Lixeira com nivel baixo ! ")
-                retorno = atualizar_nivel_lixeira(nivel_lixeira)
+                mensagem = "Lixeira com nivel baixo !"
+                print(mensagem)
+                retorno = atualizar_lixeira(nivel_lixeira,esta_aberta=lixeira_esta_aberta)
 
                 if retorno:
 
-                    informar_nivel_lixeira(nivel_lixeira)
+                    informar_nivel_lixeira(nivel_lixeira,observacao=mensagem)
 
             elif nivel_lixeira <= ESTAGIO_LIXEIRA_NIVEL_3:
 
-                print("Lixeira esta com nivel na metade !")
-                retorno = atualizar_nivel_lixeira(nivel_lixeira)
+                mensagem = "Lixeira esta com nivel na metade !"
+                print(mensagem)
+                retorno = atualizar_lixeira(nivel_lixeira,esta_aberta=lixeira_esta_aberta)
 
                 if retorno:
 
-                    informar_nivel_lixeira(nivel_lixeira)
+                    informar_nivel_lixeira(nivel_lixeira,observacao=mensagem)
 
             elif nivel_lixeira <= ESTAGIO_LIXEIRA_NIVEL_4:
 
-                print("Lixeira quase cheia !")
-                retorno = atualizar_nivel_lixeira(nivel_lixeira)
+                mensagem= "Lixeira quase cheia !"
+                print(mensagem)
+                retorno = atualizar_lixeira(nivel_lixeira,esta_aberta=lixeira_esta_aberta)
 
                 if retorno:
 
-                    informar_nivel_lixeira(nivel_lixeira)
+                    informar_nivel_lixeira(nivel_lixeira,observacao=mensagem)
             
             elif nivel_lixeira <= ESTAGIO_LIXEIRA_NIVEL_5:
 
-                print("Lixeira esta cheia !")
-                retorno = atualizar_nivel_lixeira(nivel_lixeira)
+                mensagem= "Lixeira está cheia !"
+                print(mensagem)
+                retorno = atualizar_lixeira(nivel_lixeira,esta_aberta=lixeira_esta_aberta)
 
                 if retorno:
 
-                    informar_nivel_lixeira(nivel_lixeira)
+                    informar_nivel_lixeira(nivel_lixeira,observacao=mensagem)
+
 
             
         print()

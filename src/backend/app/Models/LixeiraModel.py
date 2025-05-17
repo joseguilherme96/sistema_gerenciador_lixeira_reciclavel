@@ -1,5 +1,5 @@
 from Models.ExtensionsModel import db
-from sqlalchemy import DateTime,Integer,String,Float,ForeignKey
+from sqlalchemy import DateTime,Integer,String,Float,ForeignKey,Boolean
 from sqlalchemy.orm import mapped_column
 
 class Lixeira(db.Model):
@@ -14,6 +14,7 @@ class Lixeira(db.Model):
     cor_id = mapped_column(Integer,ForeignKey("cor.id_cor"))
     capacidade = mapped_column(Float)
     nivel_lixeira = mapped_column(Float)
+    esta_aberta = mapped_column(Boolean)
     observacao = mapped_column(String(50))
     criado_em = mapped_column(DateTime)
     editado_em = mapped_column(DateTime)
@@ -60,6 +61,7 @@ class Lixeira(db.Model):
             result = db.session.scalars(stmt).one()
 
             result.nivel_lixeira = lixeira.nivel_lixeira
+            result.esta_aberta = lixeira.esta_aberta
             db.session.commit()
 
             return [{
@@ -72,6 +74,7 @@ class Lixeira(db.Model):
                 "capacidade" : result.capacidade,
                 "mat_colet_id" : result.mat_colet_id,
                 "nivel_lixeira" : result.nivel_lixeira,
+                'esta_aberta': "Aberta" if result.esta_aberta else "Fechada",
                 "observacao" : result.observacao,
                 "criado_em" : result.criado_em,
                 "editado_em" : result.editado_em

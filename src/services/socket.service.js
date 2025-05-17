@@ -17,12 +17,13 @@ socket.on('connect', function (e) {
     console.log('Conectado ao servidor');
 });
 
-socket.on('atualizacao_nivel_lixeira', function (dados) {
+socket.on('atualizacao_lixeira', function (dados) {
 
     const { lixeira } = storeToRefs(useLixeiraStore())
     if (dados[0].id_lixeira == lixeira.value.id_lixeira) {
 
         lixeira.value.nivel_lixeira = dados[0].nivel_lixeira
+        lixeira.value.esta_aberta = dados[0].esta_aberta
 
     }
 

@@ -8,7 +8,7 @@ import { storeToRefs } from 'pinia';
 import InformativoLixeira from '../InformativoLixeira/InformativoLixeira.vue';
 import BarraSuperior from '../BarraSuperior/BarraSuperior.vue';
 import TituloPagina from '../Titulo/TituloPagina.vue';
-import { mdiViewDashboardOutline } from '@mdi/js';
+import { mdiViewDashboardOutline, mdiTrashCan, mdiOpenInApp, mdiCloseBox, mdiDeleteEmpty, mdiDelete } from '@mdi/js';
 import DetalheLixeira from '../DetalheLixeira/DetalheLixeira.vue';
 
 //Serviços
@@ -31,7 +31,8 @@ const indexPaginaAtual = ref(0)
 
 const configuracaoTitulo = ref({
     nome: `Detalhe Grupo Lixeira`,
-    icone: mdiViewDashboardOutline
+    icone: mdiViewDashboardOutline,
+    lixeiraEstaAberta: lixeira.value.esta_aberta
 })
 
 const atualizarPaginacaoNoTitulo = () => {
@@ -77,7 +78,6 @@ watch(() => indexPaginaAtual.value, (index) => {
 
 })
 
-
 </script>
 
 
@@ -93,7 +93,14 @@ watch(() => indexPaginaAtual.value, (index) => {
 
                     <template v-slot:titulo>
 
-                        <TituloPagina :configuracaoTitulo="configuracaoTitulo"></TituloPagina>
+                        <TituloPagina :configuracaoTitulo="configuracaoTitulo">
+                        </TituloPagina>
+                        <v-chip :color="lixeira.esta_aberta == 'Aberta' ? 'brown' : 'green'">
+                            <svg-icon type="mdi"
+                                :path="lixeira.esta_aberta == 'Aberta' ? mdiDeleteEmpty : mdiDelete"></svg-icon>
+                            {{
+                                lixeira.esta_aberta }}</v-chip>
+
 
                     </template>
 

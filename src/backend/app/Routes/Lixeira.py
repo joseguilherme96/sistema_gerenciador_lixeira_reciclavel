@@ -105,6 +105,7 @@ def cadastrar_lixeira(data = [], chamada_interna_api = False):
                 "cor_id": lixeira.cor_id,
                 "capacidade ": lixeira.capacidade,
                 "nivel_lixeira ": lixeira.nivel_lixeira,
+                "esta_aberta ": lixeira.esta_aberta,
                 "observacao ": lixeira.observacao,
                 "criado_em ": str(lixeira.criado_em),
                 "editado_em ": str(lixeira.editado_em)
@@ -153,6 +154,7 @@ def get_lixeira():
                 "descricao":lixeira.Lixeira.descricao,
                 "capacidade": lixeira.Lixeira.capacidade,
                 "nivel_lixeira": lixeira.Lixeira.nivel_lixeira,
+                "esta_aberta": "Aberta" if lixeira.Lixeira.esta_aberta else "Fechada",
                 "observacao": lixeira.Lixeira.observacao,
                 "criado_em":lixeira.Lixeira.criado_em,
                 "editado_em":lixeira.Lixeira.editado_em
@@ -178,10 +180,15 @@ def atualizar_nivel_lixeira():
 
             return jsonify({'message':'O nivel da lixeira não foi informado !'}),400
         
+        if data.get('esta_aberta') == "" and not data.get('esta_aberta'):
+
+            return jsonify({'message':'O estado da lixeira não foi informado !'}),400
+        
         lixeira = Lixeira(
 
             id_lixeira = data['lixeira_id'],
-            nivel_lixeira = data['nivel_lixeira']
+            nivel_lixeira = data['nivel_lixeira'],
+            esta_aberta = data['esta_aberta']
             
         )
 
