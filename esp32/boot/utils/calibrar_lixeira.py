@@ -14,8 +14,16 @@ class Calibracao :
         print()
         print(f'Profundidade atual da lixeira : {getattr(Calibracao,'profundidade_calibrada')} cm \n')
 
+    def get_atribute(self,name):
 
-    def calibrar_profundidade():
+        return getattr(self,name)
+    
+    def set_atribute(self,name,value):
+        setattr(self, name, value)
+
+
+    def calibrar_profundidade(self):
+
 
         opcao = input('Deseja realmente calibrar novamente ? 1 - Sim, 2- Não \n')
         print()
@@ -36,7 +44,7 @@ class Calibracao :
                         profundidade_encontrada = get_distancia_entre_sensor_lixo()
                         print(f"Profundidade Lixeira Encontrada : {profundidade_encontrada} (ctrl+c) para confirmar calibramento.")
 
-                        setattr(Calibracao,'profundidade_calibrada',profundidade_encontrada)
+                        self.set_atribute(Calibracao,'profundidade_encontrada',profundidade_encontrada)
                             
                         time.sleep(3)
 
@@ -44,11 +52,11 @@ class Calibracao :
 
                     print()
                     profundidade_encontrada = input("Digite a profundidade da lixeira : \n")
-                    setattr(Calibracao,'profundidade_calibrada',profundidade_encontrada)
+                    self.set_atribute(Calibracao,'profundidade_encontrada',profundidade_encontrada)
 
             print()
             print("Profundidade Calibrada da lixeira :", getattr(Calibracao,'profundidade_calibrada'),' cm')
-            setattr(Calibracao,'lixeira_esta_calibrada',True)
+            self.set_atribute(Calibracao,'lixeira_esta_calibrada',True)
             
             return True
 
@@ -57,7 +65,7 @@ class Calibracao :
         except KeyboardInterrupt as e:
 
             print()
-            setattr(Calibracao,'lixeira_esta_calibrada',True)
+            self.set_atribute(Calibracao,'lixeira_esta_calibrada',True)
             print("Profundidade Calibrada da lixeira :", getattr(Calibracao,'profundidade_calibrada'),' cm')
             return  True
 

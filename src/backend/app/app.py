@@ -31,7 +31,7 @@ app = Flask(__name__)
 # Configuração SQLALCHEMY/Banco de dados
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 
-CORS(app, origins=['http://localhost:5173']) # Permite URL que está sendo executada o front-end
+CORS(app, origins=['http://192.168.43.243:5173']) # Permite URL que está sendo executada o front-end
 
 socketio.init_app(app)
 
@@ -68,8 +68,8 @@ def tipo_media(e):
 
     return jsonify({'message':'O tipo de conteúdo enviado não é suportado pelo servidor !'}),415
 
-if __name__ == '__main__':
-    app.run(debug=False)
-    socketio.run(app)
+
+app.run(debug=False,host='0.0.0.0',port=5000)
+socketio.run(app,host='0.0.0.0',port=5000)
 
 
