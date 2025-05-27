@@ -1,6 +1,6 @@
 # Gerenciador de Lixeira Reciclável
 
-Este projeto está sendo desenvolvido e tem objetivo de ser capaz gerenciar os níveis das lixeiras em tempo real em diversos pontos da cidade, seja por meio da sinalização por um morador ou ainda por meio de sensores que serão integrados ao sistema.
+Este projeto está sendo desenvovido para o trabalho da Fatec São Roque para disciplina de IOT e tem objetivo de ser capaz gerenciar os níveis das lixeiras em tempo real em diversos pontos da cidade, seja por meio da sinalização por um morador ou ainda por meio de sensores que ESP32 que são integrados ao sistema.
 
 A empresa pode gerenciar a coleta de lixos recicláveis de uma maneira mais eficiente, se programando antecipadamente, realizando a coleta em pontos 
 estratégicos. Também pode reduzir os custos traçando a melhor rota antecipadamente, coletando lixos recicláveis em pontos mais críticos. Pois o sistema será capaz de apresentar diversos dados que ajudam na tomada de decisão como, regiões com mais ou menos lixo.
