@@ -11,14 +11,14 @@ O sistema identificando estas requisições, faz atualização do nivel da lixei
 
 Estes foram basicamente os passos que permitiram que o ESP32 começasse a medir os niveis das lixeiras e enviar as informações para o sistema(API).
 
--- Placa ESP32_GENERIC
--- Instalação do Python >= 3.10.11
--- Driver para ESP32 para permitir computador reconhecer o dispositivo.
--- Firmware Micropython para ser instalado no esp32
--- Esptool ferramenta que permite a instalação do firmware Micropython
--- Emulador Tera Term 5 para processar os primeiros comandos com python direto no ESP32.
--- Pacote adafruit-ampy  1.1.0 responsável por permitir copiar scripts python criados para a placa ESP32.
--- Uma classe base do python hcsr04.py para medição do nivel da lixeira
--- Criação do script para processamento das medições no ESP32 e enviar para o sistema(API)
--- Criação de API que recebe os dados gerados pelos microcontroladores(ESP32)
+- Placa ESP32_GENERIC
+- Instalação do Python >= 3.10.11
+- Driver para ESP32 para permitir computador reconhecer o dispositivo.
+- Firmware Micropython para ser instalado no esp32
+- Esptool ferramenta que permite a instalação do firmware Micropython
+- Emulador Tera Term 5 para processar os primeiros comandos com python direto no ESP32.
+- Pacote adafruit-ampy  1.1.0 responsável por permitir copiar scripts python criados para a placa ESP32.
+- Uma classe base do python hcsr04.py para medição do nivel da lixeira
+- Criação do script para processamento das medições no ESP32 e enviar para o sistema(API)
+- Criação de API que recebe os dados gerados pelos microcontroladores(ESP32)
 
