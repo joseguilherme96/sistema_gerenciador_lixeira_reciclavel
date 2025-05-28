@@ -64,7 +64,11 @@ watch(() => monitarMudancasNoSelectNoNovoNivelLixeira(), () => {
 
 async function atualizarLixeira() {
 
-    const retorno = await atualizarNivelLixeira({ nivel_lixeira: lixeira.value.nivel_lixeira, lixeira_id: lixeira.value.id_lixeira });
+    const retorno = await atualizarNivelLixeira({
+        nivel_lixeira: lixeira.value.nivel_lixeira,
+        lixeira_id: lixeira.value.id_lixeira,
+        esta_aberta: lixeira.value.esta_aberta === "Aberta" ? true : false
+    });
 
     const informativoLixeira = {
 
@@ -113,14 +117,20 @@ async function atualizarLixeira() {
 
         <v-form>
             <v-row>
-                <v-col cols="4" sm="12">
+                <v-col cols="12" sm="12">
                     <v-select label="Nivel Lixeira"
                         :items="niveisLixeira.map((descricoes) => descricoes.descricaoComoTexto)"
                         v-model="form.lixeiras[0].nivelLixeira"></v-select>
                 </v-col>
             </v-row>
             <v-row>
-                <v-col cols="4" sm="12">
+                <v-col cols="12" sm="12">
+                    <v-select label="Estado Lixeira" :items='["Aberta", "Fechada"]'
+                        v-model="lixeira.esta_aberta"></v-select>
+                </v-col>
+            </v-row>
+            <v-row>
+                <v-col cols="12" sm="12">
                     <v-text-field label="Observação" v-model="form.lixeiras[0].observacao"></v-text-field>
                 </v-col>
             </v-row>
