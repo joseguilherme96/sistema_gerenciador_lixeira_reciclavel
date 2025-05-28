@@ -35,8 +35,8 @@ watchEffect(() => {
 </script>
 <template>
 
-    <div class="d-flex flex-no-wrap justify-space-between">
-        <div>
+    <v-row class="d-flex flex-no-wrap justify-space-between">
+        <v-col cols="6" sm="4">
             <v-card-title>Grupo ID</v-card-title>
             <v-card-subtitle>{{ lixeira.grupo_lixeira_id }}</v-card-subtitle>
             <v-card-title>ID Lixeira</v-card-title>
@@ -44,8 +44,8 @@ watchEffect(() => {
             <v-card-title>Descrição</v-card-title>
             <v-card-subtitle>{{ lixeira.observacao }}</v-card-subtitle>
 
-        </div>
-        <div>
+        </v-col>
+        <v-col cols="6" sm="4">
             <v-card-title>Material Coletado</v-card-title>
             <v-card-subtitle> {{ lixeira.mat_colet_id }}</v-card-subtitle>
             <v-card-title>Capacidade(L)</v-card-title>
@@ -55,18 +55,17 @@ watchEffect(() => {
                 <BarraProgressoNivelLixeira :item="lixeira"></BarraProgressoNivelLixeira>
             </v-card-subtitle>
 
-        </div>
+        </v-col>
 
-        <div>
+        <v-col cols="12" sm="4">
+            <v-row class="justify-center">
+                <v-card-title>Ponto Lixo ID</v-card-title>
+                <v-card-subtitle> {{ lixeira.ponto_lixo_id }}</v-card-subtitle>
+                <QRCodeLixeira :configuracaoQRCode="lixeira.configuracaoQRCode" v-if="lixeira.configuracaoQRCode">
+                </QRCodeLixeira>
 
-            <v-card-title>Ponto Lixo ID</v-card-title>
-            <v-card-subtitle> {{ lixeira.ponto_lixo_id }}</v-card-subtitle>
-
-        </div>
-        <div>
-            <QRCodeLixeira :configuracaoQRCode="lixeira.configuracaoQRCode" v-if="lixeira.configuracaoQRCode">
-            </QRCodeLixeira>
-        </div>
-    </div>
+            </v-row>
+        </v-col>
+    </v-row>
 
 </template>
