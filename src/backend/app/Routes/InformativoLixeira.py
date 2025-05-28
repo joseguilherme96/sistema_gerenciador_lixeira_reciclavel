@@ -73,9 +73,15 @@ def insert():
 
             return jsonify({'message', 'Nenhum ponto de lixo foi informado !'}),400
         
-        if not data.get("nivel_lixeira"):
+        if data.get('nivel_lixeira') != 0:
 
-            return jsonify({"message": "O nível da lixeira não foi informado !"}),400
+            if(not data.get('nivel_lixeira')):
+
+                return jsonify({'message':'O nivel da lixeira não foi informado !'}),400
+            
+            if(int(data.get('nivel_lixeira')) < 0):
+
+                return jsonify({'message':'O nivel da lixeira não pode menor que 0 !'}),400
         
         if not data.get('informado_por_id'):
 
@@ -102,7 +108,7 @@ def insert():
             "informado_por_id": dados_inseridos.informado_por_id,
             "nivel_lixeira": dados_inseridos.nivel_lixeira,
             "observacao": dados_inseridos.observacao,
-            "criado_em": datetime.strftime(dados_inseridos.criado_em, "%d/%m/%Y %H:%M:%S")
+            "criado_em": str(dados_inseridos.criado_em)
 
         }
         

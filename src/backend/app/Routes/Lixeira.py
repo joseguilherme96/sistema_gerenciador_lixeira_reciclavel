@@ -176,9 +176,15 @@ def atualizar_nivel_lixeira():
 
             return jsonify({'message':'Informe o id da lixeira !'}),400
         
-        if not data.get('nivel_lixeira'):
+        if data.get('nivel_lixeira') != 0:
 
-            return jsonify({'message':'O nivel da lixeira não foi informado !'}),400
+            if(not data.get('nivel_lixeira')):
+
+                return jsonify({'message':'O nivel da lixeira não foi informado !'}),400
+            
+            if(int(data.get('nivel_lixeira')) < 0):
+
+                return jsonify({'message':'O nivel da lixeira não pode menor que 0 !'}),400
         
         if data.get('esta_aberta') == "" and not data.get('esta_aberta'):
 
