@@ -19,6 +19,7 @@ Também tem objetivo de aprender e explorar um pouco mais a questão de projetar
 - Empresa consegue visualizar se as sinalizações das lixeiras estão sendo informadas por uma pessoa, ou ainda por um dispositivo instalado nas lixeiras.
 - Empresa consegue filtrar e visualizar grupos de lixeira por id_grupo, endereço(rua, bairro, cidade, estado ou cep), capacidades de cada lixeiras em litros ou ainda niveis de lixo que cada uma se encontra.
 - Integração do sistema com microcontroladores ESP32 que envia dados para o sistema informando o nivel das lixeiras.
+- Gráfico de acompanhamento dos niveis de lixo reciclável ao longo do tempo nas lixeiras.
 
 ## Futuras
 - Ajustes
