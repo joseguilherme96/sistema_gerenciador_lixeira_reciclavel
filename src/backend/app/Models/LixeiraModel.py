@@ -85,3 +85,48 @@ class Lixeira(db.Model):
             db.session.rollback()
             raise
 
+    def calcular_media_nivel_lixo_por_grupo(where = []):
+
+        query = db.select(Lixeira.grupo_lixeira_id, db.func.avg(Lixeira.nivel_lixeira).label('media_nivel_lixeira'))
+
+        try:
+
+            for condicao in where:
+
+                if condicao.get('grupo_lixeira_id'):
+
+                    query = query.where(Lixeira.grupo_lixeira_id == condicao['grupo_lixeira_id'])
+
+            result = db.session.execute(query).all()
+        
+        except:
+
+            raise
+
+
+        result = db.session.execute(query).all()
+
+        return result
+
+    def calcular_soma_capacidade_total_armazenamento_de_lixo_por_grupo(where = []):
+
+        query = db.select(Lixeira.grupo_lixeira_id, db.func.sum(Lixeira.capacidade).label('capacidade_total'))
+
+        try:
+
+            for condicao in where:
+
+                if condicao.get('grupo_lixeira_id'):
+
+                    query = query.where(Lixeira.grupo_lixeira_id == condicao['grupo_lixeira_id'])
+
+            result = db.session.execute(query).all()
+        
+        except:
+
+            raise
+
+
+        result = db.session.execute(query).all()
+
+        return result

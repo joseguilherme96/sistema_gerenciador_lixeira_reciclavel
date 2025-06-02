@@ -31,7 +31,7 @@ app = Flask(__name__)
 # Configuração SQLALCHEMY/Banco de dados
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 
-CORS(app, origins=['http://192.168.43.243:5173']) # Permite URL que está sendo executada o front-end
+CORS(app, origins=['http://192.168.43.243:5173','http://localhost:5173','http://192.168.1.14:5173']) # Permite URL que está sendo executada o front-end
 
 socketio.init_app(app)
 

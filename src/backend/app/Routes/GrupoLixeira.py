@@ -1,5 +1,8 @@
 from Models.GrupoLixeiraModel import GrupoLixeira  # Importa o db e o modelo
 from flask import jsonify,Blueprint,request
+from Models.LixeiraModel import Lixeira
+import math
+from datetime import datetime,time
 
 # Blueprint é uma extensão do Flask que pode oferecer diversos recursos, onde permite criação de componentes, para que
 # depois estes componentes possam se integrar com o flask novamente. Como este projeto tem varias rotas para diferentes componentes. O Blueprint cria
@@ -60,19 +63,24 @@ def select_grupo_lixeira():
 
     for lixeira in GrupoLixeira.select(where):
 
+        grupo_id,media_nivel_lixeira_por_grupo = Lixeira.calcular_media_nivel_lixo_por_grupo([{'grupo_lixeira_id':lixeira.GrupoLixeira.id_grupo_lixeira}])[0]
+        grupo_id,soma_capacidade_lixeira_por_grupo = Lixeira.calcular_soma_capacidade_total_armazenamento_de_lixo_por_grupo([{'grupo_lixeira_id':lixeira.GrupoLixeira.id_grupo_lixeira}])[0]
+
         dados_lixeira = {
 
             "id_grupo_lixeira":lixeira.GrupoLixeira.id_grupo_lixeira,
             "nome":lixeira.GrupoLixeira.nome,
             "descricao":lixeira.GrupoLixeira.descricao,
+            "nivel_lixeira": math.ceil(media_nivel_lixeira_por_grupo),
+            "capacidade_total_lixo": math.ceil(soma_capacidade_lixeira_por_grupo),
             "cep":lixeira.GrupoLixeira.cep,
             "endereco": lixeira.GrupoLixeira.endereco,
             "bairro":lixeira.GrupoLixeira.bairro,
             "cidade":lixeira.GrupoLixeira.cidade,
             "estado":lixeira.GrupoLixeira.estado,
             "uf":lixeira.GrupoLixeira.uf,
-            "data":str(lixeira.GrupoLixeira.data),
-            "hora":str(lixeira.GrupoLixeira.hora)
+            "data": datetime.strftime(lixeira.GrupoLixeira.data, "%d/%m/%Y"),
+            "hora": time.strftime(lixeira.GrupoLixeira.hora, "%H:%M:%S")
         }
         lixeiras.append(dados_lixeira)
 

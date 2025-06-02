@@ -75,7 +75,7 @@ onMounted(async () => {
                     Capacidade Total(L)
                 </th>
                 <th class="text-left">
-                    Nivel Total Lixeira
+                    Média Nivel de Lixo
                 </th>
                 <th class="text-left">
                     Data Atualização
@@ -98,7 +98,7 @@ onMounted(async () => {
                 <td>{{ item.cidade }}</td>
                 <td>{{ item.estado }}</td>
                 <td>{{ item.cep }}</td>
-                <td>{{ item.capacidade }}</td>
+                <td>{{ item.capacidade_total_lixo }}</td>
                 <td>
                     <BarraProgressoNivelLixeira :item="item"></BarraProgressoNivelLixeira>
                 </td>
