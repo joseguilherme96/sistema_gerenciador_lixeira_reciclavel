@@ -52,6 +52,10 @@ Também tem objetivo de aprender e explorar um pouco mais a questão de projetar
 npm install
 ```
 
+## Renomeie o arquivo de ambiente
+
+Renomeie o arquivo ".env.development.example" para ".env.development"
+
 ### Execução
 
 ```sh
