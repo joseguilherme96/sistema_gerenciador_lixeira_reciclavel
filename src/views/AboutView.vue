@@ -1,19 +1,38 @@
 <template>
 
-  <!--Descrição sobe o sistema de gerenciamento de lixo reciclavel-->
-  <p>
+  <v-container>
+    <v-row>
+      <v-col cols="12" sm="6" md="4">
+        <v-card color="gray">
+          <v-card-title>Grupo de Lixeiras</v-card-title>
+          <v-card-text>
+            <v-btn color="primary">Acessar</v-btn>
+          </v-card-text>
+        </v-card>
+      </v-col>
+      <v-col cols="12" sm="6" md="4">
+        <v-card>
+          <v-card-title>Lixeiras</v-card-title>
+          <v-card-text>
+            <v-btn color="primary">Acessar</v-btn>
+          </v-card-text>
+        </v-card>
+      </v-col>
+      <v-col cols="12" sm="6" md="4">
+        <v-card>
+          <v-card-title>Filtros</v-card-title>
+          <v-card-text>
+            <v-btn color="primary">Acessar</v-btn>
+          </v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 
-    Está sistema tem objetivo de ajudar a população a se tornar mais consciente sobre o lixo reciclavel. <br>
-    Ele é capaz de identificar o lixo reciclavel e o não reciclavel, e emite um alerta para o usuário. <br>
 
-
-    
-
-  </p>
 </template>
 
 <style>
-
 @media (min-width: 1024px) {
   .about {
     min-height: 100vh;

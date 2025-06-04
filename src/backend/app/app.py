@@ -24,6 +24,12 @@ from Routes.PontoLixo import ponto_lixo
 from Routes.Cor import cor
 from Routes.GrupoLixeiraPontoLixoLixeira import grupo_lixeira_ponto_lixo_lixeira
 
+# Variavel de ambiente
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
 
 # Instância do Flask
 app = Flask(__name__)
@@ -31,7 +37,7 @@ app = Flask(__name__)
 # Configuração SQLALCHEMY/Banco de dados
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 
-CORS(app, origins=['http://192.168.43.243:5173','http://localhost:5173','http://192.168.1.14:5173']) # Permite URL que está sendo executada o front-end
+CORS(app, origins = os.getenv('ORIGENS_PERMITIDAS').split(',')) # Permite URL que está sendo executada o front-end
 
 socketio.init_app(app)
 

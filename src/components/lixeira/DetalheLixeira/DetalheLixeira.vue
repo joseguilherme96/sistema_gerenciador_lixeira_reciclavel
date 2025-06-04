@@ -20,7 +20,7 @@ const configuracaoQRCode = ref({
 function gerarValorQRCode() {
 
     props.lixeira.configuracaoQRCode = configuracaoQRCode.value;
-    props.lixeira.configuracaoQRCode.valor = `${baseUrl}/lixeira/${props.lixeira.id_lixeira}`
+    props.lixeira.configuracaoQRCode.valor = `${baseUrl}/informar-status-lixeira/${props.lixeira.id_lixeira}`
 
 }
 

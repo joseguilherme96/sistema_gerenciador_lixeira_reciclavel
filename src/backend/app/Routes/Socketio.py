@@ -1,7 +1,11 @@
 # Configurando o SocketIO
 from flask_socketio import SocketIO
+from dotenv import load_dotenv
+import os
 
-socketio = SocketIO(cors_allowed_origins=['http://192.168.43.243:5173','http://localhost:5173','http://192.168.1.14:5173'])
+load_dotenv()
+
+socketio = SocketIO(cors_allowed_origins= os.getenv('ORIGENS_PERMITIDAS').split(','))
 
 
 

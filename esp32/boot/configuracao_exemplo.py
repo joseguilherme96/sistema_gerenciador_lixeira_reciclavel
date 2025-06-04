@@ -2,7 +2,7 @@
 # Ao terminar a configuração do arquivo...renomear arquivo para configuracao.py
 
 # Permite que seja executado no terminal sem ESP32 e Sensor. Os valores serão gerados aleatoriamente para teste.
-SCRIPT_SENDO_EXECUTADO_NO_ESP32 = True
+SCRIPT_SENDO_EXECUTADO_NO_ESP32 = False
 
 # Numeros dos Pinos que o sensor conectou no ESP32 Dxx
 TRIGGER_PIN = 5
@@ -30,11 +30,19 @@ LIXEIRA_ID = 5
 GRUPO_ID = 10
 
 # API enviada a informação automaticamente
-API_INFORMATIVO_LIXEIRA = 'http://127.0.0.1:5000/cadastrar_informativo_lixeira'
-API_ATUALIZAR_LIXEIRA = 'http://127.0.0.1:5000/atualizar_nivel_lixeira'
+API_FLASK_BASE_URL_LOCAL='http://127.0.0.1:5000' # Local
+API_FLASK_BASE_URL_NETWORK1='http://192.168.1.13:5000' # Rede Wifi 1
+API_FLASK_BASE_URL_NETWORK2='http://192.168.43.243:5000' # Rede Wifi 2
+
+API_FLASK_BASE_URL = f'${API_FLASK_BASE_URL_NETWORK1}'
+
+
+API_INFORMATIVO_LIXEIRA = f'${API_FLASK_BASE_URL}/cadastrar_informativo_lixeira'
+API_ATUALIZAR_LIXEIRA = f'{API_FLASK_BASE_URL}/atualizar_nivel_lixeira'
 
 # REDE
 SSID=''
 PASSWORD=''
 NUMERO_TENTATIVAS_CONECTAR_UMA_REDE_WIFI = 10
+
 
