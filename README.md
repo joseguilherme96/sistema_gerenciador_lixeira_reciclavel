@@ -27,6 +27,8 @@ Também tem objetivo de aprender e explorar um pouco mais a questão de projetar
 ## Arquitetura de comunicação entre clientes e APIs
 [![Arquitetura de comunicação entre clientes e APIs](src/assets/Arquitetura_de_comunicacentre_clientes_apis.png "Arquitetura de comunicação entre clientes e APIs")](src/assets/Arquitetura_de_comunicacentre_clientes_apis.png)
 
+## MER - Modelo Entidade Relacionamento
+[![Modelo Entidade Relacionamento](src/assets/mer_modelo_entidade_relacionamento.png "Modelo Entidade Relacionamento")](src/assets/mer_modelo_entidade_relacionamento.png)
 
 
 # Imagens do projeto
