@@ -32,8 +32,7 @@ Também tem objetivo de aprender e explorar um pouco mais a questão de projetar
 
 - [![Tela utilizada pelo usuário para informar o nivel da lixeira](https://github.com/joseguilherme96/sistema_gerenciador_lixeira_reciclavel/blob/4757e4a78eb1e3e1431d8539587ac248c5fdc1c8/src/assets/tela_de_atualizacao_nivel_lixeira.png "Tela utilizada pelo usuário para informar o nivel da lixeira")](https://github.com/joseguilherme96/sistema_gerenciador_lixeira_reciclavel/blob/4757e4a78eb1e3e1431d8539587ac248c5fdc1c8/src/assets/tela_de_atualizacao_nivel_lixeira.png)
 
-- [![Tela de apresentação dos niveis de lixo reciclável de forma gráfica nas lixeiras ao longo do tempo](https://github.com/joseguilherme96/sistema_gerenciador_lixeira_reciclavel/blob/main/src/assets/grafico_de_acompanhamento_do_nivel_da_lixeira_reciclavel.png "Tela de apresentação dos niveis de lixo reciclável de forma gráfica nas lixeiras ao longo do tempo")] (https://github.com/joseguilherme96/sistema_gerenciador_lixeira_reciclavel/blob/main/src/assets/
-grafico_de_acompanhamento_do_nivel_da_lixeira_reciclavel.png)
+- [![Tela de apresentação dos niveis de lixo reciclável de forma gráfica nas lixeiras ao longo do tempo](https://github.com/joseguilherme96/sistema_gerenciador_lixeira_reciclavel/blob/main/src/assets/grafico_de_acompanhamento_do_nivel_da_lixeira_reciclavel.png "Tela de apresentação dos niveis de lixo reciclável de forma gráfica nas lixeiras ao longo do tempo")](https://github.com/joseguilherme96/sistema_gerenciador_lixeira_reciclavel/blob/main/src/assets/grafico_de_acompanhamento_do_nivel_da_lixeira_reciclavel.png)
 
 - [![Lixeira integrada com microcontrolador ESP32](src/assets/lixeira_automatizada.jpg "Lixeira integrada com microcontrolador ESP32")](src/assets/lixeira_automatizada.jpg)
 
