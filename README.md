@@ -24,6 +24,10 @@ Também tem objetivo de aprender e explorar um pouco mais a questão de projetar
 ## Futuras
 - Ajustes
 
+## Arquitetura de comunicação entre clientes e APIs
+[![Arquitetura de comunicação entre clientes e APIs](src/assets/Arquitetura_de_comunicacentre_clientes_apis.png "Arquitetura de comunicação entre clientes e APIs")](src/assets/Arquitetura_de_comunicacentre_clientes_apis.png)
+
+
 
 # Imagens do projeto
 - [![Tela acompanhamento dos niveis de lixeira reciclavel](https://github.com/joseguilherme96/sistema_gerenciador_lixeira_reciclavel/blob/f8fddfa8650bf7573296a4d1f46f303a74648278/src/assets/tela_acompanhamento_lixeiras_reciclaveis.png "Tela acompanhamento dos niveis de lixeira reciclavel")](https://github.com/joseguilherme96/sistema_gerenciador_lixeira_reciclavel/blob/f8fddfa8650bf7573296a4d1f46f303a74648278/src/assets/tela_acompanhamento_lixeiras_reciclaveis.png)
