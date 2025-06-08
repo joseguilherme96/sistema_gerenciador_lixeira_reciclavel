@@ -1,28 +1,35 @@
-# Gerenciador de Lixeira Reciclável
+# Gerenciador de Lixeira Reciclável integrado com Microcontrolador ESP32
 
-Este projeto está sendo desenvovido para o trabalho da Fatec São Roque para disciplina de IOT e tem objetivo de ser capaz gerenciar os níveis das lixeiras em tempo real em diversos pontos da cidade, seja por meio da sinalização por um morador ou ainda por meio de sensores que ESP32 que são integrados ao sistema.
+Este projeto foi desenvolvido para o trabalho da Fatec São Roque para disciplina de IOT(Internet das coisas) e tem objetivo de gerenciar os níveis das lixeiras em tempo real em diversos pontos da cidade, seja por meio da sinalização de um morador em uma página web ou ainda por meio de sensores que coletam os niveis de lixo automaticamente, o microcontrolador ESP32 recebe estas informações, realiza o processamento e envia as informações para o sistema/servidor.
 
 A empresa pode gerenciar a coleta de lixos recicláveis de uma maneira mais eficiente, se programando antecipadamente, realizando a coleta em pontos 
-estratégicos. Também pode reduzir os custos traçando a melhor rota antecipadamente, coletando lixos recicláveis em pontos mais críticos. Pois o sistema será capaz de apresentar diversos dados que ajudam na tomada de decisão como, regiões com mais ou menos lixo.
+estratégicos. Também pode reduzir os custos traçando a melhor rota antecipadamente, coletando lixos recicláveis em pontos mais críticos. Pois o sistema é capaz de apresentar diversos dados que ajudam na tomada de decisão.
 
-Também tem objetivo de aprender e explorar um pouco mais a questão de projetar sistemas seguindo as melhores práticas no desenvolvimento de software, como a criação de componentes, serviços, gerenciamentos de estados dos componentes, aplicação de diretivas personalizadas, criação de APis, uso de websockets para informação em tempo real, trabalhar com microcontrolador ESP32 utilizando micropython e outros tópicos que poderão ser explorados ao longo do projeto.
+Este trabalho também teve objetivo de aprender e explorar um pouco mais a questão de projetar sistemas seguindo as melhores práticas no desenvolvimento de software, como a criação de componentes, serviços, gerenciamentos de estados dos componentes, aplicação de diretivas personalizadas, criação e consumo de APis, uso de websockets para informação em tempo real, controle de versão de script SQL e ainda trabalhar com processamento de informações no microcontrolador ESP32 utilizando micropython.
 
-## Funcionalidades já desenvolvidas
+## Funcionalidades do Sistema
 
 - Criação de grupos de lixeiras recicláveis
 - Criação de lixeiras para coletas de papel, metal, vidro, orgânico.....
-- Usuário pode informar niveis das lixeiras manualmente
+- Usuário pode informar niveis das lixeiras manualmente e também descrever o estado que as lixeiras se encontram.
 - Usuário consegue acessar link através de QRCode gerado na tela para cada lixeira para informar status da lixeira.
 - Empresa consegue visualizar grupos de lixeiras criados.
-- Empresa consegue visualizar as lixeiras cadastradas por grupo
+- Empresa consegue visualizar as lixeiras cadastradas por grupo.
 - Empresa consegue visualizar observações deixadas por cada usuário que informa o nivel da lixeiras, como também informação sobre coletas já realizadas.
 - Empresa consegue visualizar se as sinalizações das lixeiras estão sendo informadas por uma pessoa, ou ainda por um dispositivo instalado nas lixeiras.
 - Empresa consegue filtrar e visualizar grupos de lixeira por id_grupo, endereço(rua, bairro, cidade, estado ou cep), capacidades de cada lixeiras em litros ou ainda niveis de lixo que cada uma se encontra.
-- Integração do sistema com microcontroladores ESP32 que envia dados para o sistema informando o nivel das lixeiras.
-- Gráfico de acompanhamento dos niveis de lixo reciclável ao longo do tempo nas lixeiras.
+- Atualização automática dos niveis de lixo em tempo real por meio de Microcontroladores que estão integrado ao sistema.
+- Atualização automática em tempo real das informações das lixeiras.
+- Gráfico de acompanhamento dos niveis de lixo reciclável nas lixeiras em tempo real.
 
-## Futuras
-- Ajustes
+## Funcionalidades do Microcontrolador ESP32
+
+- Permite configuração personalizada de acordo com cada lixeira que o dispositivo é implementado.
+- Possui conectividade com Wifi.
+- Permite calibração de altura da lixeira de acordo com cada lixeira que o ESP32 é implementado.
+- Registra todas as atividades que estão sendo executadas no dispositivo por meio de registros de logs.
+- Realiza leitura do nivel da lixeira.
+- Envia informações para o sistema/servidor.
 
 ## Arquitetura de comunicação entre clientes e APIs
 [![Arquitetura de comunicação entre clientes e APIs](src/assets/Arquitetura_de_comunicacentre_clientes_apis.png "Arquitetura de comunicação entre clientes e APIs")](src/assets/Arquitetura_de_comunicacentre_clientes_apis.png)
@@ -32,15 +39,24 @@ Também tem objetivo de aprender e explorar um pouco mais a questão de projetar
 
 
 # Imagens do projeto
-- [![Tela acompanhamento dos niveis de lixeira reciclavel](https://github.com/joseguilherme96/sistema_gerenciador_lixeira_reciclavel/blob/f8fddfa8650bf7573296a4d1f46f303a74648278/src/assets/tela_acompanhamento_lixeiras_reciclaveis.png "Tela acompanhamento dos niveis de lixeira reciclavel")](https://github.com/joseguilherme96/sistema_gerenciador_lixeira_reciclavel/blob/f8fddfa8650bf7573296a4d1f46f303a74648278/src/assets/tela_acompanhamento_lixeiras_reciclaveis.png)
+## Listagem de grupos de lixeira
+[![Tela acompanhamento dos niveis de lixeira reciclavel](https://github.com/joseguilherme96/sistema_gerenciador_lixeira_reciclavel/blob/f8fddfa8650bf7573296a4d1f46f303a74648278/src/assets/tela_acompanhamento_lixeiras_reciclaveis.png "Tela acompanhamento dos niveis de lixeira reciclavel")](https://github.com/joseguilherme96/sistema_gerenciador_lixeira_reciclavel/blob/f8fddfa8650bf7573296a4d1f46f303a74648278/src/assets/tela_acompanhamento_lixeiras_reciclaveis.png)
 
-- [![Tela que mostra as atualizações dos niveis da lixeira sinalizadas pelos os usuários ou por microcontrolador](https://github.com/joseguilherme96/sistema_gerenciador_lixeira_reciclavel/blob/25f74f8c33a1e9f190f744726051cedc35b58d23/src/assets/atualizacao_lixeira.png "Tela que mostra as atualizações dos niveis da lixeira sinalizadas pelos os usuários ou por microcontrolador")](https://github.com/joseguilherme96/sistema_gerenciador_lixeira_reciclavel/blob/25f74f8c33a1e9f190f744726051cedc35b58d23/src/assets/atualizacao_lixeira.png)
+## Informações detalhadas da lixeira
+[![Tela que mostra as atualizações dos niveis da lixeira sinalizadas pelos os usuários ou por microcontrolador](https://github.com/joseguilherme96/sistema_gerenciador_lixeira_reciclavel/blob/25f74f8c33a1e9f190f744726051cedc35b58d23/src/assets/atualizacao_lixeira.png "Tela que mostra as atualizações dos niveis da lixeira sinalizadas pelos os usuários ou por microcontrolador")](https://github.com/joseguilherme96/sistema_gerenciador_lixeira_reciclavel/blob/25f74f8c33a1e9f190f744726051cedc35b58d23/src/assets/atualizacao_lixeira.png)
 
-- [![Tela utilizada pelo usuário para informar o nivel da lixeira](https://github.com/joseguilherme96/sistema_gerenciador_lixeira_reciclavel/blob/4757e4a78eb1e3e1431d8539587ac248c5fdc1c8/src/assets/tela_de_atualizacao_nivel_lixeira.png "Tela utilizada pelo usuário para informar o nivel da lixeira")](https://github.com/joseguilherme96/sistema_gerenciador_lixeira_reciclavel/blob/4757e4a78eb1e3e1431d8539587ac248c5fdc1c8/src/assets/tela_de_atualizacao_nivel_lixeira.png)
+## Tela para usuário informar o nível de lixo
+[![Tela utilizada pelo usuário para informar o nivel da lixeira](https://github.com/joseguilherme96/sistema_gerenciador_lixeira_reciclavel/blob/4757e4a78eb1e3e1431d8539587ac248c5fdc1c8/src/assets/tela_de_atualizacao_nivel_lixeira.png "Tela utilizada pelo usuário para informar o nivel da lixeira")](https://github.com/joseguilherme96/sistema_gerenciador_lixeira_reciclavel/blob/4757e4a78eb1e3e1431d8539587ac248c5fdc1c8/src/assets/tela_de_atualizacao_nivel_lixeira.png)
 
-- [![Tela de apresentação dos niveis de lixo reciclável de forma gráfica nas lixeiras ao longo do tempo](https://github.com/joseguilherme96/sistema_gerenciador_lixeira_reciclavel/blob/main/src/assets/grafico_de_acompanhamento_do_nivel_da_lixeira_reciclavel.png "Tela de apresentação dos niveis de lixo reciclável de forma gráfica nas lixeiras ao longo do tempo")](https://github.com/joseguilherme96/sistema_gerenciador_lixeira_reciclavel/blob/main/src/assets/grafico_de_acompanhamento_do_nivel_da_lixeira_reciclavel.png)
+## Gráfico de acompanhamento dos níveis de lixo na lixeira em tempo real ao longo do tempo
+[![Tela de apresentação dos niveis de lixo reciclável de forma gráfica nas lixeiras ao longo do tempo](https://github.com/joseguilherme96/sistema_gerenciador_lixeira_reciclavel/blob/main/src/assets/grafico_de_acompanhamento_do_nivel_da_lixeira_reciclavel.png "Tela de apresentação dos niveis de lixo reciclável de forma gráfica nas lixeiras ao longo do tempo")](https://github.com/joseguilherme96/sistema_gerenciador_lixeira_reciclavel/blob/main/src/assets/grafico_de_acompanhamento_do_nivel_da_lixeira_reciclavel.png)
 
-- [![Lixeira integrada com microcontrolador ESP32](src/assets/lixeira_automatizada.jpg "Lixeira integrada com microcontrolador ESP32")](src/assets/lixeira_automatizada.jpg)
+## Foto da instalação do Microcontrolador ESP32 na lixeira
+[![Lixeira integrada com microcontrolador ESP32](src/assets/lixeira_automatizada.jpg "Lixeira integrada com microcontrolador ESP32")](src/assets/lixeira_automatizada.jpg)
+
+## Acompanhamento de atividade do Microcontrolador ESP32 com registro de Logs
+[![Lixeira integrada com microcontrolador ESP32](src/assets/acompanhamento_de_atividade_ep32_resgistro_de_logs.png "Lixeira integrada com microcontrolador ESP32")](src/assets/acompanhamento_de_atividade_ep32_resgistro_de_logs.png)
+
 
 ## Configuração do projeto  
 
