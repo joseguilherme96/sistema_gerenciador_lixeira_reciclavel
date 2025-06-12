@@ -24,6 +24,22 @@ def cadastrar_logs():
     
     except Exception as e:
 
-        log_message(f"Falha ao enviar log para o servidor : {str(e)}","ERROR")
+        log_message(f"Falha ao cadastrar log do dispositivo para o servidor : {str(e)}","ERROR")
         
+        return False
+    
+def gravar_logs_em_arquivo_no_esp32():
+
+    try:
+
+        with open('log.txt', 'a') as arquivo:
+            for log in get_log_messages():
+                arquivo.write(f"{log}\n")
+
+        log_message("Log gravado com sucesso no dispositivo !", "SUCCESS")
+        return True
+
+    except Exception as e:
+
+        log_message(f"Falha ao gravar log no dispositivo ! {str(e)}","ERROR")
         return False

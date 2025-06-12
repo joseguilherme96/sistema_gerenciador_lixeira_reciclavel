@@ -5,7 +5,7 @@ from configuracao import ESTAGIO_LIXEIRA_NIVEL_1,ESTAGIO_LIXEIRA_NIVEL_2,ESTAGIO
 from services.informativo_service import informar_nivel_lixeira
 from services.lixeira_service import atualizar_lixeira
 from services.wifi_service import conectar_wifi, verificar_conectividade_wifi
-from services.log_service import cadastrar_logs
+from services.log_service import cadastrar_logs,gravar_logs_em_arquivo_no_esp32
 
 # Classes
 import time 
@@ -40,11 +40,18 @@ try:
 
         verificar_conectividade_wifi()
 
+        # Grava Logs no própio dispositivo
+        gravar_logs_em_arquivo_no_esp32()
+
+        # Cadastra Logs no servidor
         cadastrar_logs()
+
+        # Limpa logs gerados
         clear_log_message()
 
         print()
 
+        log_message('---------------------------------Log ESP32--------------------------------------------',"SUCCESS")
         log_message(f'Ponto de lixo ID : {PONTO_LIXO_ID} Lixeira ID : {LIXEIRA_ID}',"SUCCESS")
 
         distancia_entre_sensor_lixo_atual = get_distancia_entre_sensor_lixo()
