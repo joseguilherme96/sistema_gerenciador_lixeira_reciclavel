@@ -29,7 +29,7 @@ ID_INFORMADOR = 2 # 1 - Usuário(Quando a informação é feita via sistema) 2 -
 LIXEIRA_ID = 5
 GRUPO_ID = 10
 
-# API enviada a informação automaticamente
+# Endereço de API para ser enviado a informação automaticamente
 API_FLASK_BASE_URL_LOCAL='http://127.0.0.1:5000' # Local
 API_FLASK_BASE_URL_NETWORK1='http://192.168.1.13:5000' # Rede Wifi 1
 API_FLASK_BASE_URL_NETWORK2='http://192.168.43.243:5000' # Rede Wifi 2

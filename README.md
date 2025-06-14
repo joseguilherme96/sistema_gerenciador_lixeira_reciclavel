@@ -1,11 +1,11 @@
-# Gerenciador de Lixeira Reciclável integrado com Microcontrolador ESP32
+# Sistema Gerenciador de Lixeira Reciclável integrada com Microcontrolador ESP32
 
-Este projeto foi desenvolvido para o trabalho da Fatec São Roque para disciplina de IOT(Internet das coisas) e tem objetivo de gerenciar os níveis das lixeiras em tempo real em diversos pontos da cidade, seja por meio da sinalização de um morador em uma página web ou ainda por meio de sensores que coletam os niveis de lixo automaticamente, o microcontrolador ESP32 recebe estas informações, realiza o processamento e envia as informações para o sistema/servidor.
+Este projeto foi desenvolvido para o trabalho da Fatec São Roque para disciplina de IOT(Internet das coisas) e teve objetivo de gerenciar os níveis das lixeiras em tempo real em diversos pontos da cidade, seja por meio da sinalização de um morador no próprio sistema ou ainda por meio de sensores que coletam os niveis de lixo automaticamente, o microcontrolador ESP32 recebe estas informações dos sensores, realiza o processamento e envia as informações para o sistema/servidor.
 
 A empresa pode gerenciar a coleta de lixos recicláveis de uma maneira mais eficiente, se programando antecipadamente, realizando a coleta em pontos 
 estratégicos. Também pode reduzir os custos traçando a melhor rota antecipadamente, coletando lixos recicláveis em pontos mais críticos. Pois o sistema é capaz de apresentar diversos dados que ajudam na tomada de decisão.
 
-Este trabalho também teve objetivo de aprender e explorar um pouco mais a questão de projetar sistemas seguindo as melhores práticas no desenvolvimento de software, como a criação de componentes, serviços, gerenciamentos de estados dos componentes, aplicação de diretivas personalizadas, criação e consumo de APis, uso de websockets para informação em tempo real, controle de versão de script SQL e ainda trabalhar com processamento de informações no microcontrolador ESP32 utilizando micropython.
+Este trabalho também teve objetivo de aprender e explorar um pouco mais a questão de projetar sistemas seguindo as melhores práticas no desenvolvimento de software, como a criação de componentes , serviços, gerenciamentos de estados dos componentes, aplicação de diretivas personalizadas, criação e consumo de APis, uso de websockets para informação em tempo real, controle de versão de script SQL e ainda trabalhar com processamento de informações no microcontrolador ESP32 utilizando micropython.
 
 ## Funcionalidades do Sistema
 
@@ -22,14 +22,26 @@ Este trabalho também teve objetivo de aprender e explorar um pouco mais a quest
 - Atualização automática em tempo real das informações das lixeiras.
 - Gráfico de acompanhamento dos niveis de lixo reciclável nas lixeiras em tempo real.
 
+### Principais Recursos/detalhes que API em Flask oferece
+
+- Validação dos dados
+- APis Modulares com Blueprints
+- Persistência no banco de dados com Flask-SQLAchemy
+- Controle de Transações com os principais comandos BEGIN, COMMIT e ROLLBACK.
+- Acompanhamento de atividade dos Microcontroladores ESP32
+- Gravação de logs gerados pelos Microcontroladores ESP32 em arquivo.
+- Retorno direcionado com principais Códigos de status de Respostas HTTP 400, 404, 405, 415 e 500.
+- Controle de versão do Banco de Dados com Flask-Migrate
+- API WEBSOCKET para comunicação em tempo real com Flask-SocketIO
+
 ## Funcionalidades do Microcontrolador ESP32
 
 - Permite configuração personalizada de acordo com cada lixeira que o dispositivo é implementado.
 - Possui conectividade com Wifi.
 - Permite calibração de altura da lixeira de acordo com cada lixeira que o ESP32 é implementado.
-- Registra todas as atividades que estão sendo executadas no dispositivo por meio de registros de logs.
+- Exibe e registra todas as atividades que estão sendo executadas no dispositivo em um arquivo de log que é gerado no Microcontrolador.
 - Realiza leitura do nivel da lixeira.
-- Envia informações para o sistema/servidor.
+- Coleta dados, processamento e envio das informações para o sistema/servidor.
 
 ## Arquitetura de comunicação entre clientes e APIs
 [![Arquitetura de comunicação entre clientes e APIs](src/assets/Arquitetura_de_comunicacentre_clientes_apis.png "Arquitetura de comunicação entre clientes e APIs")](src/assets/Arquitetura_de_comunicacentre_clientes_apis.png)
@@ -54,80 +66,27 @@ Este trabalho também teve objetivo de aprender e explorar um pouco mais a quest
 ## Foto da instalação do Microcontrolador ESP32 na lixeira
 [![Lixeira integrada com microcontrolador ESP32](src/assets/lixeira_automatizada.jpg "Lixeira integrada com microcontrolador ESP32")](src/assets/lixeira_automatizada.jpg)
 
-## Acompanhamento de atividade do Microcontrolador ESP32 com registro de Logs
+## Acompanhamento de atividade direto no Microcontrolador ESP32 com exibição e registro de Logs
 [![Lixeira integrada com microcontrolador ESP32](src/assets/acompanhamento_de_atividade_ep32_resgistro_de_logs.png "Lixeira integrada com microcontrolador ESP32")](src/assets/acompanhamento_de_atividade_ep32_resgistro_de_logs.png)
 
+## API em Flask
+[![API em Flask](src/assets/API_FLASK.png "API em Flask")](src/assets/API_FLASK.png)
 
 ## Configuração do projeto  
 
-## Instalação
+Como podem ver, projeto completo é divido até em 3 partes para facilitar sua compreensão, Frontend, Backend e pasta ESP32 com todo script para processamento no Microcontrolador. Cada umas destas partes você encontrará informações detalhadas sobre cada parte do projeto para que fosse possível o projeto ser executado por completo, possibilitando também o seu entendimento sobre partes especificas do projeto.
 
-### Requisitos baseados nas versões que o projeto foi executado
+Aqui está os links das pastas em partes para maiores detalhes, pasta [Backend](https://github.com/joseguilherme96/sistema_gerenciador_lixeira_reciclavel/tree/main/src/backend) e pasta [ESP32](https://github.com/joseguilherme96/sistema_gerenciador_lixeira_reciclavel/tree/main/esp32) para instalação. E para maiores detalhes da pasta FrontEnd continue lendo abaixo.
 
-Backend :
+## Frontend Instalação
 
-- Python >= 3.10.11 
+### Versão do Node 
+
+Aqui está a versão do Node.js que foi utilizada para execução do projeto no FrontEnd
 
 FrontEnd
 
 - Node >= v22.15.0
-
-## Backend - Servidor Flask
-
-### Instale as dependências do backend com o seguinte comando :
-
-Dentro da pasta src/backend. Instale as dependências usando o comando abaixo, para que o servidor flask possa ser executado corretamente.
-
-```sh
-
-    pip install -r requirements.txt
-
-```
-
-### Ative o ambiente virtual
-
-Ative o ambiente virtual na pasta src/backend/.venv/scripts/activate usando o seguinte comando dentro da pasta backend
-
-```sh
-
-    .venv\scripts\activate
-
-```
-
-### Inicie o banco de dados
-
-Partindo da raiz do projeto, abra a pasta src/backend/app e inicie o banco de dados.
-
-```sh
-
-    cd src/backend/app
-
-    flask db init
-
-```
-
-### Inicie o servidor Flask
-
-Ainda dentro da pasta app. Execute o comando abaixo para iniciar o servidor flask.
-
-```sh
-
-    python app.py
-
-```
-
-### Inicie o servidor json-server
-
-Inicie o servidor json-server para carregar os estados automaticamente dentro dos forms de pesquisa e cadastro de grupo lixeira. Está é a ultima api que ainda está mockada, mas em breve será criada definitivamente com python. Assim com já foram feitas as outras APIs que já foram migradas.
-
-```sh
-
-    npx json-server src/backend/db.json
-
-```
-
-
-## Frontend
 
 ### Instalação das depêndencias do Frontend
 
@@ -209,97 +168,5 @@ Note caso tente escanear o QRCode da lixeira apresentado na tela da aplicação 
 ```sh
 
     npm run dev
-
-```
-
-## Backend
-
-### Configure o arquivo .env na pasta backend
-
-Na pasta src/backend abra o arquivo .env, você verá as configurações abaixo.
-
-```sh
-
-# BASES URL QUE O FRONT PODE ESTAR SENDO EXECUTADO
-    
-VITE_APP_BASE_URL_LOCAL = 'http://localhost:5173'
-VITE_APP_BASE_URL_NETWORK1 = 'http://192.168.1.13:5173'
-VITE_APP_BASE_URL_NETWORK2 = 'http://192.168.43.243:5173'
-
-
-ORIGENS_PERMITIDAS = ${VITE_APP_BASE_URL_LOCAL},${VITE_APP_BASE_URL_NETWORK1},${VITE_APP_BASE_URL_NETWORK2}
-
-```
-
-Elas mudam de acordo com a base url que o app(frontend) está sendo executado. Reatribua os valores baseados nas possiveis bases url que seu front possa estar sendo executado. Assim você estará autorizando que as origens onde o app está sendo executado sejam permitidas a consumir as APIs criadas em Flask.
-
-
-## ESP32
-
-O código na pasta ESP32 pode ser executado de duas maneiras :
-
-- Ser executado diretamente dentro do ESP32
-- Ou em modo simulação
-
-### Código executado dentro do ESP32
-
-Para saber como o código pode ser executado dentro de um ESP32. Consulte mais detalhes [aqui](https://github.com/joseguilherme96/sistema_gerenciador_lixeira_reciclavel/tree/main/esp32).
-
-### Código sendo executado em modo simulação
-
-Abra a pasta ESP32 partindo da raiz de todo o projeto.
-
-Instale as dependências.
-
-
-```sh
-
-    pip install -r requirements.txt
-
-```
-
-Abra a pasta boot
-
-Renomeie o arquivo configuracao_exemplo para configuracao.py
-
-Abra o arquivo e edite algumas configurações Principais.
-
-```sh
-
-# API enviada a informação automaticamente
-API_FLASK_BASE_URL_LOCAL='http://127.0.0.1:5000' # Locmal
-API_FLASK_BASE_URL_NETWORK1='http://192.168.1.13:5000' # Rede Wifi 1
-API_FLASK_BASE_URL_NETWORK2='http://192.168.43.243:5000' # Rede Wifi 2
-
-API_FLASK_BASE_URL = f'${API_FLASK_BASE_URL_LOCAL}'
-
-
-API_INFORMATIVO_LIXEIRA = f'${API_FLASK_BASE_URL}/cadastrar_informativo_lixeira'
-API_ATUALIZAR_LIXEIRA = f'{API_FLASK_BASE_URL}/atualizar_nivel_lixeira'
-
-```
-
-Na variável API_FLASK_BASE_URL reatribua a ela um valor que corresponde a base url que o servidor Flask está sendo executado. Conforme padrão do servidor está sendo executado na url local 'http://127.0.0.1:5000'. Mas caso esteja sendo executado em rede, o valor deverá ser alterado.
-
-### Ative o ambiente virtual
-
-Ainda dentro da pasta esp32. Ative o ambiente virtual usando o seguinte comando dentro da pasta backend
-
-```sh
-
-    .venv\scripts\activate
-
-```
-
-### Execute arquivo principal
-
-Abra a pasta boot. E execute o arquivo boot.py
-
-
-```sh
-
-    cd boot
-
-    python boot.py
 
 ```
