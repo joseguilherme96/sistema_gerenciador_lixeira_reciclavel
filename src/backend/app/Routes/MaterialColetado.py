@@ -1,11 +1,12 @@
 from flask import request, jsonify, Blueprint
 from Models.MaterialColetadoModel import MaterialColetado
-
+from flask_jwt_extended import jwt_required
 
 material_coletado = Blueprint('material_coletado',__name__)
 
 
 @material_coletado.route('/cadastrar_material_coletado',methods=['POST'])
+@jwt_required()
 def insert():
 
     try:

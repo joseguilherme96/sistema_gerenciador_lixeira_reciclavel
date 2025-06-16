@@ -3,6 +3,7 @@ from flask import jsonify,Blueprint,request
 from Models.LixeiraModel import Lixeira
 import math
 from datetime import datetime,time
+from flask_jwt_extended import jwt_required
 
 # Blueprint é uma extensão do Flask que pode oferecer diversos recursos, onde permite criação de componentes, para que
 # depois estes componentes possam se integrar com o flask novamente. Como este projeto tem varias rotas para diferentes componentes. O Blueprint cria
@@ -10,6 +11,7 @@ from datetime import datetime,time
 grupo_lixeira = Blueprint('grupo_lixeira', __name__)
 
 @grupo_lixeira.route('/grupo_lixeira', methods=['POST'])
+@jwt_required()
 def select_grupo_lixeira():
 
     lixeiras = []
@@ -87,6 +89,7 @@ def select_grupo_lixeira():
     return jsonify(lixeiras),200
 
 @grupo_lixeira.route('/cadastrar_grupo_lixeira',methods=['POST'])
+@jwt_required()
 def inserir_grupo_lixeira():
 
     if request.method == 'POST':

@@ -8,10 +8,12 @@ from Routes.Lixeira import cadastrar_lixeira
 from Models.ExtensionsModel import db
 import json
 import requests
+from flask_jwt_extended import jwt_required
 
 
 grupo_lixeira_ponto_lixo_lixeira = Blueprint('grupo_lixeira_ponto_lixo_lixeira',__name__)
 @grupo_lixeira_ponto_lixo_lixeira.route('/cadastrar_grupo_lixeira_ponto_lixo_lixeira',methods=['POST'])
+@jwt_required()
 def cadastrar_grupo_lixeira_ponto_lixo_lixeira():
 
 

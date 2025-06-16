@@ -1,10 +1,12 @@
 from flask import request, jsonify, Blueprint
 from Models.PontoLixoModel import PontoLixo
 from Models.ExtensionsModel import db
+from flask_jwt_extended import jwt_required
 
 ponto_lixo = Blueprint('ponto_lixo',__name__)
 
 @ponto_lixo.route('/cadastrar_ponto_lixo',methods=['POST'])
+@jwt_required()
 def insert(data = [],chamada_interna_api = False):
 
     try:
@@ -29,6 +31,7 @@ def insert(data = [],chamada_interna_api = False):
         return jsonify({'message':f'${str(e)}'})
     
 @ponto_lixo.route('/ponto_lixo',methods=['POST'])
+@jwt_required()
 def select():
 
     try:

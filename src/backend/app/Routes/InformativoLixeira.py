@@ -3,10 +3,12 @@ from Models.InformativoLixeiraModel import InformativoLixeira
 from Routes.Socketio import socketio
 from Routes.SocketioEnviarObservacao import enviar_observacao_lixeira
 from datetime import datetime
+from flask_jwt_extended import jwt_required
 
 informativo_lixeira = Blueprint('informativo_lixeira',__name__)
 
 @informativo_lixeira.route('/get_informativo_lixeira',methods=['POST'])
+@jwt_required()
 def select_informativo_lixeira():
 
     resultado = []

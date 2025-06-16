@@ -1,4 +1,5 @@
 from flask import request, jsonify, Blueprint
+from flask_jwt_extended import jwt_required
 from Models.CorModel import Cor
 
 
@@ -6,6 +7,7 @@ cor = Blueprint('cor',__name__)
 
 
 @cor.route('/cadastrar_cor',methods=['POST'])
+@jwt_required()
 def insert():
 
     try:
@@ -33,6 +35,7 @@ def insert():
         return jsonify({'message':f'${str(e)}','status':'error'})
 
 @cor.route('/cor',methods=['POST'])
+@jwt_required()
 def select_cor():
 
     try:

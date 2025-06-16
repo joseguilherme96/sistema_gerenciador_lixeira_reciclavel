@@ -11,10 +11,13 @@ from Routes.Socketio import socketio
 
 from Models.ExtensionsModel import db
 
+from flask_jwt_extended import jwt_required
+
 lixeira = Blueprint('lixeira',__name__)
 
 
 @lixeira.route('/cadastrar_lixeira',methods=['POST'])
+@jwt_required()
 def cadastrar_lixeira(data = [], chamada_interna_api = False):
 
     if request.method == 'POST':
@@ -126,6 +129,7 @@ def cadastrar_lixeira(data = [], chamada_interna_api = False):
             return jsonify({'message':str(e)}),500
         
 @lixeira.route("/get_lixeira",methods=["POST"])
+@jwt_required()
 def get_lixeira():
 
     lixeiras = []

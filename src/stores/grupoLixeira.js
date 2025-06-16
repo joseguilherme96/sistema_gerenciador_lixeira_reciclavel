@@ -42,9 +42,14 @@ export const useGrupoLixeiraStore = defineStore('grupo_lixeira', {
         async carregarLista() {
 
             const grupoLixeira = await getGrupoLixeira()
-            this.lista = grupoLixeira
 
-            this.lista.sort((a, b) => new Date(b.id_grupo_lixeira) - new Date(a.id_grupo_lixeira))
+            if (grupoLixeira) {
+
+                this.lista = grupoLixeira
+
+                this.lista.sort((a, b) => new Date(b.id_grupo_lixeira) - new Date(a.id_grupo_lixeira))
+
+            }
 
         },
 

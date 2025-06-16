@@ -1,9 +1,11 @@
 
 
 from flask import Blueprint, jsonify, request
+from flask_jwt_extended import jwt_required
 estado = Blueprint('estados',__name__)
 
 @estado.route('/estados',methods=['GET'])
+@jwt_required()
 def estados():
 
     estados = [
