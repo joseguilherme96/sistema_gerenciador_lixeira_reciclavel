@@ -1,72 +1,39 @@
+import { post } from "./main.service";
+
 const { VITE_API_GRUPO_LIXEIRA, VITE_API_CADASTRAR_GRUPO_LIXEIRA } = import.meta.env
 
 export async function getGrupoLixeira() {
 
+    const retorno = await post({
 
-    try {
+        enderecoAPI: VITE_API_GRUPO_LIXEIRA,
 
-        const retornoHeader = await fetch(VITE_API_GRUPO_LIXEIRA, {
+    })
 
-            method: 'POST',
-            body: JSON.stringify({ "grupo_lixeira_id": "" }),
-            headers: {
-                'Content-Type': 'application/json'
-            }
+    if (retorno) {
 
-        })
-
-        const retornoBody = await retornoHeader.json();
-
-        if (retornoHeader.status !== 200 && retornoHeader.status !== 404) {
-
-            throw new Error(retornoBody.message)
-
-        }
-
-        if (retornoHeader.status !== 404) {
-
-            return retornoBody;
-        }
-
-        return []
-
-
-    } catch (e) {
-
-        alert(e)
-        return false
+        return retorno.body
 
     }
+
+    return false
 
 }
 
 export async function criarGrupoLixeira(GrupoLixeira) {
 
-    try {
 
-        let retornoHeader = await fetch(VITE_API_CADASTRAR_GRUPO_LIXEIRA, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(form.value)
-        })
+    const retorno = await post({
 
-        const retornoBody = await retornoHeader.json()
+        enderecoAPI: VITE_API_CADASTRAR_GRUPO_LIXEIRA,
+        body: GrupoLixeira
 
-        if (!retornoHeader.ok) {
+    })
 
-            throw new Error(retornoBody.message)
+    if (retorno) {
 
-        }
 
-        return retornoBody;
-
-    } catch (e) {
-
-        alert(e)
-        return false;
+        return retorno.body
 
     }
 

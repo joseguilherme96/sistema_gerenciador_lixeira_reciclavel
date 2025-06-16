@@ -1,3 +1,5 @@
+import { post } from "./main.service";
+
 const {
 
     VITE_API_INFORMATIVO_LIXEIRA,
@@ -8,90 +10,42 @@ const {
 export async function getInformativoLixeiraPorPontoLixoId(informativoLixeiraStore, ponto_lixo_id) {
 
 
-    try {
+    const retorno = await post({
 
-        const retornoHeader = await fetch(`${VITE_API_INFORMATIVO_LIXEIRA}`, {
+        enderecoAPI: `${VITE_API_INFORMATIVO_LIXEIRA}`,
+        body: { ponto_lixo_id },
 
-            method: 'POST',
-            body: JSON.stringify({ ponto_lixo_id }),
-            headers: {
-                'Content-Type': 'application/json'
-            }
+    })
 
-        })
+    if (retorno) {
 
-        const retornoBody = await retornoHeader.json()
+        informativoLixeiraStore().carregarTodosInformativos(retorno.body);
+        informativoLixeiraStore().ordernarPorOrdemDecrescente()
 
-        if (retornoHeader.status !== 200 && retornoHeader.status !== 404) {
-
-            throw new Error(retornoBody.message)
-
-        }
-
-        if (retornoHeader.status == 200) {
-
-            informativoLixeiraStore().carregarTodosInformativos(retornoBody);
-            informativoLixeiraStore().ordernarPorOrdemDecrescente()
-
-        }
-
-        if (retornoHeader.status == 404) {
+        if (retorno.status == 404) {
 
             informativoLixeiraStore().limparInformativo()
 
         }
 
         return true;
-
-    } catch (err) {
-
-        alert(err)
-        return false;
-
     }
+
+    return false
 
 }
 
 export async function cadastrarInformativoLixeira(informativo) {
 
-    try {
+    const retorno = await post({
 
-        const retornoHeader = await fetch(`${VITE_API_CADASTRAR_INFORMATIVO_LIXEIRA}`, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(informativo)
-        })
+        enderecoAPI: `${VITE_API_CADASTRAR_INFORMATIVO_LIXEIRA}`,
+        body: informativo
+    })
 
-        const retornoBody = await retornoHeader.json()
+    if (retorno) {
 
-        if (retornoHeader.status !== 201 && retornoHeader.status !== 404) {
-
-            throw new Error(retornoBody.message)
-
-        }
-
-        if (retornoHeader.status == 201) {
-
-            alert(retornoBody.message)
-            return retornoBody;
-
-        }
-
-        if (retornoHeader.status == 404) {
-
-            alert(retornoBody.message)
-
-        }
-
-        return true;
-
-    } catch (err) {
-
-        alert(err)
-        return false;
+        return retorno.body
 
     }
 

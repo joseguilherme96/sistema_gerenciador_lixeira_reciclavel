@@ -1,3 +1,4 @@
+import { post } from './main.service.js'
 import { ref } from 'vue'
 import { lixeiraModel } from '../components/lixeira/lixeira.model.js'
 
@@ -25,54 +26,30 @@ export function formatarDataParaAmericano(data) {
 
 export function filtrarLixeiras(form) {
 
-    fetch(VITE_API_GRUPO_LIXEIRA, {
+    const retorno = post({
 
-        method: 'POST',
+        enderecoAPI: VITE_API_GRUPO_LIXEIRA,
         body: JSON.stringify(form),
-        headers: {
-            'Content-Type': 'application/json'
-        },
 
     })
-        .then(res => res.json())
-        .then(res => {
 
-            lixeira.value = res
+    if (retorno) {
+        lixeira.value = retorno.body
+    }
 
-
-        })
-        .catch(err => err)
 }
 
 
 export async function cadastrarLixeira(lixeiras) {
 
-    try {
+    const retorno = await post({
+        enderecoAPI: VITE_API_CADASTRAR_LIXEIRA,
+        body: JSON.stringify(lixeiras)
+    })
 
-        const retornoHeader = await fetch(VITE_API_CADASTRAR_LIXEIRA, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(lixeiras)
-        })
+    if (retorno) {
 
-        const retornoBody = await retornoHeader.json();
-
-        if (!retornoHeader.ok) {
-
-            throw new Error(retornoBody.message)
-
-        }
-
-        return retornoBody;
-
-
-    } catch (e) {
-
-        alert(e)
-        return false;
+        return retorno.body
 
     }
 
@@ -80,47 +57,19 @@ export async function cadastrarLixeira(lixeiras) {
 
 export async function getLixeira(data) {
 
-    try {
+    const retorno = await post({
 
-        const retorno = await fetch(`${VITE_API_LIXEIRA}`, {
+        enderecoAPI: `${VITE_API_LIXEIRA}`,
+        body: data,
 
-            method: 'POST',
-            body: JSON.stringify(data),
-            headers: {
-                'Content-Type': 'application/json'
-            }
+    })
 
-        })
+    if (retorno) {
 
-        const retornoBody = await retorno.json()
-
-        if (retorno.status !== 200 && retorno.status !== 404) {
-
-            throw new Error(retornoBody.message)
-
-        }
-
-        if (retorno.status == 200) {
-
-            return retornoBody
-
-        }
-
-        if (retorno.status == 404) {
-
-            alert(retornoBody.message)
-            return false
-
-        }
-
-    } catch (e) {
-
-        alert(e)
-        return false;
-
+        return retorno.body
     }
 
-
+    return false
 
 }
 

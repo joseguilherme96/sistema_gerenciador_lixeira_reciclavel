@@ -1,35 +1,20 @@
+import { post } from "./main.service"
 const { VITE_API_CADASTRAR_PONTO_LIXO } = import.meta.env
 
 export async function cadastrarPontoDeLixo(PontoLixo) {
 
-    try {
+    const retorno = post({
 
-        const retornoHeader = await fetch(VITE_API_CADASTRAR_PONTO_LIXO, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({})
-        })
+        enderecoAPI: VITE_API_CADASTRAR_PONTO_LIXO,
+    })
 
-        const retornoBody = await retornoHeader.json();
+    if (retorno) {
 
-        if (!retornoHeader.ok) {
-
-            throw new Error(retornoBody.message)
-
-        }
-
-        return retornoBody;
-
-    } catch (e) {
-
-        alert(e)
-
-        return false;
+        return retorno.body
 
     }
+
+    return
 
 
 }

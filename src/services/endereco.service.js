@@ -1,3 +1,5 @@
+import { get } from "./main.service"
+
 const {
 
     VITE_API_ESTADO,
@@ -7,53 +9,54 @@ const {
 } = import.meta.env
 
 
-export function getEstados(useEstadoStore) {
+export async function getEstados(useEstadoStore) {
 
-    fetch(VITE_API_ESTADO)
-        .then(res => res.json())
-        .then(res => {
+    const retorno = await get({
 
-            useEstadoStore().addEstado(res.map((linha) => linha.estado))
+        enderecoAPI: VITE_API_ESTADO
 
-        })
-        .catch(err => err)
+    })
+
+    if (retorno) {
+
+        useEstadoStore().addEstado(retorno.body.map((linha) => linha.estado))
+
+    }
+
+    return false
 
 }
 
-export function getCidades(useCidadeStore) {
+export async function getCidades(useCidadeStore) {
 
-    fetch(VITE_API_CIDADE)
-        .then(res => res.json())
-        .then(res => {
+    const retorno = await get({
 
-            useCidadeStore().addCidade(res.map((linha) => linha.nome))
-            useCidadeStore().cidades.sort()
-        })
-        .catch(err => err)
+        enderecoAPI: VITE_API_CIDADE
+
+    })
+
+    if (retorno) {
+
+        useCidadeStore().addCidade(retorno.body.map((linha) => linha.nome))
+        useCidadeStore().cidades.sort()
+
+    }
+
+    return false
 
 }
 
 export async function getEnderecoPorCep(cep) {
 
+    const retorno = await get({
 
-    try {
+        enderecoAPI: `${VITE_API_ENDERECO_POR_CEP}/${cep}`
 
-        const retorno = await fetch(`${VITE_API_ENDERECO_POR_CEP}/${cep}`)
+    })
 
-        const retornoBody = await retorno.json()
+    if (retorno) {
 
-        if (retorno.status !== 200 && retorno.status !== 404) {
-
-
-            throw new Error(retorno.messsage)
-
-        }
-
-        return retornoBody;
-
-    } catch (e) {
-
-        return false;
+        return retorno.body
 
     }
 

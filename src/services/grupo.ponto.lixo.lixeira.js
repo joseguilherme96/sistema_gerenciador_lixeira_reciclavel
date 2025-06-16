@@ -1,3 +1,5 @@
+import { post } from './main.service'
+
 const { VITE_API_CADASTRAR_GRUPO_LIXEIRA_PONTO_LIXO_LIXEIRA } = import.meta.env
 
 import { corLixeira } from '../services/cor.lixeira.service'
@@ -14,33 +16,14 @@ export async function cadastrarGrupoPontoLixoLixeira(form) {
 
     })
 
-    try {
+    const retorno = await post({
+        enderecoAPI: VITE_API_CADASTRAR_GRUPO_LIXEIRA_PONTO_LIXO_LIXEIRA,
+        body: form
+    })
 
-        const retornoHeader = await fetch(VITE_API_CADASTRAR_GRUPO_LIXEIRA_PONTO_LIXO_LIXEIRA, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(form)
-        })
+    if (retorno) {
 
-        const retornoBody = await retornoHeader.json();
-
-        if (retornoHeader.status !== 201) {
-
-            throw new Error(retornoBody.message)
-
-        }
-
-        alert(retornoBody.message)
-        return retornoBody;
-
-
-    } catch (e) {
-
-        alert(e)
-        return false;
+        return retorno.body
 
     }
 

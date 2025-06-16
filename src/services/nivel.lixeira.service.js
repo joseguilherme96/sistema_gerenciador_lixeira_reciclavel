@@ -1,3 +1,4 @@
+import { put } from "./main.service"
 const { VITE_API_ATUALIZAR_LIXEIRA } = import.meta.env
 
 export const niveisLixeira = [
@@ -10,34 +11,17 @@ export const niveisLixeira = [
 
 export async function atualizarNivelLixeira(lixeira) {
 
-    try {
+    const retorno = put({
+        enderecoAPI: `${VITE_API_ATUALIZAR_LIXEIRA}`,
+        method: 'PUT',
+        body: lixeira
+    })
 
-        const retorno = await fetch(`${VITE_API_ATUALIZAR_LIXEIRA}`, {
-            method: 'PUT',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(lixeira)
-        })
+    if (retorno) {
 
-        const retornoBody = await retorno.json()
-
-        if (retorno.status !== 200) {
-
-            throw new Error(retorno.message)
-
-        }
-
-        alert(retornoBody.message)
-        return retornoBody;
-
-
-    } catch (e) {
-
-        alert(e)
-        return false
-
+        return retorno.body
     }
+
+    return false
 
 }
