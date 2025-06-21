@@ -57,5 +57,10 @@ const entrar = async () => {
             </v-row>
         </v-form>
     </v-container>
+    <v-row class="d-flex flex-column align-center mb-5 mt-5" style="color: rgb(94, 93, 93);">
+        <v-col lg="7" cols="12" sm="12">
+            Sistema Gerenciador de Lixeiras Recicláveis Integrado com Microcontrolador ESP32
+        </v-col>
+    </v-row>
 
 </template>

@@ -7,6 +7,7 @@ from flask_jwt_extended import create_access_token
 
 login_blueprint = Blueprint('login',__name__)
 
+## Está função é uma validação temporaria apenas para finalizar o frontend com autenticação com JWT, mas posteriormente será feito consulta valida do usuário no banco de dados 
 @login_blueprint.route('/login',methods=["POST"])
 def login():
 
