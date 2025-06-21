@@ -1,4 +1,5 @@
 <script setup lang="js">
+
 import { ref } from 'vue'
 
 const items = ref([
@@ -46,5 +47,6 @@ a:hover {
     width: 100%;
     max-width: 2000px;
     margin-bottom: 10px;
+    background-color: rgb(238, 238, 238)
 }
 </style>

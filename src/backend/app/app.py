@@ -41,7 +41,7 @@ app = Flask(__name__)
 
 # Configuração SQLALCHEMY/Banco de dados
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
-app.config["JWT_SECRET_KEY"] = "nd838***VX||||||xssw9"  # Change this!
+app.config["JWT_SECRET_KEY"] = "nd838***VX||||||xssw9" 
 
 CORS(app, origins = os.getenv('ORIGENS_PERMITIDAS').split(',')) # Permite URL que está sendo executada o front-end
 

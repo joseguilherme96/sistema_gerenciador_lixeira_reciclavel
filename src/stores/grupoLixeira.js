@@ -3,7 +3,6 @@ import { defineStore } from 'pinia'
 
 import { getGrupoLixeira } from '../services/grupo.lixeira.service'
 
-
 const estadoInicial = {
 
     id_grupo_lixeira: '',
@@ -41,15 +40,13 @@ export const useGrupoLixeiraStore = defineStore('grupo_lixeira', {
 
         async carregarLista() {
 
-            const grupoLixeira = await getGrupoLixeira()
+            await getGrupoLixeira().then((res) => {
 
-            if (grupoLixeira) {
-
-                this.lista = grupoLixeira
-
+                this.lista = res.data
                 this.lista.sort((a, b) => new Date(b.id_grupo_lixeira) - new Date(a.id_grupo_lixeira))
 
-            }
+            }).catch(e => console.log)
+
 
         },
 

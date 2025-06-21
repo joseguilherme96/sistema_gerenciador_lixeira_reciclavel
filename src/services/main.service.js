@@ -1,8 +1,9 @@
-const token = localStorage.getItem('token');
+//Será removido está arquivo e substituido requisições com axios..
+
 const headers = {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
-    'Authorization': `Bearer ${token}`
+    'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MDUyNjA1MSwianRpIjoiMTIyYTdiMDAtN2EzMi00NWU0LWIwOWEtNDhmNzAwMmM5NDM0IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImRlZmF1bHQiLCJuYmYiOjE3NTA1MjYwNTEsImNzcmYiOiI4NDk0M2VlMC02ODA2LTQ2ZjEtYTE4Mi03ZGJjODcyMWZiY2QiLCJleHAiOjE3NTA1MjY5NTF9.AsHtgk1v3Qu4XcVXiZ77J6UXYNYgzKjeTIwkXPP2QWY`
 }
 
 export async function validarResposta(retorno) {

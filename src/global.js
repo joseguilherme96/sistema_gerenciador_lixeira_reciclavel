@@ -1,0 +1,1 @@
+export const userKey = '__gereciador_lixeira_reciclavel_user'

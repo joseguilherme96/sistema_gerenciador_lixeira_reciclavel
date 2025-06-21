@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import GrupoLixeiraView from '@/views/GrupoLixeiraView.vue';
 import InformarStatusLixeira from '@/views/InformarStatusLixeira.vue';
+import LoginView from '@/views/LoginView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -28,6 +29,11 @@ const router = createRouter({
       path: '/informar-status-lixeira/:id',
       name: 'informar-status-lixeira',
       component: InformarStatusLixeira
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: LoginView
     }
   ],
 })
