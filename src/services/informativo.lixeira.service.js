@@ -1,4 +1,4 @@
-import { post } from "./main.service";
+import axios from "axios";
 
 const {
 
@@ -10,16 +10,11 @@ const {
 export async function getInformativoLixeiraPorPontoLixoId(informativoLixeiraStore, ponto_lixo_id) {
 
 
-    const retorno = await post({
+    const retorno = await axios.post(VITE_API_INFORMATIVO_LIXEIRA, { ponto_lixo_id })
 
-        enderecoAPI: `${VITE_API_INFORMATIVO_LIXEIRA}`,
-        body: { ponto_lixo_id },
+    if (retorno.status == 200) {
 
-    })
-
-    if (retorno) {
-
-        informativoLixeiraStore().carregarTodosInformativos(retorno.body);
+        informativoLixeiraStore().carregarTodosInformativos(retorno.data);
         informativoLixeiraStore().ordernarPorOrdemDecrescente()
 
         if (retorno.status == 404) {
@@ -37,17 +32,7 @@ export async function getInformativoLixeiraPorPontoLixoId(informativoLixeiraStor
 
 export async function cadastrarInformativoLixeira(informativo) {
 
-    const retorno = await post({
-
-        enderecoAPI: `${VITE_API_CADASTRAR_INFORMATIVO_LIXEIRA}`,
-        body: informativo
-    })
-
-    if (retorno) {
-
-        return retorno.body
-
-    }
+    return await axios.post(VITE_API_CADASTRAR_INFORMATIVO_LIXEIRA, informativo)
 
 }
 

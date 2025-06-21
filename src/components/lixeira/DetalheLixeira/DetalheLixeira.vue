@@ -58,13 +58,11 @@ watchEffect(() => {
         </v-col>
 
         <v-col cols="12" sm="4">
-            <v-row class="justify-center">
-                <v-card-title>Ponto Lixo ID</v-card-title>
-                <v-card-subtitle> {{ lixeira.ponto_lixo_id }}</v-card-subtitle>
-                <QRCodeLixeira :configuracaoQRCode="lixeira.configuracaoQRCode" v-if="lixeira.configuracaoQRCode">
-                </QRCodeLixeira>
+            <v-card-title>Ponto Lixo ID</v-card-title>
+            <v-card-subtitle> {{ lixeira.ponto_lixo_id }}</v-card-subtitle>
+            <QRCodeLixeira :configuracaoQRCode="lixeira.configuracaoQRCode" v-if="lixeira.configuracaoQRCode">
+            </QRCodeLixeira>
 
-            </v-row>
         </v-col>
     </v-row>
 

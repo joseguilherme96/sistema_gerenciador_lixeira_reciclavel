@@ -42,45 +42,39 @@ export const useLixeiraStore = defineStore('lixeira', {
 
         async carregarListaLixeira(where) {
 
-            const lixeiras = await getLixeira(where)
+            await getLixeira(where).then(res => {
 
-            if (lixeiras) {
+                this.listaLixeira = res.data
 
-                this.listaLixeira = lixeiras
-
-            }
+            })
 
         },
 
         async carregarLixeira(where) {
 
-            const lixeiras = await getLixeira(where)
+            await getLixeira(where).then(res => {
 
-            if (lixeiras) {
+                this.listaLixeira = res.data[0]
 
-                this.lixeira = lixeiras[0]
-
-            }
+            })
 
         },
 
         setLixeira(lixeira) {
 
+            console.log(lixeira)
             this.lixeira = lixeira
 
         },
 
         async atualizarNivelLixeira(dados) {
 
-            const lixeira = await atualizarNivelLixeira(dados);
+            await atualizarNivelLixeira(dados).then(resp => {
 
-            if (lixeira) {
+                this.listaLixeira = this.listaLixeira.filter((item) => item.id_lixeira !== resp.data.dados.id_lixeira)
+                this.addLixeira(resp.data.dados)
 
-                this.listaLixeira = this.listaLixeira.filter((item) => item.id_lixeira !== lixeira.dados.id_lixeira)
-                this.addLixeira(lixeira)
-
-            }
-
+            })
         }
 
     }

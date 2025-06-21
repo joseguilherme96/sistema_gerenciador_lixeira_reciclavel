@@ -10,19 +10,6 @@ export async function getGrupoLixeira() {
 
 export async function criarGrupoLixeira(GrupoLixeira) {
 
-
-    const retorno = await post({
-
-        enderecoAPI: VITE_API_CADASTRAR_GRUPO_LIXEIRA,
-        body: GrupoLixeira
-
-    })
-
-    if (retorno) {
-
-
-        return retorno.body
-
-    }
+    return await axios.post(VITE_API_GRUPO_LIXEIRA, GrupoLixeira)
 
 }

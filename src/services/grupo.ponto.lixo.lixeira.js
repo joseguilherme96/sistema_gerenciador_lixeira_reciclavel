@@ -1,4 +1,4 @@
-import { post } from './main.service'
+import axios from 'axios'
 
 const { VITE_API_CADASTRAR_GRUPO_LIXEIRA_PONTO_LIXO_LIXEIRA } = import.meta.env
 
@@ -16,16 +16,6 @@ export async function cadastrarGrupoPontoLixoLixeira(form) {
 
     })
 
-    const retorno = await post({
-        enderecoAPI: VITE_API_CADASTRAR_GRUPO_LIXEIRA_PONTO_LIXO_LIXEIRA,
-        body: form
-    })
-
-    if (retorno) {
-
-        return retorno.body
-
-    }
-
+    return await axios.post(VITE_API_CADASTRAR_GRUPO_LIXEIRA_PONTO_LIXO_LIXEIRA, form)
 
 }

@@ -10,7 +10,7 @@ import { useRouter } from 'vue-router'
 import { useUserStore } from "@/stores/user.js"
 
 // Global
-import { userKey } from '@/global.js'
+import { userKey, exibirMensagemErro } from '@/global.js'
 
 
 const router = useRouter()
@@ -34,7 +34,7 @@ const entrar = async () => {
             router.push({ path: '/about' })
 
         })
-        .catch(e => console.log(e))
+        .catch(exibirMensagemErro)
 }
 </script>
 

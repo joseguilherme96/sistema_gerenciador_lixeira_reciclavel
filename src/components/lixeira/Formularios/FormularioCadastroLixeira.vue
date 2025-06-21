@@ -22,6 +22,9 @@ import { useCidadeStore } from '@/stores/cidade'
 // Icones
 import { mdiAccount, mdiAccountPlus, mdiDatabase, mdiPlus, mdiTruck } from '@mdi/js'
 
+//Global
+import { exibirMensagemErro } from '@/global.js'
+
 
 //Gerenciadores de estado
 const estados = ref(useEstadoStore().estados)
@@ -65,16 +68,16 @@ watch(() => grupoLixeira.cep, async (cep) => {
 
         let cepLimpo = cep.replace(/[^0-9]/g, '')
 
-        const retorno = await getEnderecoPorCep(cepLimpo)
+        await getEnderecoPorCep(cepLimpo)
+            .then(res => {
 
-        if (retorno) {
+                grupoLixeira.endereco = res.data.street
+                grupoLixeira.bairro = res.data.neighborhood
+                grupoLixeira.cidade = res.data.city
+                grupoLixeira.estado = res.data.state
 
-            grupoLixeira.endereco = retorno.street
-            grupoLixeira.bairro = retorno.neighborhood
-            grupoLixeira.cidade = retorno.city
-            grupoLixeira.estado = retorno.state
-
-        }
+            })
+            .catch(exibirMensagemErro)
 
     }
 

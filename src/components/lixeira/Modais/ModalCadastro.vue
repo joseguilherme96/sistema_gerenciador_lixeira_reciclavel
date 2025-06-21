@@ -11,6 +11,9 @@ import { cadastrarGrupoPontoLixoLixeira } from '../../../services/grupo.ponto.li
 import { useGrupoLixeiraStore } from '@/stores/grupoLixeira.js'
 import { useLixeiraStore } from '@/stores/lixeira.js'
 
+//Global
+import { exibirMensagemErro, exibirMensagemSucesso } from '@/global.js'
+
 const useGrupoLixeira = useGrupoLixeiraStore()
 const useLixeira = useLixeiraStore()
 
@@ -22,15 +25,15 @@ async function cadastrarGrupoLixeiraLixeira() {
 
     const formGrupoLixeiraLixeiras = { lixeiras: useLixeira.lixeiras, ...useGrupoLixeira.grupoLixeira }
 
-    const retorno = await cadastrarGrupoPontoLixoLixeira(formGrupoLixeiraLixeiras);
+    await cadastrarGrupoPontoLixoLixeira(formGrupoLixeiraLixeiras)
+        .then(res => {
 
-    if (retorno) {
+            useGrupoLixeira.addGrupo(res.data.dados_grupo_criado)
+            console.log(res.data)
+            exibirMensagemSucesso(res)
 
-        useGrupoLixeira.addGrupo(retorno.dados_grupo_criado)
-
-    }
-
-
+        })
+        .catch(exibirMensagemErro)
 }
 
 </script>

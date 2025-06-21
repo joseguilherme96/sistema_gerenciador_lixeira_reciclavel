@@ -1,4 +1,4 @@
-import { get } from "./main.service"
+import axios from "axios";
 
 const {
 
@@ -11,15 +11,12 @@ const {
 
 export async function getEstados(useEstadoStore) {
 
-    const retorno = await get({
+    const retorno = await axios.get(VITE_API_ESTADO)
 
-        enderecoAPI: VITE_API_ESTADO
+    if (retorno.status == 200) {
 
-    })
-
-    if (retorno) {
-
-        useEstadoStore().addEstado(retorno.body.map((linha) => linha.estado))
+        useEstadoStore().addEstado(retorno.data.map((linha) => linha.estado))
+        return true;
 
     }
 
@@ -29,16 +26,14 @@ export async function getEstados(useEstadoStore) {
 
 export async function getCidades(useCidadeStore) {
 
-    const retorno = await get({
+    const retorno = await axios.get(VITE_API_CIDADE)
 
-        enderecoAPI: VITE_API_CIDADE
+    if (retorno.status == 200) {
 
-    })
-
-    if (retorno) {
-
-        useCidadeStore().addCidade(retorno.body.map((linha) => linha.nome))
+        useCidadeStore().addCidade(retorno.data.map((linha) => linha.nome))
         useCidadeStore().cidades.sort()
+
+        return true;
 
     }
 
@@ -48,17 +43,6 @@ export async function getCidades(useCidadeStore) {
 
 export async function getEnderecoPorCep(cep) {
 
-    const retorno = await get({
-
-        enderecoAPI: `${VITE_API_ENDERECO_POR_CEP}/${cep}`
-
-    })
-
-    if (retorno) {
-
-        return retorno.body
-
-    }
-
+    return await axios.get(`${VITE_API_ENDERECO_POR_CEP}/${cep}`)
 
 }

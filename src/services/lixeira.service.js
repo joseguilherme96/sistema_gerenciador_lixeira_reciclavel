@@ -1,6 +1,6 @@
-import { post } from './main.service.js'
 import { ref } from 'vue'
 import { lixeiraModel } from '../components/lixeira/lixeira.model.js'
+import axios from 'axios'
 
 const {
     VITE_API_GRUPO_LIXEIRA,
@@ -57,19 +57,7 @@ export async function cadastrarLixeira(lixeiras) {
 
 export async function getLixeira(data) {
 
-    const retorno = await post({
-
-        enderecoAPI: `${VITE_API_LIXEIRA}`,
-        body: data,
-
-    })
-
-    if (retorno) {
-
-        return retorno.body
-    }
-
-    return false
+    return await axios.post(VITE_API_LIXEIRA, data)
 
 }
 

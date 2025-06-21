@@ -1,4 +1,4 @@
-import { put } from "./main.service"
+import axios from "axios"
 const { VITE_API_ATUALIZAR_LIXEIRA } = import.meta.env
 
 export const niveisLixeira = [
@@ -11,17 +11,6 @@ export const niveisLixeira = [
 
 export async function atualizarNivelLixeira(lixeira) {
 
-    const retorno = put({
-        enderecoAPI: `${VITE_API_ATUALIZAR_LIXEIRA}`,
-        method: 'PUT',
-        body: lixeira
-    })
-
-    if (retorno) {
-
-        return retorno.body
-    }
-
-    return false
+    return axios.put(VITE_API_ATUALIZAR_LIXEIRA, lixeira)
 
 }

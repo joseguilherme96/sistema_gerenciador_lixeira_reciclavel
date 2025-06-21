@@ -2,6 +2,7 @@ import { ref } from 'vue'
 import { defineStore } from 'pinia'
 
 import { cadastrarInformativoLixeira } from '../services/informativo.lixeira.service.js'
+import { exibirMensagemErro, exibirMensagemSucesso } from '@/global.js'
 
 export const useInformativoLixeiraStore = defineStore('informativo_lixeira', {
 
@@ -39,8 +40,13 @@ export const useInformativoLixeiraStore = defineStore('informativo_lixeira', {
 
         async cadastrarInformativo(informativoLixeira) {
 
+            await cadastrarInformativoLixeira(informativoLixeira)
+                .then(res => {
 
-            const retorno = await cadastrarInformativoLixeira(informativoLixeira)
+                    exibirMensagemSucesso(res)
+
+
+                }).catch(exibirMensagemErro)
 
         }
 
