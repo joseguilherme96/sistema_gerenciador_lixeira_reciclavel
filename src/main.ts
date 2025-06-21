@@ -19,6 +19,9 @@ import router from './router'
 // Translations provided by Vuetify
 import { pt } from 'vuetify/locale'
 
+//Config
+import './config/interceptacao.axios'
+
 const app = createApp(App)
 
 app.use(createPinia())
