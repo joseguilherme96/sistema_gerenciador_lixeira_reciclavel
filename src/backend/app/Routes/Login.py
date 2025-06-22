@@ -21,7 +21,7 @@ def login():
 
         return jsonify({"message","Usuário ou senha incorretos !"}),401
     
-    token_acesso = create_access_token(identity=usuario,expires_delta=datetime.timedelta(minutes=1))
+    token_acesso = create_access_token(identity=usuario,expires_delta=datetime.timedelta(hours=1))
     return jsonify(token_acesso=token_acesso,usuario=usuario)
 
 @login_blueprint.route('/validar_token',methods=["POST"])

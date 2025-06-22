@@ -1,6 +1,7 @@
 <script setup lang="js">
 
 import { ref } from 'vue'
+import UserDropdown from './UserDropdown.vue';
 
 const items = ref([
     { title: 'Home', route: '/home' },
@@ -11,9 +12,12 @@ const items = ref([
 
 <template>
     <div class="menu">
-        <div v-for="item in items" :key="item.route" class="item">
-            <RouterLink :to="item.route">{{ item.title }}</RouterLink>
+        <div class="items">
+            <div v-for="item in items" :key="item.route" class="item">
+                <RouterLink :to="item.route">{{ item.title }}</RouterLink>
+            </div>
         </div>
+        <UserDropdown></UserDropdown>
     </div>
 </template>
 
@@ -25,7 +29,8 @@ a {
     display: block;
 }
 
-.item {
+.items {
+    display: flex;
     padding: 5px;
     transition: background-color 0.3s ease-in-out;
 }
@@ -43,7 +48,7 @@ a:hover {
 
 .menu {
     display: flex;
-    justify-content: start;
+    justify-content: space-between;
     width: 100%;
     max-width: 2000px;
     margin-bottom: 10px;
