@@ -1,4 +1,4 @@
-// O objetivo deste arquivo é inteceptar respostas 401(Acesso não autorizado) fazendo com que o usuário seja
+// O objetivo deste arquivo é interceptar respostas 401(Acesso não autorizado) fazendo com que o usuário seja
 // redirecionado para página de login
 
 import axios from "axios";

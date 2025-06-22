@@ -3,7 +3,7 @@
 import { ref } from 'vue'
 
 const items = ref([
-    { title: 'Home', route: '/' },
+    { title: 'Home', route: '/home' },
     { title: 'Sobre', route: '/about' },
     { title: 'Lixeiras', route: '/lixeiras' },
 ])

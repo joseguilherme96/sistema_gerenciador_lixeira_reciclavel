@@ -22,6 +22,9 @@ import { pt } from 'vuetify/locale'
 //Config
 import './config/interceptacao.axios'
 
+//Socket
+import './services/socket.service'
+
 const app = createApp(App)
 
 app.use(createPinia())
