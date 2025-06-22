@@ -12,7 +12,7 @@ O sistema identificando estas requisições, faz atualização do nivel da lixei
 - Permite calibração de altura da lixeira de acordo com cada lixeira que o ESP32 é implementado.
 - Exibe e registra todas as atividades que estão sendo executadas no dispositivo em um arquivo de log que é gerado no Microcontrolador.
 - Realiza leitura do nivel da lixeira.
-- Coleta dados, processamento e envio das informações para o sistema/servidor.
+- Coleta dados, processa e envia informações para o sistema/servidor.
 
 ## Passos que foram necessários para integrar o ESP32 ao sistema(API)
 

@@ -9,6 +9,7 @@ Este trabalho também teve objetivo de aprender e explorar um pouco mais a quest
 
 ## Funcionalidades do Sistema
 
+- Áreas exclusivas para usuários/empresas
 - Criação de grupos de lixeiras recicláveis
 - Criação de lixeiras para coletas de papel, metal, vidro, orgânico.....
 - Usuário pode informar niveis das lixeiras manualmente e também descrever o estado que as lixeiras se encontram.
@@ -33,6 +34,7 @@ Este trabalho também teve objetivo de aprender e explorar um pouco mais a quest
 - Retorno direcionado com principais Códigos de status de Respostas HTTP 400, 404, 405, 415 e 500.
 - Controle de versão do Banco de Dados com Flask-Migrate
 - API WEBSOCKET para comunicação em tempo real com Flask-SocketIO
+- Proteção de rotas com Flask-JWT-Extended’s, criação e validação de tokens JWT.
 
 ## Funcionalidades do Microcontrolador ESP32
 
@@ -41,7 +43,7 @@ Este trabalho também teve objetivo de aprender e explorar um pouco mais a quest
 - Permite calibração de altura da lixeira de acordo com cada lixeira que o ESP32 é implementado.
 - Exibe e registra todas as atividades que estão sendo executadas no dispositivo em um arquivo de log que é gerado no Microcontrolador.
 - Realiza leitura do nivel da lixeira.
-- Coleta dados, processamento e envio das informações para o sistema/servidor.
+- Coleta dados, processa e envia informações para o sistema/servidor.
 
 ## Arquitetura de comunicação entre clientes e APIs
 [![Arquitetura de comunicação entre clientes e APIs](src/assets/Arquitetura_de_comunicacentre_clientes_apis.png "Arquitetura de comunicação entre clientes e APIs")](src/assets/Arquitetura_de_comunicacentre_clientes_apis.png)

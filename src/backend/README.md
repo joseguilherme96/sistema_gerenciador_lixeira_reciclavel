@@ -5,6 +5,7 @@ Foi desenvolvido API em Flask para recebimento de dados do usuário que usa o si
 ### Principais Recursos que API oferece
 
 - Validação dos dados
+- APis Modulares com Blueprints
 - Persistência no banco de dados com Flask-SQLAchemy
 - Controle de Transações com os principais comandos BEGIN, COMMIT e ROLLBACK.
 - Acompanhamento de atividade dos Microcontroladores ESP32
@@ -12,6 +13,7 @@ Foi desenvolvido API em Flask para recebimento de dados do usuário que usa o si
 - Retorno direcionado com principais Códigos de status de Respostas HTTP 400, 404, 405, 415 e 500.
 - Controle de versão do Banco de Dados com Flask-Migrate
 - API WEBSOCKET para comunicação em tempo real com Flask-SocketIO
+- Proteção de rotas com Flask-JWT-Extended’s, criação e validação de tokens JWT.
 
 
 ## Instalação
