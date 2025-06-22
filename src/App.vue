@@ -19,7 +19,7 @@ const { VITE_API_VALIDAR_TOKEN } = import.meta.env
 // Modulos
 import { storeToRefs } from 'pinia';
 import { RouterView } from 'vue-router'
-import { onBeforeMount, onMounted, ref } from 'vue'
+import { ref } from 'vue'
 
 //Navegação programatica
 import { useRouter } from 'vue-router';
@@ -78,9 +78,33 @@ async function validarToken() {
 
 }
 
-onBeforeMount(async () => {
+//Verifica se a rota é publica
+function isRoutePublic(record) {
+
+  return record.meta.routePublic ? true : false
+
+}
+
+//Adiciona proteção de navegação antes da mudança de página de uma rota para outra verificando se a rota é publica ou privada
+router.beforeEach(async (to, from, next) => {
+
+  if (to.matched.some(isRoutePublic)) {
+
+    next()
+    validandoToken.value = false
+    return
+
+  }
+
+  if (useUser.user) {
+
+    next()
+    return;
+
+  }
 
   await validarToken()
+  next()
 
 })
 

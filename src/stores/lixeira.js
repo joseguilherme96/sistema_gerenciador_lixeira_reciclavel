@@ -54,7 +54,7 @@ export const useLixeiraStore = defineStore('lixeira', {
 
             await getLixeira(where).then(res => {
 
-                this.listaLixeira = res.data[0]
+                this.lixeira = res.data[0]
 
             })
 

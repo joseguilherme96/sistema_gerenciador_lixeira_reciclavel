@@ -10,6 +10,7 @@ const router = createRouter({
     {
       path: '/home',
       name: 'home',
+      meta: { routePublic: true },
       component: HomeView,
     },
     {
@@ -28,6 +29,7 @@ const router = createRouter({
     {
       path: '/informar-status-lixeira/:id',
       name: 'informar-status-lixeira',
+      meta: { routePublic: true },
       component: InformarStatusLixeira
     },
     {

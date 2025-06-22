@@ -129,7 +129,6 @@ def cadastrar_lixeira(data = [], chamada_interna_api = False):
             return jsonify({'message':str(e)}),500
         
 @lixeira.route("/get_lixeira",methods=["POST"])
-@jwt_required()
 def get_lixeira():
 
     lixeiras = []
