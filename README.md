@@ -51,6 +51,9 @@ Este trabalho também teve objetivo de aprender e explorar um pouco mais a quest
 ## MER - Modelo Entidade Relacionamento
 [![Modelo Entidade Relacionamento](src/assets/mer_modelo_entidade_relacionamento.png "Modelo Entidade Relacionamento")](src/assets/mer_modelo_entidade_relacionamento.png)
 
+## BMC - Modelo de Negócio 
+[![Modelo de Negócio](src/assets/bmc.png "Modelo de Negócio")](src/assets/bmc.png)
+
 
 # Imagens do projeto
 
