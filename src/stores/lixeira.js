@@ -75,6 +75,13 @@ export const useLixeiraStore = defineStore('lixeira', {
                 this.addLixeira(resp.data.dados)
 
             })
+        },
+
+        limparModelLixeira(index) {
+
+            this.lixeiras[index] = { ...estadoInicial }
+            this.lixeiras[index].exibirBotaoAdicionarLixeira = true
+
         }
 
     }

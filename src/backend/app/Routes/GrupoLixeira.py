@@ -10,83 +10,136 @@ from flask_jwt_extended import jwt_required
 # e empacota varias rotas para depois acoplar a instancia principal do flask no arquivo app.py
 grupo_lixeira = Blueprint('grupo_lixeira', __name__)
 
+
+# Sub_filtro para capacidade_total_lixo, nivel_lixeira_por_grupo_menor_igual_que, nivel_lixeira_por_grupo_igual_que e nivel_lixeira_por_grupo_igual_maior_que
+# Após calculo da soma da capacidade total e media nivel lixo por grupo
+def sub_filtro_grupo_pos_calculo(grupo_lixeiras,data):
+
+    resultado_sub_filtro_grupo_lixeiras = []
+    id_grupo_lixeira_inserido_por_ultimo = None
+
+    def adicionar_resultado_sub_filtro_grupo_lixeiras(lixeira):
+
+        if id_grupo_lixeira_inserido_por_ultimo != lixeira["id_grupo_lixeira"]:
+
+            resultado_sub_filtro_grupo_lixeiras.append(lixeira)
+            return lixeira["id_grupo_lixeira"]
+
+    # Sub Filtro Grupo Lixeiras
+    for grupo in grupo_lixeiras:
+
+        if data.get('capacidade'):
+
+            if grupo["capacidade_total_lixo"] == int(data['capacidade']):
+
+                id_grupo_lixeira_inserido_por_ultimo = adicionar_resultado_sub_filtro_grupo_lixeiras(grupo)
+
+        if data.get('nivel_lixeira_por_grupo_menor_igual_que'):
+
+            if int(grupo["nivel_lixeira"]) <= int(data['nivel_lixeira_por_grupo_menor_igual_que'].split("%")[0]):
+
+                id_grupo_lixeira_inserido_por_ultimo = adicionar_resultado_sub_filtro_grupo_lixeiras(grupo)
+            
+        if data.get('nivel_lixeira_por_grupo_igual_que'):
+
+            if int(grupo["nivel_lixeira"]) == int(data['nivel_lixeira_por_grupo_igual_que'].split("%")[0]):
+
+                id_grupo_lixeira_inserido_por_ultimo = adicionar_resultado_sub_filtro_grupo_lixeiras(grupo)
+
+        if data.get('nivel_lixeira_por_grupo_igual_maior_que'):
+
+            if int(grupo["nivel_lixeira"]) >= int(data['nivel_lixeira_por_grupo_igual_maior_que'].split("%")[0]):
+
+                id_grupo_lixeira_inserido_por_ultimo = adicionar_resultado_sub_filtro_grupo_lixeiras(grupo)
+
+    return resultado_sub_filtro_grupo_lixeiras
+
 @grupo_lixeira.route('/grupo_lixeira', methods=['POST'])
 @jwt_required()
 def select_grupo_lixeira():
 
-    lixeiras = []
-    where = []
+    try:
 
-    data = request.get_json()
+        grupo_lixeiras = []
+        where = []
 
-    if data.get('grupo_lixeira_id'):
+        data = request.get_json()
 
-        where.append({'grupo_lixeira_id':data['grupo_lixeira_id']})
+        if data.get('grupo_lixeira_id'):
 
-    if data.get('nome'):
+            where.append({'grupo_lixeira_id':data['grupo_lixeira_id']})
 
-        where.append({'nome':data['nome']})
+        if data.get('nome'):
 
-    if data.get('descricao'):
+            where.append({'nome':data['nome']})
 
-        where.append({'descricao':data['descricao']})
+        if data.get('descricao'):
 
-    if data.get('logradouro'):
+            where.append({'descricao':data['descricao']})
 
-        where.append({'logradouro':data['logradouro']})
+        if data.get('logradouro'):
 
-    if data.get('cidade'):
+            where.append({'logradouro':data['logradouro']})
 
-        where.append({'cidade':data['cidade']})
+        if data.get('cidade'):
+
+            where.append({'cidade':data['cidade']})
+        
+        if data.get('cep'):
+
+            where.append({'cep':data['cep']})
+
+        if data.get('bairro'):
+
+            where.append({'bairro':data['bairro']})
+
+        if data.get('estado'):
+
+            where.append({'estado':data['estado']})
+
+        if data.get('uf'):
+
+            where.append({'uf':data['uf']})
+
+        if data.get('data'):
+
+            where.append({'data':data['data']})
+
+        if data.get('hora'):
+
+            where.append({'hora':data['hora']})
+
+        for lixeira in GrupoLixeira.select(where):
+
+            grupo_id,media_nivel_lixeira_por_grupo = Lixeira.calcular_media_nivel_lixo_por_grupo([{'grupo_lixeira_id':lixeira.GrupoLixeira.id_grupo_lixeira}])[0]
+            grupo_id,soma_capacidade_lixeira_por_grupo = Lixeira.calcular_soma_capacidade_total_armazenamento_de_lixo_por_grupo([{'grupo_lixeira_id':lixeira.GrupoLixeira.id_grupo_lixeira}])[0]
+
+            dados_lixeira = {
+
+                "id_grupo_lixeira":lixeira.GrupoLixeira.id_grupo_lixeira,
+                "nome":lixeira.GrupoLixeira.nome,
+                "descricao":lixeira.GrupoLixeira.descricao,
+                "nivel_lixeira": math.ceil(media_nivel_lixeira_por_grupo),
+                "capacidade_total_lixo": math.ceil(soma_capacidade_lixeira_por_grupo),
+                "cep":lixeira.GrupoLixeira.cep,
+                "endereco": lixeira.GrupoLixeira.endereco,
+                "bairro":lixeira.GrupoLixeira.bairro,
+                "cidade":lixeira.GrupoLixeira.cidade,
+                "estado":lixeira.GrupoLixeira.estado,
+                "uf":lixeira.GrupoLixeira.uf,
+                "data": datetime.strftime(lixeira.GrupoLixeira.data, "%d/%m/%Y"),
+                "hora": time.strftime(lixeira.GrupoLixeira.hora, "%H:%M:%S")
+            }
+
+            grupo_lixeiras.append(dados_lixeira)
+
+        sub_filtro_grupo_lixeiras = sub_filtro_grupo_pos_calculo(grupo_lixeiras, data)
+        
+        return jsonify(sub_filtro_grupo_lixeiras if sub_filtro_grupo_lixeiras else grupo_lixeiras),200
     
-    if data.get('cep'):
+    except Exception as e:
 
-        where.append({'cep':data['cep']})
-
-    if data.get('bairro'):
-
-        where.append({'bairro':data['bairro']})
-
-    if data.get('estado'):
-
-        where.append({'estado':data['estado']})
-
-    if data.get('uf'):
-
-        where.append({'uf':data['uf']})
-
-    if data.get('data'):
-
-        where.append({'data':data['data']})
-
-    if data.get('hora'):
-
-        where.append({'hora':data['hora']})
-
-    for lixeira in GrupoLixeira.select(where):
-
-        grupo_id,media_nivel_lixeira_por_grupo = Lixeira.calcular_media_nivel_lixo_por_grupo([{'grupo_lixeira_id':lixeira.GrupoLixeira.id_grupo_lixeira}])[0]
-        grupo_id,soma_capacidade_lixeira_por_grupo = Lixeira.calcular_soma_capacidade_total_armazenamento_de_lixo_por_grupo([{'grupo_lixeira_id':lixeira.GrupoLixeira.id_grupo_lixeira}])[0]
-
-        dados_lixeira = {
-
-            "id_grupo_lixeira":lixeira.GrupoLixeira.id_grupo_lixeira,
-            "nome":lixeira.GrupoLixeira.nome,
-            "descricao":lixeira.GrupoLixeira.descricao,
-            "nivel_lixeira": math.ceil(media_nivel_lixeira_por_grupo),
-            "capacidade_total_lixo": math.ceil(soma_capacidade_lixeira_por_grupo),
-            "cep":lixeira.GrupoLixeira.cep,
-            "endereco": lixeira.GrupoLixeira.endereco,
-            "bairro":lixeira.GrupoLixeira.bairro,
-            "cidade":lixeira.GrupoLixeira.cidade,
-            "estado":lixeira.GrupoLixeira.estado,
-            "uf":lixeira.GrupoLixeira.uf,
-            "data": datetime.strftime(lixeira.GrupoLixeira.data, "%d/%m/%Y"),
-            "hora": time.strftime(lixeira.GrupoLixeira.hora, "%H:%M:%S")
-        }
-        lixeiras.append(dados_lixeira)
-
-    return jsonify(lixeiras),200
+        return jsonify({'message':str(e)}),500
 
 @grupo_lixeira.route('/cadastrar_grupo_lixeira',methods=['POST'])
 @jwt_required()

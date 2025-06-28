@@ -4,12 +4,13 @@
 import { ref, watch } from 'vue'
 
 // Serviços
-import { form, filtrarLixeiras, limparCampos } from '../../../services/lixeira.service'
 import { niveisLixeira } from '../../../services/nivel.lixeira.service'
 
 // Gerenciadores de Estado
 import { useEstadoStore } from '@/stores/estado'
 import { useCidadeStore } from '@/stores/cidade'
+import { useFiltroGrupoLixeiraStore } from '@/stores/filtro.js'
+import { storeToRefs } from 'pinia'
 
 
 const exibirCalendario = ref(false)
@@ -17,11 +18,20 @@ const dataSelecionada = ref(null)
 
 const estados = ref(useEstadoStore().estados)
 const cidades = ref(useCidadeStore().cidades)
-
+const useFiltroLixeiraGrupo = useFiltroGrupoLixeiraStore();
+const { filtro } = storeToRefs(useFiltroGrupoLixeiraStore())
+const { VITE_API_GRUPO_LIXEIRA } = import.meta.env
 
 function pesquisar() {
 
-    filtrarLixeiras(form.value)
+    useFiltroLixeiraGrupo.filtrar(VITE_API_GRUPO_LIXEIRA)
+
+}
+
+function limparCampos() {
+
+    useFiltroLixeiraGrupo.limparFiltro();
+
 
 }
 
@@ -31,7 +41,7 @@ watch(() => dataSelecionada.value, (newValue, oldvalue) => {
     if (newValue !== oldvalue) {
 
         let novaData = new Date(dataSelecionada.value)
-        form.value.data = novaData.toLocaleDateString('pt-BR', { timeZone: 'UTC' })
+        filtro.value.data = novaData.toLocaleDateString('pt-BR', { timeZone: 'UTC' })
     }
 
 })
@@ -54,36 +64,45 @@ watch(() => dataSelecionada.value, (newValue, oldvalue) => {
     </v-dialog>
     <v-row>
         <v-col cols="12" sm="2">
-            <v-text-field label="ID Lixeira" v-model="form.grupo_lixeira_id"></v-text-field>
+            <v-text-field label="ID Lixeira" v-model="filtro.grupo_lixeira_id"></v-text-field>
         </v-col>
         <v-col cols="12" sm="4">
-            <v-text-field label="Logradouro" v-model="form.endereco"></v-text-field>
+            <v-text-field label="Logradouro" v-model="filtro.logradouro"></v-text-field>
         </v-col>
         <v-col cols="12" sm="2">
-            <v-select label="Cidade" :items="cidades" v-model="form.cidade"></v-select>
+            <v-select label="Cidade" :items="cidades" v-model="filtro.cidade"></v-select>
         </v-col>
         <v-col cols="12" sm="2">
-            <v-text-field label="Cep" v-model="form.cep"></v-text-field>
+            <v-text-field label="Cep" v-model="filtro.cep"></v-text-field>
         </v-col>
         <v-col cols="12" sm="2">
-            <v-text-field label="Bairro" v-model="form.bairro"></v-text-field>
+            <v-text-field label="Bairro" v-model="filtro.bairro"></v-text-field>
         </v-col>
         <v-col cols="12" sm="2">
-            <v-select label="Estado" :items="estados" v-model="form.estado"></v-select>
+            <v-select label="Estado" :items="estados" v-model="filtro.estado"></v-select>
         </v-col>
         <v-col cols="12" sm="2">
-            <v-text-field label="Capacidade(L)" v-model="form.capacidade" type="number"></v-text-field>
+            <v-text-field label="Capacidade(L)" v-model="filtro.capacidade" type="number"></v-text-field>
         </v-col>
         <v-col cols="12" sm="3">
             <v-select label="Nivel Lixeira(menor/igual)"
                 :items="niveisLixeira.map((nivel) => nivel.descricaoComPorcentagem)"
-                v-model="form.nivel_lixeira"></v-select>
+                v-model="filtro.nivel_lixeira_por_grupo_menor_igual_que"></v-select>
+        </v-col>
+        <v-col cols="12" sm="3">
+            <v-select label="Nivel Lixeira(igual)" :items="niveisLixeira.map((nivel) => nivel.descricaoComPorcentagem)"
+                v-model="filtro.nivel_lixeira_por_grupo_igual_que"></v-select>
+        </v-col>
+        <v-col cols="12" sm="3">
+            <v-select label="Nivel Lixeira(igual/maior)"
+                :items="niveisLixeira.map((nivel) => nivel.descricaoComPorcentagem)"
+                v-model="filtro.nivel_lixeira_por_grupo_igual_maior_que"></v-select>
         </v-col>
         <v-col cols="12" sm="2">
-            <v-text-field label="Data" v-model="form.data" @click="exibirCalendario = true"></v-text-field>
+            <v-text-field label="Data" v-model="filtro.data" @click="exibirCalendario = true"></v-text-field>
         </v-col>
         <v-col cols="12" sm="2">
-            <v-text-field label="Hora" v-model="form.hora"></v-text-field>
+            <v-text-field label="Hora" v-model="filtro.hora"></v-text-field>
         </v-col>
     </v-row>
     <v-row class="d-flex justify-end">

@@ -54,51 +54,57 @@ class GrupoLixeira(db.Model):
 
     def select(where = []):
 
-        query = db.select(GrupoLixeira)
+        try:
 
-        for condicao in where:
+            query = db.select(GrupoLixeira)
 
-            if(condicao.get('grupo_lixeira_id')):
+            for condicao in where:
 
-                query = query.where(GrupoLixeira.id_grupo_lixeira == condicao['grupo_lixeira_id'])
+                if(condicao.get('grupo_lixeira_id')):
 
-            if(condicao.get('nome')):
+                    query = query.where(GrupoLixeira.id_grupo_lixeira == condicao['grupo_lixeira_id'])
 
-                query = query.where(GrupoLixeira.nome == condicao['nome'])
+                if(condicao.get('nome')):
 
-            if(condicao.get('descricao')):
+                    query = query.where(GrupoLixeira.nome == condicao['nome'])
 
-                query = query.where(GrupoLixeira.nome == condicao['descricao'])
+                if(condicao.get('descricao')):
 
-            if(condicao.get('logradouro')):
+                    query = query.where(GrupoLixeira.nome == condicao['descricao'])
 
-                query = query.where(GrupoLixeira.endereco == condicao['logradouro'])
+                if(condicao.get('logradouro')):
 
-            if(condicao.get('bairro')):
+                    query = query.where(GrupoLixeira.endereco == condicao['logradouro'])
 
-                query = query.where(GrupoLixeira.bairro == condicao['bairro'])
+                if(condicao.get('bairro')):
 
-            if(condicao.get('cidade')):
+                    query = query.where(GrupoLixeira.bairro == condicao['bairro'])
 
-                query = query.where(GrupoLixeira.cidade == condicao['cidade'])
+                if(condicao.get('cidade')):
 
-            if(condicao.get('estado')):
+                    query = query.where(GrupoLixeira.cidade == condicao['cidade'])
 
-                query = query.where(GrupoLixeira.estado == condicao['estado'])
+                if(condicao.get('estado')):
 
-            if(condicao.get('uf')):
+                    query = query.where(GrupoLixeira.estado == condicao['estado'])
 
-                query = query.where(GrupoLixeira.uf == condicao['uf'])
+                if(condicao.get('uf')):
 
-            if(condicao.get('data')):
+                    query = query.where(GrupoLixeira.uf == condicao['uf'])
 
-                query = query.where(GrupoLixeira.data == condicao['data'])
+                if(condicao.get('data')):
 
-            if(condicao.get('hora')):
+                    query = query.where(GrupoLixeira.data == datetime.strptime(condicao['data'], '%d/%m/%Y').date())
 
-                query = query.where(GrupoLixeira.hora == condicao['hora'])
+                if(condicao.get('hora')):
 
-        stmt = db.session.execute(query).all()
+                    query = query.where(GrupoLixeira.hora == condicao['hora'])
 
-        return stmt
+            stmt = db.session.execute(query).all()
+
+            return stmt
+
+        except Exception as e:
+            
+            raise # Raise levanta uma exceção
 

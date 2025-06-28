@@ -2,6 +2,7 @@
 
 // Vue
 import { onMounted, ref } from 'vue'
+import { storeToRefs } from 'pinia';
 
 // Componentes
 import BarraSuperior from '../components/lixeira/BarraSuperior/BarraSuperior.vue';
@@ -20,6 +21,9 @@ import { getCidades, getEstados } from '../services/endereco.service.js'
 // Gerenciadores de Estado
 import { useEstadoStore } from '@/stores/estado.js'
 import { useCidadeStore } from '@/stores/cidade.js'
+import { useFiltroGrupoLixeiraStore } from '@/stores/filtro.js'
+
+const { filtroEstaAberto } = storeToRefs(useFiltroGrupoLixeiraStore())
 
 
 onMounted(() => {
@@ -42,7 +46,6 @@ const modalDetalhesGrupoLixeira = ref({
 
 
 })
-const filtroEstaAberto = ref(false)
 
 function abrirFiltro() {
     filtroEstaAberto.value = !filtroEstaAberto.value

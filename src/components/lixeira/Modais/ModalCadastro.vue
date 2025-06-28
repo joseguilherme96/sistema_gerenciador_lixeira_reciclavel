@@ -4,7 +4,6 @@
 import FormularioCadastroLixeira from '../Formularios/FormularioCadastroLixeira.vue'
 
 //Serviços
-import { limparCampos } from '../../../services/lixeira.service'
 import { cadastrarGrupoPontoLixoLixeira } from '../../../services/grupo.ponto.lixo.lixeira.js'
 
 // Gerenciadores de estado
@@ -49,9 +48,6 @@ async function cadastrarGrupoLixeiraLixeira() {
                 <FormularioCadastroLixeira></FormularioCadastroLixeira>
 
                 <template v-slot:actions>
-                    <v-btn variant="flat" color="rgb(94, 93, 93)" @click="limparCampos()">
-                        Limpar Campos
-                    </v-btn>
                     <v-btn variant="flat" color="rgb(94, 93, 93)" text="CADASTRAR LIXEIRA"
                         @click="cadastrarGrupoLixeiraLixeira()"></v-btn>
                     <v-btn variant="flat" color="rgb(94, 93, 93)" text="Fechar" @click="data.exibir = false"></v-btn>

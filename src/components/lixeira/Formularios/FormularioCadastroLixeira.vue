@@ -31,6 +31,7 @@ const estados = ref(useEstadoStore().estados)
 const cidades = ref(useCidadeStore().cidades)
 const { grupoLixeira } = useGrupoLixeiraStore()
 const { lixeiras } = useLixeiraStore()
+const useLixeira = useLixeiraStore()
 
 const configuracaoTitulo = {
 
@@ -161,6 +162,10 @@ watch(() => grupoLixeira.cep, async (cep) => {
                     <v-text-field label="Observação" v-model="lixeira.observacao"></v-text-field>
                 </v-col>
                 <v-container class="d-flex justify-end">
+                    <v-btn variant="flat" color="rgb(94, 93, 93)" @click="useLixeira.limparModelLixeira(index)"
+                        class="mr-5">
+                        Limpar Campos
+                    </v-btn>
                     <v-btn color="rgb(94, 93, 93)" @click="criarEspacoParaArmazenamentoDaLixeira()"
                         v-if="lixeira.exibirBotaoAdicionarLixeira">
                         <svg-icon type="mdi" :path="mdiPlus"></svg-icon>

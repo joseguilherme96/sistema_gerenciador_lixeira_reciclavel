@@ -1,7 +1,7 @@
 <script setup lang="js">
 
 import { storeToRefs } from 'pinia'
-import { onMounted } from 'vue'
+import { onMounted, watch } from 'vue'
 
 // Icones
 import { mdiUpdate, mdiViewDashboardOutline } from '@mdi/js'
@@ -12,9 +12,11 @@ import BarraProgressoNivelLixeira from '../NivelLixeira/BarraProgressoNivelLixei
 //Gerenciadores de estado
 import { useGrupoLixeiraStore } from '@/stores/grupoLixeira.js'
 import { useLixeiraStore } from '@/stores/lixeira'
+import { useFiltroGrupoLixeiraStore } from '@/stores/filtro.js'
 
 const useGrupoLixeira = useGrupoLixeiraStore()
 const { lista } = storeToRefs(useGrupoLixeira)
+const { resultadoFiltro } = storeToRefs(useFiltroGrupoLixeiraStore())
 
 const useLixeira = useLixeiraStore()
 
@@ -30,7 +32,19 @@ const abrirModalLixeirasDoGrupoLixeiraSelecionado = async (grupoLixeiraId) => {
 
 onMounted(async () => {
 
-    useGrupoLixeira.carregarLista()
+    if (lista.value.length == 0) {
+
+        useGrupoLixeira.carregarLista()
+
+    }
+
+})
+
+
+//Fica monitorando os resultados da filtragem dos grupos de lixeiras
+watch(() => resultadoFiltro.value, (novoValor) => {
+
+    useGrupoLixeira.setGrupo(novoValor)
 
 })
 

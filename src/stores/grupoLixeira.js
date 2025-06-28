@@ -50,6 +50,18 @@ export const useGrupoLixeiraStore = defineStore('grupo_lixeira', {
 
         },
 
+        setGrupo(grupos) {
+
+            this.lista = grupos
+
+        },
+
+        limparModelGrupoLixeira() {
+
+            this.grupoLixeira = ref({ ...estadoInicial })
+
+        }
+
 
     }
 
