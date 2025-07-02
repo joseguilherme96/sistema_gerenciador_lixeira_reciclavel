@@ -6,6 +6,7 @@ const contexto = {
     state: () => ({
 
         filtro: {},
+        filtros: [],
         resultadoFiltro: [],
         filtroEstaAberto: false
 
@@ -25,6 +26,17 @@ const contexto = {
         limparFiltro() {
 
             this.filtro = {}
+        },
+
+        criarFiltros(filtros) {
+
+            this.filtros = filtros
+
+        },
+
+        abrirFecharFiltro() {
+
+            this.filtroEstaAberto = !this.filtroEstaAberto
         }
 
     }
@@ -32,3 +44,4 @@ const contexto = {
 }
 
 export const useFiltroGrupoLixeiraStore = defineStore('filtro-grupo-lixeira', contexto)
+export const useFiltroRelatorioLixeiraStore = defineStore('filtro-relatorio-lixeira', contexto)
