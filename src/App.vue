@@ -2,7 +2,7 @@
 
   <MenuNavegacao v-if="user"></MenuNavegacao>
 
-  <v-progress-circular v-if="validandoToken" color="green" indeterminate id="progress-circular"
+  <v-progress-circular v-if="validandoToken" color="rgb(165, 137, 94)" indeterminate id="progress-circular"
     size="100"></v-progress-circular>
   <v-container v-else>
 

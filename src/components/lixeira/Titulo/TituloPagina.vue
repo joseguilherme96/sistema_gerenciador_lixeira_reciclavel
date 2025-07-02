@@ -16,7 +16,7 @@ defineProps({
 
     <v-toolbar-title>
         <svg-icon type="mdi" :path="configuracaoTitulo.icone"></svg-icon>
-        <span>{{ configuracaoTitulo.nome }}</span>
+        <span style="color: var(--btn-text-color);">{{ configuracaoTitulo.nome }}</span>
     </v-toolbar-title>
 
 

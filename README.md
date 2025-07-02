@@ -72,6 +72,9 @@ Este trabalho também teve objetivo de aprender e explorar um pouco mais a quest
 ## Gráfico de acompanhamento dos níveis de lixo na lixeira em tempo real ao longo do tempo
 [![Tela de apresentação dos niveis de lixo reciclável de forma gráfica nas lixeiras ao longo do tempo](https://github.com/joseguilherme96/sistema_gerenciador_lixeira_reciclavel/blob/main/src/assets/grafico_de_acompanhamento_do_nivel_da_lixeira_reciclavel.png "Tela de apresentação dos niveis de lixo reciclável de forma gráfica nas lixeiras ao longo do tempo")](https://github.com/joseguilherme96/sistema_gerenciador_lixeira_reciclavel/blob/main/src/assets/grafico_de_acompanhamento_do_nivel_da_lixeira_reciclavel.png)
 
+## Relatório de acompanhamento dos niveis das lixeiras
+[![Relatório de acompanhamento dos niveis das lixeiras](src/assets/relatorio_lixeira_grupo.png "Relatório de acompanhamento dos niveis das lixeiras")](src/assets/relatorio_lixeira_grupo.png)
+
 ## Foto da instalação do Microcontrolador ESP32 na lixeira
 [![Lixeira integrada com microcontrolador ESP32](src/assets/lixeira_automatizada.jpg "Lixeira integrada com microcontrolador ESP32")](src/assets/lixeira_automatizada.jpg)
 

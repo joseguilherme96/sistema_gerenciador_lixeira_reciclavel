@@ -1,6 +1,8 @@
 from Models.ExtensionsModel import db
 from sqlalchemy import DateTime,Integer,String,Float,ForeignKey,Boolean
 from sqlalchemy.orm import mapped_column
+from Models.GrupoLixeiraModel import GrupoLixeira
+from Models.MaterialColetadoModel import MaterialColetado
 
 class Lixeira(db.Model):
 
@@ -128,5 +130,70 @@ class Lixeira(db.Model):
 
 
         result = db.session.execute(query).all()
+
+        return result
+    
+    def join_lixeira_grupo_lixeira(where = []):
+
+        query = db.select(Lixeira, GrupoLixeira,MaterialColetado).join(GrupoLixeira, Lixeira.grupo_lixeira_id == GrupoLixeira.id_grupo_lixeira).join(MaterialColetado,Lixeira.mat_colet_id == MaterialColetado.id_mat_colet)
+
+        try:
+
+            for condicao in where:
+
+                if condicao.get('lixeira_id'):
+
+                    query = query.where(Lixeira.id_lixeira == condicao['lixeira_id'])
+
+                if condicao.get('grupo_lixeira_id'):
+
+                    query = query.where(Lixeira.grupo_lixeira_id == condicao['grupo_lixeira_id'])
+
+                
+                if condicao.get('mat_colet_id'):
+
+                    query = query.where(MaterialColetado.id_mat_colet == condicao['mat_colet_id'])
+
+                if condicao.get('material_coletado'):
+
+                    query = query.where(MaterialColetado.nome == str(condicao['material_coletado']))
+
+                if condicao.get('capacidade'):
+
+                    query = query.where(Lixeira.capacidade == condicao['capacidade'])
+
+                if condicao.get('nivel_lixeira_menor_igual_que'):
+
+                    query = query.where(Lixeira.nivel_lixeira < condicao['nivel_lixeira_menor_igual_que'])
+
+                if condicao.get('nivel_lixeira_igual_que'):
+
+                    query = query.where(Lixeira.nivel_lixeira == condicao['nivel_lixeira_igual_que'])
+
+                if condicao.get('nivel_lixeira_maior_que'):
+
+                    query = query.where(Lixeira.nivel_lixeira > condicao['nivel_lixeira_maior_que'])
+
+                if condicao.get('endereco'):
+
+                    query = query.where(GrupoLixeira.endereco == condicao['endereco'])
+
+                if condicao.get('bairro'):
+
+                    query = query.where(GrupoLixeira.bairro == condicao['bairro'])
+
+                if condicao.get('cidade'):
+
+                    query = query.where(GrupoLixeira.cidade == condicao['cidade'])
+
+                if condicao.get('estado'):
+
+                    query = query.where(GrupoLixeira.estado == condicao['estado'])
+
+            result = db.session.execute(query).all()
+
+        except:
+
+            raise
 
         return result

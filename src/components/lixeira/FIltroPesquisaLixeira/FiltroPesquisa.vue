@@ -11,6 +11,7 @@ import { useEstadoStore } from '@/stores/estado'
 import { useCidadeStore } from '@/stores/cidade'
 import { useFiltroGrupoLixeiraStore } from '@/stores/filtro.js'
 import { storeToRefs } from 'pinia'
+import ButtonPadrao from '@/components/ButtonPadrao.vue'
 
 
 const exibirCalendario = ref(false)
@@ -107,14 +108,14 @@ watch(() => dataSelecionada.value, (newValue, oldvalue) => {
     </v-row>
     <v-row class="d-flex justify-end">
         <v-col cols="4" sm="2">
-            <v-btn color="primary" @click="limparCampos()">
+            <ButtonPadrao @click="limparCampos()">
                 Limpar Filtro
-            </v-btn>
+            </ButtonPadrao>
         </v-col>
         <v-col cols="4" sm="2">
-            <v-btn color="primary" @click="pesquisar()">
+            <ButtonPadrao @click="pesquisar()">
                 Pesquisar
-            </v-btn>
+            </ButtonPadrao>
         </v-col>
     </v-row>
 </template>

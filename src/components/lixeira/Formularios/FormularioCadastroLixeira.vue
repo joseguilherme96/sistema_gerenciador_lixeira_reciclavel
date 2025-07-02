@@ -2,6 +2,7 @@
 
 // Vue
 import { ref, watch } from 'vue'
+import { storeToRefs } from 'pinia'
 
 // Componentes
 import BarraSuperior from '../BarraSuperior/BarraSuperior.vue'
@@ -10,7 +11,7 @@ import TituloPagina from '../Titulo/TituloPagina.vue'
 // Serviços
 import { corLixeira } from '../../../services/cor.lixeira.service.js'
 import { niveisLixeira } from '../../../services/nivel.lixeira.service.js'
-import { materiaisReciclaveisComChaveValor } from '../../../services/materiais.reciclaveis.services.js'
+import { useMaterialReciclavelStore } from '@/stores/MaterialReciclavel.js'
 import { getEnderecoPorCep } from '../../../services/endereco.service'
 
 // Gerenciadores de estado
@@ -32,6 +33,7 @@ const cidades = ref(useCidadeStore().cidades)
 const { grupoLixeira } = useGrupoLixeiraStore()
 const { lixeiras } = useLixeiraStore()
 const useLixeira = useLixeiraStore()
+const { materiaisReciclaveis } = storeToRefs(useMaterialReciclavelStore())
 
 const configuracaoTitulo = {
 
@@ -88,7 +90,7 @@ watch(() => grupoLixeira.cep, async (cep) => {
 
 <template>
     <v-container>
-        <BarraSuperior>
+        <BarraSuperior style="background-color: var(--btn-bg-primary-color)">
 
             <template v-slot:titulo>
                 <TituloPagina :configuracaoTitulo="configuracaoTitulo"></TituloPagina>
@@ -127,7 +129,7 @@ watch(() => grupoLixeira.cep, async (cep) => {
             </v-col>
         </v-row>
 
-        <BarraSuperior>
+        <BarraSuperior style="background-color: var(--btn-bg-primary-color)">
 
             <template v-slot:titulo>
                 <TituloPagina :configuracaoTitulo="configuracaoTitulo1"></TituloPagina>
@@ -144,8 +146,7 @@ watch(() => grupoLixeira.cep, async (cep) => {
                     <v-text-field label="Descricao" v-model="lixeira.descricao"></v-text-field>
                 </v-col>
                 <v-col cols="4" sm="4">
-                    <v-select label="Material Coletado"
-                        :items="materiaisReciclaveisComChaveValor.map((material) => material.nome)"
+                    <v-select label="Material Coletado" :items="materiaisReciclaveis.map((material) => material.nome)"
                         v-model="lixeira.material"></v-select>
                 </v-col>
                 <v-col cols="4" sm="4">

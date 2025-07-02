@@ -19,6 +19,7 @@ import { getInformativoLixeiraPorPontoLixoId } from '../../../services/informati
 //Gerenciadores de estado
 import { useInformativoLixeiraStore } from '@/stores/informativoLixeira'
 import { useLixeiraStore } from '@/stores/lixeira'
+import ButtonPadrao from '@/components/ButtonPadrao.vue';
 
 const { listaLixeira, setLixeira } = useLixeiraStore()
 const { lixeira } = storeToRefs(useLixeiraStore())
@@ -104,7 +105,7 @@ const abrirGrafico = () => {
 
             <v-card>
 
-                <BarraSuperior>
+                <BarraSuperior style="background-color: var(--btn-bg-primary-color)">
 
                     <template v-slot:titulo>
 
@@ -137,37 +138,22 @@ const abrirGrafico = () => {
                 </div>
 
                 <template v-slot:actions>
-                    <v-row class="d-flex justify-center" style="width: 100%;">
-                        <v-col cols="4" sm="2" v-if="!exibirGrafico">
-                            <v-btn variant="flat" color="rgb(94, 93, 93)" text="ANTERIOR" @click="voltarPagina"
-                                class="ml-1"></v-btn>
-                        </v-col>
-                        <v-col cols="4" sm="2" v-if="!exibirGrafico">
-                            <v-btn variant="flat" color="rgb(94, 93, 93)" text="PRÓXIMO" @click="avancarPagina"
-                                class="ml-1"></v-btn>
-                        </v-col>
-                        <v-col cols="3" sm="2" v-if="!exibirGrafico">
-                            <v-btn variant="flat" color="rgb(94, 93, 93)" text="FECHAR" @click="data.exibir = false"
-                                class="ml-1"></v-btn>
-                        </v-col>
-                        <v-col sm="12">
-                            <v-row class="justify-end">
-                                <v-col cols="8" sm="4">
-                                    <RouterLink :to="`/informar-status-lixeira/${lixeira.id_lixeira}`"
-                                        v-if="lixeira.id_lixeira">
-                                        <v-btn variant="flat" color="rgb(94, 93, 93)" text="INFORMAR STATUS LIXEIRA"
-                                            class="ml-1"></v-btn>
-                                    </RouterLink>
-                                </v-col>
-                                <v-col cols="7" sm="3">
-                                    <v-btn variant="flat" color="rgb(94, 93, 93)" class="ml-1" text="VISUALIZAR GRÁfiCO"
-                                        @click="abrirGrafico()" v-if="!exibirGrafico"></v-btn>
-
-                                    <v-btn variant="flat" color="rgb(94, 93, 93)" class="ml-1" text="FECHAR GRÁFICO"
-                                        @click="exibirGrafico = false" v-else></v-btn>
-                                </v-col>
-                            </v-row>
-                        </v-col>
+                    <v-row class="d-flex justify-end mt-5 mb-5 mr-5" style="width: 100%;">
+                        <ButtonPadrao v-if="!exibirGrafico" color="rgb(94, 93, 93)" @click="voltarPagina" class="ml-1">
+                            ANTERIOR
+                        </ButtonPadrao>
+                        <ButtonPadrao v-if="!exibirGrafico" @click="avancarPagina" class="ml-1">PRÓXIMO</ButtonPadrao>
+                        <ButtonPadrao v-if="!exibirGrafico" @click="data.exibir = false" class="ml-1">FECHAR
+                        </ButtonPadrao>
+                        <RouterLink :to="`/informar-status-lixeira/${lixeira.id_lixeira}`"
+                            v-if="lixeira.id_lixeira && !exibirGrafico">
+                            <ButtonPadrao class="ml-1">INFORMATIVO LIXEIRA</ButtonPadrao>
+                        </RouterLink>
+                        <ButtonPadrao class="ml-1" @click="abrirGrafico()" v-if="!exibirGrafico">
+                            VISUALIZAR GRÁfiCO
+                        </ButtonPadrao>
+                        <ButtonPadrao class="ml-1" @click="exibirGrafico = false" v-else>FECHAR GRÁFICO
+                        </ButtonPadrao>
                     </v-row>
                 </template>
 

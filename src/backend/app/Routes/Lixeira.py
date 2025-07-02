@@ -209,4 +209,91 @@ def atualizar_nivel_lixeira():
     except Exception as e:
 
         return jsonify({'message':f'${str(e)}'})
+    
+
+@lixeira.route('/lixeira_grupo_lixeira',methods=['POST'])
+@jwt_required()
+def lixeira_grupo_lixeira():
+
+    try:
+
+        lixeira_grupo_lixeira =[]
+        where = []
+
+        data = request.get_json()
+
+        if data.get('lixeira_id'):
+
+            where.append({"lixeira_id":data['lixeira_id']})
+
+        if data.get('grupo_lixeira_id'):
+
+            where.append({"grupo_lixeira_id":data['grupo_lixeira_id']})
+
+        if data.get('mat_colet_id'):
+
+            where.append({"mat_colet_id":data['mat_colet_id']})
+
+        if data.get('material_coletado'):
+
+            where.append({"material_coletado":data['material_coletado']})
+
+        if data.get('capacidade'):
+
+            where.append({"capacidade":data['capacidade']})
+
+        if data.get('nivel_lixeira_menor_igual_que'):
+
+            where.append({"nivel_lixeira_menor_igual_que":data['nivel_lixeira_menor_igual_que']})
+
+        if data.get('nivel_lixeira_igual_que'):
+
+            where.append({"nivel_lixeira_igual_que":data['nivel_lixeira_igual_que']})
+
+        if data.get('nivel_lixeira_maior_que'):
+
+            where.append({"nivel_lixeira_maior_que":data['nivel_lixeira_maior_que']})
+        
+        if data.get('endereco'):
+
+            where.append({"endereco":data['endereco']})
+
+        if data.get('bairro'):
+
+            where.append({"endereco":data['bairro']})
+        
+        if data.get('cidade'):
+
+            where.append({"cidade":data['cidade']})
+
+        if data.get('estado'):
+
+            where.append({"estado":data['estado']})
+
+        for resultado_lixeira_grupo_lixeira in Lixeira.join_lixeira_grupo_lixeira(where):
+
+            resultado = {
+
+                "id_lixeira":resultado_lixeira_grupo_lixeira.Lixeira.id_lixeira,
+                "grupo_lixeira_id":resultado_lixeira_grupo_lixeira.Lixeira.grupo_lixeira_id,
+                "mat_colet_id":resultado_lixeira_grupo_lixeira.Lixeira.mat_colet_id,
+                "ponto_lixo_id":resultado_lixeira_grupo_lixeira.Lixeira.ponto_lixo_id,
+                "capacidade":resultado_lixeira_grupo_lixeira.Lixeira.capacidade,
+                "nivel_lixeira":resultado_lixeira_grupo_lixeira.Lixeira.nivel_lixeira,
+                "endereco":resultado_lixeira_grupo_lixeira.GrupoLixeira.endereco,
+                "bairro":resultado_lixeira_grupo_lixeira.GrupoLixeira.bairro,
+                "cidade":resultado_lixeira_grupo_lixeira.GrupoLixeira.cidade,
+                "estado":resultado_lixeira_grupo_lixeira.GrupoLixeira.estado,
+                "material_coletado":resultado_lixeira_grupo_lixeira.MaterialColetado.nome
+                
+            }
+
+            lixeira_grupo_lixeira.append(resultado)
+
+
+        return jsonify(lixeira_grupo_lixeira)
+
+    except Exception as e:
+
+        return jsonify({'message':f'${str(e)}'})
 

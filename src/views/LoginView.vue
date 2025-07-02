@@ -11,6 +11,7 @@ import { useUserStore } from "@/stores/user.js"
 
 // Global
 import { userKey, exibirMensagemErro } from '@/global.js'
+import ButtonPadrao from '@/components/ButtonPadrao.vue';
 
 
 const router = useRouter()
@@ -44,8 +45,7 @@ const entrar = async () => {
         <v-form class="text-center">
             <v-row class="justify-center">
                 <v-col cols="auto">
-                    <v-img :width="400" :height="400" class="align-center"
-                        src="https://i0.wp.com/www.larplasticos.com.br/wp-content/uploads/2018/03/lixeiras-reciclaveis-larplasticos.jpg?fit=700%2C420&ssl=1"></v-img>
+                    <v-img :width="400" :height="400" class="align-center" src="planeta.png"></v-img>
                 </v-col>
             </v-row>
             <v-text-field label="Usuario" style="width: 400px" v-model="user.usuario" variant="underlined">
@@ -53,7 +53,7 @@ const entrar = async () => {
             <v-text-field label="Senha" style="width: 400px" type="password" v-model="user.senha" variant="underlined">
             </v-text-field>
             <v-row class="justify-center mt-5">
-                <v-btn text="Entrar" @click="entrar" variant="flat" color="green"></v-btn>
+                <ButtonPadrao @click="entrar">Entrar</ButtonPadrao>
             </v-row>
         </v-form>
     </v-container>

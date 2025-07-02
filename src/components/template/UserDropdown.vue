@@ -3,9 +3,7 @@
         <v-menu open-on-hover>
             <template v-slot:activator="{ props }">
                 <div v-bind="props">
-                    <v-avatar
-                        image="https://i0.wp.com/www.larplasticos.com.br/wp-content/uploads/2018/03/lixeiras-reciclaveis-larplasticos.jpg?fit=700%2C420&ssl=1"
-                        size="40"></v-avatar>{{ user.usuario }}
+                    <v-avatar image="../../../public/planeta.png" size="40"></v-avatar>{{ user.usuario }}
                 </div>
             </template>
 
@@ -65,7 +63,7 @@ function logout() {
     display: flex;
     align-items: center;
     margin-right: 100px;
-    color: rgb(94, 93, 93);
+    color: rgb(244, 236, 236);
 
 }
 

@@ -7,11 +7,12 @@ const items = ref([
     { title: 'Home', route: '/home' },
     { title: 'Sobre', route: '/about' },
     { title: 'Lixeiras', route: '/lixeiras' },
+    { title: 'Relatório', route: '/relatorio-lixeira' }
 ])
 </script>
 
 <template>
-    <div class="menu">
+    <div class="menu d-flex justify-end">
         <div class="items">
             <div v-for="item in items" :key="item.route" class="item">
                 <RouterLink :to="item.route">{{ item.title }}</RouterLink>
@@ -24,7 +25,7 @@ const items = ref([
 <style scoped>
 a {
     text-decoration: none;
-    color: rgb(94, 93, 93);
+    color: rgb(255, 255, 255);
     padding: 10px 15px;
     display: block;
 }
@@ -50,8 +51,9 @@ a:hover {
     display: flex;
     justify-content: space-between;
     width: 100%;
+    height: 60px;
     max-width: 2000px;
     margin-bottom: 10px;
-    background-color: rgb(238, 238, 238)
+    background-color: var(--btn-bg-primary-color);
 }
 </style>

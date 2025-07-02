@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import GrupoLixeiraView from '@/views/GrupoLixeiraView.vue';
 import InformarStatusLixeira from '@/views/InformarStatusLixeira.vue';
 import LoginView from '@/views/LoginView.vue';
+import RelatorioLixeiraView from '@/views/RelatorioLixeiraView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -36,6 +37,11 @@ const router = createRouter({
       path: '/',
       name: 'login',
       component: LoginView
+    },
+    {
+      path: '/relatorio-lixeira',
+      name: "relatorio-lixeira",
+      component: RelatorioLixeiraView
     }
   ],
 })

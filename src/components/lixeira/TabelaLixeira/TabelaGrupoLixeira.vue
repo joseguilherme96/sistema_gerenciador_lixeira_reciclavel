@@ -13,6 +13,7 @@ import BarraProgressoNivelLixeira from '../NivelLixeira/BarraProgressoNivelLixei
 import { useGrupoLixeiraStore } from '@/stores/grupoLixeira.js'
 import { useLixeiraStore } from '@/stores/lixeira'
 import { useFiltroGrupoLixeiraStore } from '@/stores/filtro.js'
+import ButtonPadrao from '@/components/ButtonPadrao.vue'
 
 const useGrupoLixeira = useGrupoLixeiraStore()
 const { lista } = storeToRefs(useGrupoLixeira)
@@ -118,11 +119,12 @@ watch(() => resultadoFiltro.value, (novoValor) => {
                 </td>
                 <td>{{ item.data }}</td>
                 <td>{{ item.hora }}</td>
-                <td><v-btn color="rgb(94, 93, 93)"
-                        @click="abrirModalLixeirasDoGrupoLixeiraSelecionado(item.id_grupo_lixeira)">
+                <td>
+                    <ButtonPadrao @click="abrirModalLixeirasDoGrupoLixeiraSelecionado(item.id_grupo_lixeira)">
                         <svg-icon type="mdi" :path="mdiViewDashboardOutline"></svg-icon>
                         Visualizar
-                    </v-btn></td>
+                    </ButtonPadrao>
+                </td>
             </tr>
         </tbody>
     </v-table>

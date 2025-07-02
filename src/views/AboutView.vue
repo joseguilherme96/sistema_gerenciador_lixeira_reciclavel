@@ -1,3 +1,8 @@
+<script setup lang="ts">
+import ButtonPadrao from '@/components/ButtonPadrao.vue';
+
+</script>
+
 <template>
 
   <v-container>
@@ -6,7 +11,7 @@
         <v-card color="gray">
           <v-card-title>Grupo de Lixeiras</v-card-title>
           <v-card-text>
-            <v-btn color="primary">Acessar</v-btn>
+            <ButtonPadrao>Acessar</ButtonPadrao>
           </v-card-text>
         </v-card>
       </v-col>
@@ -14,7 +19,7 @@
         <v-card>
           <v-card-title>Lixeiras</v-card-title>
           <v-card-text>
-            <v-btn color="primary">Acessar</v-btn>
+            <ButtonPadrao>Acessar</ButtonPadrao>
           </v-card-text>
         </v-card>
       </v-col>
@@ -22,7 +27,7 @@
         <v-card>
           <v-card-title>Filtros</v-card-title>
           <v-card-text>
-            <v-btn color="primary">Acessar</v-btn>
+            <ButtonPadrao>Acessar</ButtonPadrao>
           </v-card-text>
         </v-card>
       </v-col>

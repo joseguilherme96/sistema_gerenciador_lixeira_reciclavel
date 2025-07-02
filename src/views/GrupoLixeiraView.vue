@@ -22,14 +22,18 @@ import { getCidades, getEstados } from '../services/endereco.service.js'
 import { useEstadoStore } from '@/stores/estado.js'
 import { useCidadeStore } from '@/stores/cidade.js'
 import { useFiltroGrupoLixeiraStore } from '@/stores/filtro.js'
+import { useMaterialReciclavelStore } from '@/stores/MaterialReciclavel.js'
+import ButtonPadrao from '@/components/ButtonPadrao.vue';
 
 const { filtroEstaAberto } = storeToRefs(useFiltroGrupoLixeiraStore())
+const useMaterialReciclavel = useMaterialReciclavelStore();
 
 
 onMounted(() => {
 
     getEstados(useEstadoStore);
     getCidades(useCidadeStore);
+    useMaterialReciclavel.getMaterialReciclavel()
 
 })
 
@@ -70,19 +74,19 @@ const configuracaoTitulo = ref({
 
 <template>
 
-    <BarraSuperior>
+    <BarraSuperior style="background-color: var(--btn-bg-secondary-color)">
         <template v-slot:titulo>
             <TituloPagina :configuracaoTitulo="configuracaoTitulo"></TituloPagina>
         </template>
         <template v-slot:opcoes>
-            <v-btn color="primary" @click="abrirModalCadastroLixeira()">
+            <ButtonPadrao @click="abrirModalCadastroLixeira()" class="mr-5">
                 <svg-icon type="mdi" :path="mdiPlus"></svg-icon>
                 Cadastrar Grupo Lixeira / Lixeira
-            </v-btn>
-            <v-btn color="primary" @click="abrirFiltro()">
+            </ButtonPadrao>
+            <ButtonPadrao @click="abrirFiltro()">
                 <svg-icon type="mdi" :path="mdiMagnify"></svg-icon>
                 Filtro Lixeiras
-            </v-btn>
+            </ButtonPadrao>
         </template>
     </BarraSuperior>
     <FiltroPesquisa v-if="filtroEstaAberto"></FiltroPesquisa>

@@ -8,7 +8,7 @@ const { lixeira } = storeToRefs(lixeiraStore)
 
 </script>
 <template>
-    <v-chip :color="lixeira.esta_aberta == 'Aberta' ? 'brown' : 'green'">
+    <v-chip :color="lixeira.esta_aberta == 'Aberta' ? 'white' : 'white'">
         <svg-icon type="mdi" :path="lixeira.esta_aberta == 'Aberta' ? mdiDeleteEmpty : mdiDelete"></svg-icon>
         {{
             lixeira.esta_aberta }}</v-chip>

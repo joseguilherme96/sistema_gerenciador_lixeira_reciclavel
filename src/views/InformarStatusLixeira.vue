@@ -91,7 +91,7 @@ async function atualizarLixeira() {
 <template>
 
 
-    <BarraSuperior>
+    <BarraSuperior style="background-color: var(--btn-bg-primary-color)">
 
         <template v-slot:titulo>
 
@@ -102,7 +102,7 @@ async function atualizarLixeira() {
     </BarraSuperior>
     <DetalheLixeira :lixeira="lixeira" v-if="lixeira.id_lixeira !== ''"></DetalheLixeira>
 
-    <BarraSuperior class="mt-5">
+    <BarraSuperior class="mt-5" style="background-color: var(--btn-bg-primary-color)">
 
         <template v-slot:titulo>
 
