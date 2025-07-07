@@ -2,6 +2,15 @@
 
 import { ref } from 'vue'
 import UserDropdown from './UserDropdown.vue';
+import { mdiMenu } from '@mdi/js';
+import { useUserStore } from '../../stores/user.js'
+import { storeToRefs } from 'pinia';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+
+const { exibirMenuLateral, user } = storeToRefs(useUserStore())
 
 const items = ref([
     { title: 'Home', route: '/home' },
@@ -12,12 +21,17 @@ const items = ref([
 </script>
 
 <template>
-    <div class="menu d-flex justify-end">
+    <!-- <div class="menu d-flex justify-space-between align-center">
         <div class="items">
             <div v-for="item in items" :key="item.route" class="item">
                 <RouterLink :to="item.route">{{ item.title }}</RouterLink>
             </div>
         </div>
+        <UserDropdown v-if="user"></UserDropdown>
+    </div> -->
+    <div class="menu d-flex justify-space-between align-center">
+        <svg-icon type="mdi" :path="mdiMenu" class="item" size="40" color="rgb(255, 255, 255)"
+            @click="exibirMenuLateral = !exibirMenuLateral"></svg-icon>
         <UserDropdown></UserDropdown>
     </div>
 </template>
@@ -53,7 +67,6 @@ a:hover {
     width: 100%;
     height: 60px;
     max-width: 2000px;
-    margin-bottom: 10px;
     background-color: var(--btn-bg-primary-color);
 }
 </style>

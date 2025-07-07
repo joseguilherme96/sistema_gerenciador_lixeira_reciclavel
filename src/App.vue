@@ -2,13 +2,20 @@
 
   <MenuNavegacao v-if="user"></MenuNavegacao>
 
-  <v-progress-circular v-if="validandoToken" color="rgb(165, 137, 94)" indeterminate id="progress-circular"
-    size="100"></v-progress-circular>
-  <v-container v-else>
+  <div class="layout">
 
-    <RouterView />
+    <MenuLateral v-if="exibirMenuLateral"></MenuLateral>
 
-  </v-container>
+    <v-progress-circular v-if="validandoToken" color="rgb(165, 137, 94)" indeterminate id="progress-circular"
+      size="100"></v-progress-circular>
+
+    <v-container v-else class="conteudo">
+
+      <RouterView />
+
+    </v-container>
+
+  </div>
 
 </template>
 <script setup lang="js">
@@ -33,9 +40,10 @@ import MenuNavegacao from './components/template/MenuNavegacao.vue'
 //Globals
 import { userKey } from '@/global.js'
 import axios from 'axios';
+import MenuLateral from './components/template/MenuLateral.vue';
 
 
-const { user } = storeToRefs(useUserStore())
+const { user, exibirMenuLateral, exibiMenuSuperior } = storeToRefs(useUserStore())
 const useUser = useUserStore()
 const router = useRouter()
 const validandoToken = ref(true)
@@ -90,6 +98,8 @@ router.beforeEach(async (to, from, next) => {
 
   if (to.matched.some(isRoutePublic)) {
 
+    exibiMenuSuperior.value = true
+    console.log(exibiMenuSuperior.value)
     next()
     validandoToken.value = false
     return
@@ -117,6 +127,12 @@ router.beforeEach(async (to, from, next) => {
   position: absolute;
   left: 100vh;
   top: 30vh;
+
+}
+
+.layout {
+
+  display: flex;
 
 }
 </style>

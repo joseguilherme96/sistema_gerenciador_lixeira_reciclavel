@@ -11,12 +11,13 @@ const router = createRouter({
     {
       path: '/home',
       name: 'home',
-      meta: { routePublic: true },
+      meta: { routePublic: true, nameFormat: "Home" },
       component: HomeView,
     },
     {
       path: '/about',
-      name: 'about',
+      name: 'Painel de Controle',
+      meta: { nameFormat: "Sobre" },
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
@@ -25,12 +26,13 @@ const router = createRouter({
     {
       path: '/lixeiras',
       name: 'lixeiras',
+      meta: { nameFormat: "Lixeiras" },
       component: GrupoLixeiraView
     },
     {
       path: '/informar-status-lixeira/:id',
       name: 'informar-status-lixeira',
-      meta: { routePublic: true },
+      meta: { routePublic: true, nameFormat: "Informar Status Lixeira" },
       component: InformarStatusLixeira
     },
     {
@@ -41,6 +43,7 @@ const router = createRouter({
     {
       path: '/relatorio-lixeira',
       name: "relatorio-lixeira",
+      meta: { nameFormat: "Relatório Lixeira" },
       component: RelatorioLixeiraView
     }
   ],

@@ -6,7 +6,9 @@ export const useUserStore = defineStore('user', {
 
     state: () => ({
 
-        user: null
+        user: null,
+        exibirMenuLateral: false,
+        exibiMenuSuperior: false
 
     }),
     actions: {
