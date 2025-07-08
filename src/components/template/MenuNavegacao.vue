@@ -51,8 +51,8 @@ a {
 }
 
 .item:hover {
-    background-color: gray;
-    color: red;
+    background-color: var(--btn-bg-secondary-color);
+    color: white;
 }
 
 

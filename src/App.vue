@@ -130,9 +130,13 @@ router.beforeEach(async (to, from, next) => {
 
 }
 
-.layout {
 
-  display: flex;
 
+@media (min-width: 450px) {
+  .layout {
+
+    display: flex;
+
+  }
 }
 </style>

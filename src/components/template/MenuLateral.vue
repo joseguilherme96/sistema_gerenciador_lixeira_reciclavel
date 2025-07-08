@@ -18,11 +18,21 @@ const rotas = router.getRoutes().map((item) => ({ ...item, liMenu: item.name.rep
 
 </script>
 <style scoped>
-.menu-lateral {
-    width: 20%;
-    min-height: 100vh;
-    background-color: var(--btn-bg-primary-color);
+@media (max-width: 450px) {
+    .menu-lateral {
+        width: 100%;
+        background-color: var(--btn-bg-primary-color);
+    }
 }
+
+@media (min-width: 450px) {
+    .menu-lateral {
+        width: 20%;
+        min-height: 100vh;
+        background-color: var(--btn-bg-primary-color);
+    }
+}
+
 
 ul {
     margin-left: 10px;
@@ -31,6 +41,17 @@ ul {
 li {
     color: white;
     margin-bottom: 5px;
+    height: 40px;
+}
+
+li:hover {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+    width: 90%;
+    height: 40px;
+    background-color: var(--btn-bg-secondary-color);
 }
 
 a {

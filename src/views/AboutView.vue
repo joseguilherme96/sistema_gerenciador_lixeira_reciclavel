@@ -106,5 +106,6 @@ import { mdiChartGantt, mdiDeleteVariant, mdiFilterOutline, mdiGroup, mdiHome, m
 .icones {
 
   color: var(--btn-bg-primary-color);
+
 }
 </style>
