@@ -38,6 +38,8 @@ Na execução do boot.py pela primeira vez, ou quando desejar, a opção sempre 
 
 # Estrutura do projeto ESP32
 
+```sh
+
 projeto/
 ├── esp32/
     └── boot/
@@ -58,7 +60,9 @@ projeto/
         ├── boot.py
         ├── configuracao_exemplo.py
         ├── log.txt
-        ├── requirements.txt
+        ├── requirements.txtm
+
+```
 
 
 ## Instalação
