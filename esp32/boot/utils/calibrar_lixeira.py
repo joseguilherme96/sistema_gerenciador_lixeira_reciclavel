@@ -1,6 +1,7 @@
-from configuracao import PROFUNDIDADE_LIXEIRA,LIXEIRA_ESTA_CALIBRADA
-from utils.obter_distancia import get_distancia_entre_sensor_lixo
 import time
+from utils.configuracao_esp32 import configuracao
+from utils import obter_distancia
+from configuracao import LIXEIRA_ESTA_CALIBRADA, PROFUNDIDADE_LIXEIRA
 
 class Calibracao :
 
@@ -24,35 +25,37 @@ class Calibracao :
 
     def calibrar_profundidade(self):
 
-
-        opcao = input('Deseja realmente calibrar novamente ? 1 - Sim, 2- Não \n')
-        print()
-
         try:
-        
-            if opcao == '1':
 
-                print("Escolha uma das opções : 1 - Calibrar automaticamente 2 - Inserir Manualmente")
-                opcao = input()
+            if LIXEIRA_ESTA_CALIBRADA:
+
+                return True
+
+            print("Escolha uma das opções : 1 - Calibrar automaticamente 2 - Inserir Manualmente")
+            opcao = input()
+
+            print()
+
+            if(opcao == '1'):
+
+                while True:
+                    
+                    profundidade_encontrada = obter_distancia.get_distancia_entre_sensor_lixo()
+                    print(f"Profundidade Lixeira Encontrada : {profundidade_encontrada} (ctrl+c) para confirmar calibramento.")
+
+                    self.set_atribute(Calibracao,'profundidade_encontrada',profundidade_encontrada)
+                    self.set_atribute(Calibracao,'profundidade_calibrada',profundidade_encontrada)
+                        
+                    time.sleep(3)
+
+            elif opcao == '2':
 
                 print()
+                profundidade_encontrada = input("Digite a profundidade da lixeira : \n")
+                self.set_atribute(Calibracao,'profundidade_encontrada',profundidade_encontrada)
+                self.set_atribute(Calibracao,'profundidade_calibrada',profundidade_encontrada)
+                configuracao.salvar_profundidade_lixeira(Calibracao)
 
-                if(opcao == '1'):
-
-                    while True:
-                        
-                        profundidade_encontrada = get_distancia_entre_sensor_lixo()
-                        print(f"Profundidade Lixeira Encontrada : {profundidade_encontrada} (ctrl+c) para confirmar calibramento.")
-
-                        self.set_atribute(Calibracao,'profundidade_encontrada',profundidade_encontrada)
-                            
-                        time.sleep(3)
-
-                elif opcao == '2':
-
-                    print()
-                    profundidade_encontrada = input("Digite a profundidade da lixeira : \n")
-                    self.set_atribute(Calibracao,'profundidade_encontrada',profundidade_encontrada)
 
             print()
             print("Profundidade Calibrada da lixeira :", getattr(Calibracao,'profundidade_calibrada'),' cm')
@@ -67,11 +70,13 @@ class Calibracao :
             print()
             self.set_atribute(Calibracao,'lixeira_esta_calibrada',True)
             print("Profundidade Calibrada da lixeira :", getattr(Calibracao,'profundidade_calibrada'),' cm')
+            configuracao.salvar_profundidade_lixeira(Calibracao)
             return  True
 
         except Exception as e:
 
             print("Falha ao calibrar ! \n")
             return  False
+
     
 

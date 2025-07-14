@@ -1,3 +1,15 @@
+# Configuração ESP32
+from utils.configuracao_esp32 import configuracao as configuracao_esp32
+
+# store
+from store.log import log_message,clear_log_message
+
+log_message('---------------------------------Log ESP32--------------------------------------------',"SUCCESS")
+log_message("Iniciando execucao ESP32 !","SUCCESS")
+
+
+configuracao_esp32(False)
+
 # Configurações ESP32
 from configuracao import ESTAGIO_LIXEIRA_NIVEL_1,ESTAGIO_LIXEIRA_NIVEL_2,ESTAGIO_LIXEIRA_NIVEL_3,ESTAGIO_LIXEIRA_NIVEL_4,ESTAGIO_LIXEIRA_NIVEL_5,PONTO_LIXO_ID,LIXEIRA_ID
 
@@ -11,17 +23,11 @@ from services.log_service import cadastrar_logs,gravar_logs_em_arquivo_no_esp32
 import time 
 
 # Utils 
-from utils.obter_distancia import get_distancia_entre_sensor_lixo
+from utils import obter_distancia
 from utils.converte_nivel_lixeira_em_porcentagem import calcular_nivel_lixeira_em_porcentagem
 from utils.calibrar_lixeira import Calibracao
 
 import time
-
-# store
-from store.log import log_message,clear_log_message
-
-log_message('---------------------------------Log ESP32--------------------------------------------',"SUCCESS")
-log_message("Iniciando execucao ESP32 !","SUCCESS")
 
 conectar_wifi()
 
@@ -42,7 +48,7 @@ try:
 
         # Grava Logs no própio dispositivo
         gravar_logs_em_arquivo_no_esp32()
-
+            
         # Cadastra Logs no servidor
         cadastrar_logs()
 
@@ -54,28 +60,26 @@ try:
         log_message('---------------------------------Log ESP32--------------------------------------------',"SUCCESS")
         log_message(f'Ponto de lixo ID : {PONTO_LIXO_ID} Lixeira ID : {LIXEIRA_ID}',"SUCCESS")
 
-        distancia_entre_sensor_lixo_atual = get_distancia_entre_sensor_lixo()
+        distancia_entre_sensor_lixo_atual = obter_distancia.get_distancia_entre_sensor_lixo()
         mensagem = f'Distancia entre o sensor e o lixo : {distancia_entre_sensor_lixo_atual} cm'
         log_message(mensagem,"SUCCESS")
 
-        profundidade_lixeira = Calibracao.get_atribute(Calibracao,'profundidade_calibrada')
+        if not Calibracao.get_atribute(Calibracao, 'lixeira_esta_calibrada'):
 
-        if not Calibracao.get_atribute(Calibracao,'lixeira_esta_calibrada'):
+            log_message("Lixeira não está calibrada","WARNING")
 
-            mensagem = "Sensor esta configurado para ser calibrado novamente! \n"
-            log_message(mensagem,"SUCCESS")
-            
-            time.sleep(1)
-            
-            if(not Calibracao.calibrar_profundidade(Calibracao)):
+            if not Calibracao.calibrar_profundidade(Calibracao):
 
                 continue
 
-            profundidade_lixeira = int(Calibracao.get_atribute(Calibracao,'profundidade_calibrada'))
-        
+        profundidade_lixeira = Calibracao.get_atribute(Calibracao,'profundidade_calibrada')    
+
+        mensagem = f'Profundidade calibrada lixeira : {profundidade_lixeira} cm'
+        log_message(mensagem,"SUCCESS")
 
         nivel_lixeira = calcular_nivel_lixeira_em_porcentagem(distancia_entre_sensor_lixo_atual)
-        altura_lixo = (nivel_lixeira/100) * profundidade_lixeira
+
+        altura_lixo = (nivel_lixeira)/100 * int(profundidade_lixeira)
 
         mensagem = f'Altura lixo : {altura_lixo} cm'
         log_message(mensagem,"SUCCESS")
@@ -90,6 +94,7 @@ try:
 
         mensagem= f'Mao aproximada : {distancia_entre_sensor_lixo_atual}'
         log_message(mensagem,"SUCCESS")
+
         
         # Guarda valor distância entre sensor e lixo na primeira execução, pois é quando a lixeira está fechada, e serve como base para identificar se a lixeira foi aberta caso o valor seja maior que o valor lido na primeira execução
         if contador == 0:
@@ -252,8 +257,19 @@ try:
 
 except KeyboardInterrupt as e:
 
-    log_message("A execucao do script no esp32 foi encerrada !","SUCCESS")
-    cadastrar_logs()
+    try:
+        
+        if configuracao_esp32.opcoes_dispositivo(configuracao_esp32) == 2:
+            
+            configuracao_esp32(True)
+
+        cadastrar_logs()
+
+    except KeyboardInterrupt:
+
+        print()
+        print("A execução foi encerrada !")
+        
 
 except Exception as e:
 

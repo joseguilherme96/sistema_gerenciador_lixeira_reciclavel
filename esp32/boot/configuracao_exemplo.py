@@ -1,6 +1,7 @@
 # Arquivo exemplo de configuração
 # Ao terminar a configuração do arquivo...renomear arquivo para configuracao.py
 
+
 # Permite que seja executado no terminal sem ESP32 e Sensor. Os valores serão gerados aleatoriamente para teste.
 SCRIPT_SENDO_EXECUTADO_NO_ESP32 = False
 
@@ -8,14 +9,11 @@ SCRIPT_SENDO_EXECUTADO_NO_ESP32 = False
 TRIGGER_PIN = 5
 ECHO_PIN = 18
 
-# Caracteristicas lixeira
-PROFUNDIDADE_LIXEIRA = 100
-DISTANCIA_LIXEIRA_ABERTA_SEM_PESSOA_OU_OBJETO_NA_FRENTE = 250
-DISTANCIA_LIXEIRA_ABERTA_COM_PESSOA_OU_OBJETO_NA_FRENTE = PROFUNDIDADE_LIXEIRA + 1
+# Configurações lixeira
+CONFIGURAR = True
 
 
 # Estagios Lixeira
-QUANTIDADE_ESTAGIOS_NIVEL_LIXEIRA = 5
 
 ESTAGIO_LIXEIRA_NIVEL_1 = 0 # Lixeira vazia(0%)
 ESTAGIO_LIXEIRA_NIVEL_2 = 25 # Lixeira com nivel baixo(até 25%)
