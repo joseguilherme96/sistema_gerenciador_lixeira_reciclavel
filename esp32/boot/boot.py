@@ -60,13 +60,9 @@ try:
         log_message('---------------------------------Log ESP32--------------------------------------------',"SUCCESS")
         log_message(f'Ponto de lixo ID : {PONTO_LIXO_ID} Lixeira ID : {LIXEIRA_ID}',"SUCCESS")
 
-        distancia_entre_sensor_lixo_atual = obter_distancia.get_distancia_entre_sensor_lixo()
-        mensagem = f'Distancia entre o sensor e o lixo : {distancia_entre_sensor_lixo_atual} cm'
-        log_message(mensagem,"SUCCESS")
-
         if not Calibracao.get_atribute(Calibracao, 'lixeira_esta_calibrada'):
 
-            log_message("Lixeira não está calibrada","WARNING")
+            log_message("Lixeira nao esta calibrada","WARNING")
 
             if not Calibracao.calibrar_profundidade(Calibracao):
 
@@ -76,6 +72,9 @@ try:
 
         mensagem = f'Profundidade calibrada lixeira : {profundidade_lixeira} cm'
         log_message(mensagem,"SUCCESS")
+
+        distancia_entre_sensor_lixo_atual = obter_distancia.get_distancia_entre_sensor_lixo()
+        mensagem = f'Distancia entre o sensor e o lixo : {distancia_entre_sensor_lixo_atual} cm'
 
         nivel_lixeira = calcular_nivel_lixeira_em_porcentagem(distancia_entre_sensor_lixo_atual)
 
@@ -130,7 +129,7 @@ try:
                 log_message(mensagem,"SUCCESS")
 
                 if estagio_lixeira_nivel_anterior_enviado == 1:
-                    mensagem = 'Nao enviado informacao para o servidor novamente devido já ter sido enviado na leitura anterior...'
+                    mensagem = 'Nao enviado informacao para o servidor novamente devido ja ter sido enviado na leitura anterior...'
                     log_message(mensagem,"SUCCESS")
 
                     time.sleep(2)
@@ -149,7 +148,7 @@ try:
                 log_message(mensagem)
                 
                 if estagio_lixeira_nivel_anterior_enviado == 2:
-                    mensagem = 'Nao enviado informacao para o servidor novamente devido já ter sido enviado na leitura anterior...'
+                    mensagem = 'Nao enviado informacao para o servidor novamente devido ja ter sido enviado na leitura anterior...'
                     log_message(mensagem,"SUCCESS")
                     time.sleep(2)
                     continue

@@ -84,9 +84,9 @@ class configuracao:
 
                     print()
 
-                    self.comentar("Arquivo gerado automaticamente com base nos dados de entrada configurado pelo terminal facilitando a implementação do ESP32 na lixeira.")
+                    self.comentar("Arquivo gerado automaticamente com base nos dados de entrada configurado pelo terminal facilitando a implementacao do ESP32 na lixeira.")
                     self.pular_linha()
-                    self.comentar("Configuração do dispositivo")
+                    self.comentar("Configuracao do dispositivo")
                     self.pular_linha()
                     self.configurar_modo_execucao()
                     self.pular_linha()
@@ -178,7 +178,7 @@ class configuracao:
 
         try:
 
-            self.comentar("Ligação dos pinos do ESP32 com o sensor HCSR04")
+            self.comentar("Ligacao dos pinos do ESP32 com o sensor HCSR04")
             TRIGGER_PIN = input("Digite o numero do pino ESP32 que foi conectado o TRIGGER_PIN do sensor : ")
             is_number_or_error(TRIGGER_PIN)
             self.adicionar_linha_no_arquivo(f"TRIGGER_PIN = {str(TRIGGER_PIN)}")
@@ -215,7 +215,7 @@ class configuracao:
 
         try:
 
-            self.comentar("Informações da Lixeira que está sendo monitorada")
+            self.comentar("Informacoes da Lixeira que está sendo monitorada")
             PONTO_LIXO_ID = input("Informe o PONTO_LIXO_ID que o ESP32 vai monitorar : ")
             is_number_or_error(PONTO_LIXO_ID)
             self.adicionar_linha_no_arquivo(f"PONTO_LIXO_ID = {str(PONTO_LIXO_ID)}")
@@ -270,7 +270,7 @@ class configuracao:
 
             ID_ESP32 = input("Informe o identificador único para o ESP32 ID_ESP32 : ")
             is_number_or_error(ID_ESP32)
-            self.comentar("Identificação ESP32")
+            self.comentar("Identificacao ESP32")
             self.adicionar_linha_no_arquivo(f"ID_ESP32 = {ID_ESP32}")
             self.adicionar_linha_no_arquivo(f"ID_INFORMADOR = {2}")
         
@@ -290,7 +290,7 @@ class configuracao:
     
     def encerrar_configuracao(self):
 
-        log_message('Configuração finalizada !','SUCCESS')
+        log_message('Configuracao finalizada !','SUCCESS')
         self.adicionar_linha_no_arquivo(f"CONFIGURAR = {False}")
     
     def opcoes_dispositivo(self):

@@ -59,7 +59,6 @@ def gravar_log_esp32_em_arquivo(logs):
     
 
 @log.route('/cadastrar_log_esp32',methods=['POST'])
-@jwt_required()
 def cadastrar_log():
 
     try:

@@ -60,7 +60,7 @@ projeto/
         ├── boot.py
         ├── configuracao_exemplo.py
         ├── log.txt
-        ├── requirements.txtm
+        ├── requirements.txt
 
 ```
 
