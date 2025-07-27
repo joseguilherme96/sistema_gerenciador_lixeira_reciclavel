@@ -26,7 +26,7 @@ Estes foram basicamente os passos que permitiram que o ESP32 começasse a medir 
 - Emulador Tera Term 5 para processar os primeiros comandos com python direto no ESP32.
 - Pacote adafruit-ampy  1.1.0 responsável por permitir copiar scripts python criados para a placa ESP32.
 - Uma classe base do python hcsr04.py para medição do nivel da lixeira.
-- Criação do script para processamento das medições no ESP32 e enviar para o sistema(API).
+- Criação dos scripts para processamento das medições no ESP32 e enviar para o sistema(API).
 - Implementação de todos os scripts criados no ESP32.
 
 O código na pasta ESP32 pode ser executado de duas maneiras :
@@ -119,7 +119,7 @@ A calibração pode ser de duas formas manual ou automática. Na manual o própr
 
 [![Exibição arquivo de configuração](../src/assets/calibracao_e_inicio_coleta_envio_de_dados.png "Exibição arquivo de configuração")](../src/assets/calibracao_e_inicio_coleta_envio_de_dados.png)
 
-O processo de implementação do boot no ESP32 pode ser feita com a cópia dos arquivos da boot para o ESP32 utilizando a biblioteca adafruit-ampy  1.1.0 que é uma dos requisitos de instalação no ambiente mencionado dentro do arquivo requiments.txt deste parte do projeto.
+O processo de implementação do boot no ESP32 pode ser feita com a cópia dos arquivos da boot para o ESP32 utilizando a biblioteca adafruit-ampy  1.1.0 que é uma dos requisitos de instalação no ambiente mencionado dentro do arquivo requirements.txt desta parte do projeto.
 
 ## Configuração Manual
 
@@ -196,3 +196,43 @@ Abra a pasta boot. E execute o arquivo boot.py
     python boot.py
 
 ```
+
+## Transferência de arquivos para o ESP32 com AMPY
+
+Use a biblioteca adafruit-ampy para realizar a cópia de todos os arquivos da pasta boot para o ESP32.
+
+Atenção o firmware micropython já deve ter sido instalado no ESP32. Para saber mais consulte a documentação da espressif.
+
+Conecte o ESP32 no seu PC.
+
+Com o ambiente virtual já ativado, entre dentro da pasta boot. Digite o seguinte comando abaixo :
+
+```sh
+
+    ampy --port=COM4 ls
+
+```
+
+Após este comando o ampy listará todos os arquivos dentro do ESP32, remova todos caso haja algum com :
+
+
+```sh
+
+    ampy --port=COM4 rm nome_arquivo ou pasta
+
+```
+
+E copie todos os arquivos dentro da pasta boot do pc para o root do ESP32.
+
+```sh
+
+    ampy --port=COM4 put 
+
+```
+
+Após o put, você deve colocar também o nome do arquivo ou pasta que deseja copiar. Repita este processo até copiar todos os arquivos e pastas.
+
+Após a cópia de todos os arquivos. Instale o ESP32 junto com o sensor HCSR04 lixeira. Após a instalação ligue seu ESP32 a um PC caso ainda não tenha configurado ou queira configurar novamente direto no ESP32. E use o emulador Tera ou um emulador de sua preferência. Após a configuração, desconecte o ESP32 do pc e conecte a uma bateria externa para que o ESP32 possa ligar novamente e começar a coletar dados da lixeira e enviar para o servidor/sistema.
+
+Caso o esp32 já foi configurado antes da trânsferência dos arquivos/pasta. E queira apenas que o ESP32 comece a trabalhar, ligue diretamente a uma bateria externa. E pronto, seu ESP32 já começará a coletar dados e enviar para o servidor/sistema.
+

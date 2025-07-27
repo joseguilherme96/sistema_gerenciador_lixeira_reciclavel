@@ -1,11 +1,11 @@
 # Sistema Gerenciador de Lixeira Reciclável integrada com Microcontrolador ESP32
 
-Este projeto foi desenvolvido para o trabalho da Fatec São Roque para disciplina de IOT(Internet das coisas) e teve objetivo de gerenciar os níveis das lixeiras em tempo real em diversos pontos da cidade, seja por meio da sinalização de um morador no próprio sistema ou ainda por meio de sensores que coletam os niveis de lixo automaticamente, o microcontrolador ESP32 recebe estas informações dos sensores, realiza o processamento e envia as informações para o sistema/servidor.
+Este projeto foi desenvolvido para Fatec São Roque Dr. Bernardino de Campos para o curso superior em Tecnologia de Sistemas para Internet para disciplina de IOT(Internet das coisas) e teve objetivo de projetar este sistema integrado com microcontroladores ESP32 onde o sistema é capaz de gerenciar os níveis das lixeiras domesticas ou em diversos pontos da cidade em tempo real, seja por meio da sinalização de um morador no próprio sistema ou ainda por meio de sensores que coletam os niveis de lixo automaticamente, o microcontrolador ESP32 recebe estas informações dos sensores, realiza o processamento e envia as informações para o sistema/servidor.
 
 A empresa pode gerenciar a coleta de lixos recicláveis de uma maneira mais eficiente, se programando antecipadamente, realizando a coleta em pontos 
 estratégicos. Também pode reduzir os custos traçando a melhor rota antecipadamente, coletando lixos recicláveis em pontos mais críticos. Pois o sistema é capaz de apresentar diversos dados que ajudam na tomada de decisão.
 
-Este trabalho também teve objetivo de aprender e explorar um pouco mais a questão de projetar sistemas seguindo as melhores práticas no desenvolvimento de software, como a criação de componentes , serviços, gerenciamentos de estados dos componentes, aplicação de diretivas personalizadas, criação e consumo de APis, uso de websockets para informação em tempo real, controle de versão de script SQL e ainda trabalhar com processamento de informações no microcontrolador ESP32 utilizando micropython.
+Este trabalho também teve objetivo de aprender, explorar diversas tecnologias, projetar sistemas seguindo as melhores práticas no desenvolvimento de software, desde a arquitetura até o software final, passando por diversos processos como criação de componentes , serviços, gerenciadores de estado dos componentes com Pinia, aplicação de diretivas personalizadas, consumo e criação de APIs RESTful com Flask, autenticação com JWT, uso de websockets para informação em tempo real, controle de versionamento de script SQL com Flask-Migration, tive a oportunidade também  de desenvolver scripts com Python/Micropython para implementação no microcontrolador ESP32 possibilitando a integração com o sistema, onde o ESP32 coleta, processa e envia as informações para a API/Sistema e outros processos que implementei que agregou conhecimento.
 
 ## Funcionalidades do Sistema
 
@@ -81,11 +81,28 @@ Este trabalho também teve objetivo de aprender e explorar um pouco mais a quest
 ## Foto da instalação do Microcontrolador ESP32 na lixeira
 [![Lixeira integrada com microcontrolador ESP32](src/assets/lixeira_automatizada.jpg "Lixeira integrada com microcontrolador ESP32")](src/assets/lixeira_automatizada.jpg)
 
+## Lixeira com QRCode
+[![QR Code da Lixeira](src/assets/lixeira_com_qrcode.jpg "QR Code da Lixeira")](src/assets/lixeira_com_qrcode.jpg)
+
+
 ## Acompanhamento de atividade direto no Microcontrolador ESP32 com exibição e registro de Logs
-[![Lixeira integrada com microcontrolador ESP32](src/assets/acompanhamento_de_atividade_ep32_resgistro_de_logs.png "Lixeira integrada com microcontrolador ESP32")](src/assets/acompanhamento_de_atividade_ep32_resgistro_de_logs.png)
+[![Lixeira integrada com microcontrolador ESP32](src/assets/acompanhamento_de_atividade_ep32_registro_de_logs.png "Lixeira integrada com microcontrolador ESP32")](src/assets/acompanhamento_de_atividade_ep32_registro_de_logs.png)
 
 ## API em Flask
 [![API em Flask](src/assets/API_FLASK.png "API em Flask")](src/assets/API_FLASK.png)
+
+## Ideias de funcionalidades extras
+Ideias de funcionalidades extras que foram tidas durante o desenvolvimento e que poderiam ter sido implementadas :
+
+- Criação processo automatizado com Python que agiliza o processo de implementação do [boot criado](https://github.com/joseguilherme96/sistema_gerenciador_lixeira_reciclavel/tree/main/esp32/boot) para cada Microcontrolador ESP32 que o boot é implementado. A finalidade da criação deste processo agilizaria o processo que cobriria desde a instalação automática do firmware micropython até a tranferência de arquivos no ESP32 de forma 100% automatizada reduzindo o tempo de implementação para um caso que o boot fosse utilizado em larga escala em microcontroladores ESP32 para muitas lixeiras.
+
+- Testes de integração garantindo ainda mais confiabilidade no sistema/Microcontrolador ESP32.
+
+- Criação de folha com informações mais detalhadas além do QRCode impresso para lixeira, como material coletado, código da lixeira, instruções....
+
+- Mapas com diversos pontos de coletas de lixos recicláveis.
+
+Este projeto foi feito para ser escálável e pode ter muito mais ideias do que as que foram listadas aqui.
 
 ## Configuração do projeto  
 
