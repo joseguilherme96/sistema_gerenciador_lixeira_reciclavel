@@ -94,7 +94,7 @@ Este trabalho também teve objetivo de aprender, explorar diversas tecnologias, 
 ## Ideias de funcionalidades extras
 Ideias de funcionalidades extras que foram tidas durante o desenvolvimento e que poderiam ter sido implementadas :
 
-- Criação processo automatizado com Python que agiliza o processo de implementação do [boot criado](https://github.com/joseguilherme96/sistema_gerenciador_lixeira_reciclavel/tree/main/esp32/boot) para cada Microcontrolador ESP32 que o boot é implementado. A finalidade da criação deste processo agilizaria o processo que cobriria desde a instalação automática do firmware micropython até a tranferência de arquivos no ESP32 de forma 100% automatizada reduzindo o tempo de implementação para um caso que o boot fosse utilizado em larga escala em microcontroladores ESP32 para muitas lixeiras.
+- Criação de processo automatizado com Python que agiliza o processo de implementação do [boot criado](https://github.com/joseguilherme96/sistema_gerenciador_lixeira_reciclavel/tree/main/esp32/boot) para cada Microcontrolador ESP32 que o boot é implementado. A finalidade da criação deste processo agilizaria o processo que cobriria desde a instalação automática do firmware micropython até a tranferência de arquivos no ESP32 de forma 100% automatizada reduzindo o tempo de implementação para um caso que o boot fosse utilizado em larga escala em microcontroladores ESP32 para muitas lixeiras.
 
 - Testes de integração garantindo ainda mais confiabilidade no sistema/Microcontrolador ESP32.
 
@@ -102,11 +102,11 @@ Ideias de funcionalidades extras que foram tidas durante o desenvolvimento e que
 
 - Mapas com diversos pontos de coletas de lixos recicláveis.
 
-Este projeto foi feito para ser escálável e pode ter muito mais ideias do que as que foram listadas aqui.
+Este projeto foi feito para ser escálável e pode ter muito mais ideias do que já foram feitas ou as listadas aqui.
 
 ## Configuração do projeto  
 
-Como podem ver, projeto completo é divido até em 3 partes para facilitar sua compreensão, Frontend, Backend e pasta ESP32 com todo script para processamento no Microcontrolador. Cada umas destas partes você encontrará informações detalhadas sobre cada parte do projeto para que fosse possível o projeto ser executado por completo, possibilitando também o seu entendimento sobre partes especificas do projeto.
+Como podem ver, projeto completo é divido até em 3 partes para facilitar sua compreensão, Frontend, Backend e pasta ESP32 com todo script para processamento no Microcontrolador. Cada umas destas partes você encontrará informações mais detalhadas sobre cada parte do projeto para que fosse possível o projeto ser executado por completo, possibilitando também o seu entendimento sobre partes especificas do projeto.
 
 Aqui está os links das pastas em partes para maiores detalhes, pasta [Backend](https://github.com/joseguilherme96/sistema_gerenciador_lixeira_reciclavel/tree/main/src/backend) e pasta [ESP32](https://github.com/joseguilherme96/sistema_gerenciador_lixeira_reciclavel/tree/main/esp32) para instalação. E para maiores detalhes da pasta FrontEnd continue lendo abaixo.
 

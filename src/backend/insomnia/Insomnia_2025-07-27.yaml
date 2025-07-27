@@ -1,0 +1,812 @@
+type: collection.insomnia.rest/5.0
+name: Gerenciador de Lixeira Reciclavel
+meta:
+  id: wrk_1c0fae4e1049419cb037b0e19f4dd2c7
+  created: 1743355180615
+  modified: 1743355180615
+  description: ""
+collection:
+  - name: GrupoLixeira
+    meta:
+      id: fld_de9c3048837b44f4b9a102ac657134f0
+      created: 1745076775588
+      modified: 1750963218674
+      sortKey: -1745076775588
+      description: ""
+    children:
+      - url: http://127.0.0.1:5000/grupo_lixeira
+        name: getGrupoLixeira
+        meta:
+          id: req_56c4c611264b46659cc0afe025b10803
+          created: 1743355333496
+          modified: 1751308018856
+          isPrivate: false
+          description: ""
+          sortKey: -1745076784747
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+
+            	"grupo_lixeira_id":"",
+            	"nome":"",
+            	"descricao":"",
+            	"endereco":"",
+            	"cidade":"",
+            	"estado":"",
+            	"uf":"",
+            	"cep":"",
+            	"data":"",
+            	"hora":""
+            	
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.0.1
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://127.0.0.1:5000/cadastrar_grupo_lixeira
+        name: cadastrarGrupoLixeira
+        meta:
+          id: req_ea1170d7e4af4d4c84f4af93b490c5e4
+          created: 1744665897128
+          modified: 1750015043001
+          isPrivate: false
+          description: ""
+          sortKey: -1745076784647
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"nome":"Grupo Y",
+            	"descricao":"Lixeiras para coleta de metais",
+            	"cep":"18909999",
+            	"endereco":"Avenida de Minas",
+            	"cidade":"Sorocaba",
+            	"bairro":"Jardim",
+            	"estado": "Minas Gerais"
+            	
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.0.2
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Lixeira
+    meta:
+      id: fld_96bf011ff3ed46598707e54f1851b491
+      created: 1745078352537
+      modified: 1745078352537
+      sortKey: -1745078352537
+      description: ""
+    children:
+      - url: "{{ _.base_url }}/atualizar_nivel_lixeira"
+        name: atualizarNivelLixeira
+        meta:
+          id: req_8afdc8e7c0614dc7912ce1a388ade3bf
+          created: 1743355253619
+          modified: 1750015052935
+          isPrivate: false
+          description: ""
+          sortKey: -1745078357336
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            		"lixeira_id":1,
+            		"nivel_lixeira":20,
+            		"esta_aberta": true
+            	
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.0.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/cadastrar_lixeira"
+        name: cadastrarLixeira
+        meta:
+          id: req_e0f6919d25c944c1bcc1cafaf037cb8f
+          created: 1745078357036
+          modified: 1750014963271
+          isPrivate: false
+          description: ""
+          sortKey: -1745078357036
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            [{
+            	"tets":"ss",
+            	"mat_colet_id":1,
+            	"grupo_lixeira_id":1,
+            	"ponto_lixo_id": "5",
+            	"cor_id":1,
+            	"descricao":"Lixeira 1",
+            	"capacidade":"100",
+            	"nivel_lixeira":"10",
+            	"observacao":""
+            	
+            }
+
+            ]
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.0.2
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/get_lixeira"
+        name: getLixeira
+        meta:
+          id: req_e65a4bfea66a4f0ea6c0e7337f68f143
+          created: 1745097437326
+          modified: 1751308050224
+          isPrivate: false
+          description: ""
+          sortKey: -1745078357136
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	
+            	"grupo_lixeira_id":"",
+            	"lixeira_id":""
+            	
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.0.2
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+          disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/lixeira_grupo_lixeira"
+        name: getLixeiraGrupoLixeira
+        meta:
+          id: req_b62a8ad33ecb4e66a9e4bb505cdc423e
+          created: 1751308716138
+          modified: 1751323648079
+          isPrivate: false
+          description: ""
+          sortKey: -1751308716138
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	
+            	"lixeira_id":"",
+            	"mat_colet_id":"",
+            	"grupo_lixeira_id":"",
+            	"nivel_lixeira":"75",
+            	"estado":"",
+            	"cidade":"",
+            	"capacidade":""
+            	
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.2.0
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: InformativoPontoLixo
+    meta:
+      id: fld_c22f08f33eb0434bad3fc65d02fefb22
+      created: 1745521000724
+      modified: 1745763858507
+      sortKey: -1745521000724
+      description: ""
+    children:
+      - url: "{{ _.base_url }}/cadastrar_informativo_lixeira"
+        name: cadastrarInformativoPontoLixo
+        meta:
+          id: req_c1c23c669d6846fd856dc5df6377546a
+          created: 1743356538478
+          modified: 1750014736632
+          isPrivate: false
+          description: ""
+          sortKey: -1745521009970
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+
+            		"ponto_lixo_id": "6",
+            		"informado_por_id":"1",
+            		"nivel_lixeira": 0,
+            		"observacao": "Lixeira começou a encher"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.0.1
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/get_informativo_lixeira"
+        name: getInformativoLixeira
+        meta:
+          id: req_ba9c162a7e7f458197bb2e8e7d01600a
+          created: 1743356581821
+          modified: 1750027623925
+          isPrivate: false
+          description: ""
+          sortKey: -1745521009870
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	
+            	"id_informativo":"",
+            	"ponto_lixo_id":"",
+            	"informado_por_id":"",
+            	"nivel_lixeira":"",
+            	"observacao":"",
+            	"criado_em":""
+            	
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.0.1
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: PontoLixo
+    meta:
+      id: fld_b11b7e1286174573a6a26f610fb50f92
+      created: 1745584579781
+      modified: 1753655266457
+      sortKey: -1745584579781
+      description: ""
+    children:
+      - url: "{{ _.base_url }}/cadastrar_ponto_lixo"
+        name: cadastrarPontoLixo
+        meta:
+          id: req_6110cf50419e463ab1aeb224d601d77d
+          created: 1745584584802
+          modified: 1753656794685
+          isPrivate: false
+          description: ""
+          sortKey: -1745673350171.5
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.0.2
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/ponto_lixo"
+        name: getPontoLixo
+        meta:
+          id: req_077aa7d313094b9db7e32f715d2cb14c
+          created: 1745762115541
+          modified: 1753656098455
+          isPrivate: false
+          description: ""
+          sortKey: -1745762115541
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	
+            	"ponto_lixo_id":"",
+            	"data":"",
+            	"hora":""
+            	
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.0.2
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: MaterialColetado
+    meta:
+      id: fld_007720d7d1dc442dbbeb6592417381a5
+      created: 1745584703998
+      modified: 1745584703998
+      sortKey: -1745584703999
+      description: ""
+    children:
+      - url: "{{ _.base_url }}/cadastrar_material_coletado"
+        name: cadastrarMaterialColetado
+        meta:
+          id: req_e90f4dee56064902a4b1e8fbf801cc71
+          created: 1745584706795
+          modified: 1753645666408
+          isPrivate: false
+          description: ""
+          sortKey: -1745584706795
+        method: POST
+        body:
+          mimeType: application/json
+          text: |
+            {
+            	"nome":"Metal"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.0.2
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/material_coletado"
+        name: getMaterialColetado
+        meta:
+          id: req_fc3ef3ba3a7c4b34b69c603692023609
+          created: 1745598883746
+          modified: 1753644964596
+          isPrivate: false
+          description: ""
+          sortKey: -1745584706845
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+
+            	"nome":"",
+            	"mat_colet_id":""
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.0.2
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Cor
+    meta:
+      id: fld_a1b8e783a27547668a8fe3a90604af90
+      created: 1746034101286
+      modified: 1746034101286
+      sortKey: -1746034101286
+      description: ""
+    children:
+      - url: "{{ _.base_url }}/cor"
+        name: getCor
+        meta:
+          id: req_3764c1a74afc4af4b99dcdac5764a288
+          created: 1746034104665
+          modified: 1750537263695
+          isPrivate: false
+          description: ""
+          sortKey: -1746034104665
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	
+            	"cor_id":"",
+            	"nome":""
+            	
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.0.2
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/cadastrar_cor"
+        name: cadastrarCor
+        meta:
+          id: req_198ba0d54207496781d2e285155ec0ab
+          created: 1746034193199
+          modified: 1753647614111
+          isPrivate: false
+          description: ""
+          sortKey: -1746034193199
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	
+            	"nome":"Outros"
+            	
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.0.2
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: GrupoLixeiraPontoLixoLixeira
+    meta:
+      id: fld_2c4b0c4e48b747a681ecb075cc09a8d2
+      created: 1746222744347
+      modified: 1746222744347
+      sortKey: -1746222744347
+      description: ""
+    children:
+      - url: "{{ _.base_url }}/cadastrar_grupo_lixeira_ponto_lixo_lixeira"
+        name: inserirGrupoLixeiraPontoLixoLixeira
+        meta:
+          id: req_fc42c5b90569421ca93909de0d1eebce
+          created: 1746222749249
+          modified: 1753656559306
+          isPrivate: false
+          description: ""
+          sortKey: -1746222752139
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+                "cep": "181200000",
+                "endereco": "ssss",
+                "cidade": "Mairinque",
+                "estado": "SP",
+                "descricao": "ssssssss",
+                "lixeiras": [
+                    {
+                        "material": "Plástico",
+                        "descricao": "",
+                        "capacidade": "10",
+                        "cor": "Verde",
+                        "observacao": "ss",
+                        "nivel_lixeira": "1",
+                        "cor_id": 1,
+                        "mat_colet_id": 1
+                    },
+            			{
+                        "material": "Plástico",
+                        "descricao": "",
+                        "capacidade": "10",
+                        "nivelLixeira": 0,
+                        "cor": "Verde",
+                        "exibirBotaoAdicionarLixeira": true,
+                        "observacao": "ss",
+                        "nivel_lixeira": "25",
+                        "cor_id": 1,
+                        "mat_colet_id": 1
+                    }
+                ],
+                "nome": "ddddddddddd",
+                "bairro": "sss"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.0.2
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Logs
+    meta:
+      id: fld_824889eb94ba4a9fbd1b382b3c9b08c5
+      created: 1749225864550
+      modified: 1749225864550
+      sortKey: -1749225864550
+      description: ""
+    children:
+      - url: "{{ _.base_url }}/cadastrar_log_esp32"
+        name: New Request
+        meta:
+          id: req_71ec1f592dc34dbab514cca01183f48f
+          created: 1749225870481
+          modified: 1750012953513
+          isPrivate: false
+          description: ""
+          sortKey: -1749225870481
+        method: POST
+        body:
+          mimeType: application/json
+          text: |
+            [
+            	{
+            			
+            			"message": "-----------------", 
+            			"label": "SUCCESS", 
+            		 	"time_execucao": "12"
+            		}, 
+            		{
+            			"message": "Iniciando loop !", 
+            			"label": "SUCCESS", 
+            			"time_execucao": "12"
+            		}, 
+            		{
+            			"message": "Aguardando conexão...", 
+            			"label": "", 
+            			"time_execucao": "1"
+            		}
+            ]
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.1.0
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Estado
+    meta:
+      id: fld_d7621f3a31004b81b111b00297234c50
+      created: 1749927157722
+      modified: 1749927157722
+      sortKey: -1749927157722
+      description: ""
+    children:
+      - url: "{{ _.base_url }}/estados"
+        name: Estado
+        meta:
+          id: req_e945250f83a5452994a5771083249038
+          created: 1749927164063
+          modified: 1750015494569
+          isPrivate: false
+          description: ""
+          sortKey: -1749927164063
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.2.0
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Login
+    meta:
+      id: fld_678a17d4a6574e4e8261a0f16bdc56c9
+      created: 1750010875090
+      modified: 1750010875090
+      sortKey: -1750010875091
+      description: ""
+    children:
+      - url: "{{ _.base_url }}/login"
+        name: login
+        meta:
+          id: req_20697733dccd4bf28266d412ee6a1ad3
+          created: 1750010889162
+          modified: 1753656954954
+          isPrivate: false
+          description: ""
+          sortKey: -1750010889163
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	
+            	"usuario":"default",
+            	"senha":"default"
+            	
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.2.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/validar_token"
+        name: validarToken
+        meta:
+          id: req_2f15dc7884264bbd801d079010cf46b8
+          created: 1750545228378
+          modified: 1753656991817
+          isPrivate: false
+          description: ""
+          sortKey: -1750010889063
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	
+            "usuario":"default",
+            "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MDU0NzM0OSwianRpIjoiMmQwZTNmYzQtODJhMy00MjliLWI2MzYtNzBmYTllNDRmMjc5IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImRlZmF1bHQiLCJuYmYiOjE3NTA1NDczNDksImNzcmYiOiIwZDJmNzI3Zi1jMWQ3LTQ5MTUtOGE4Yi0zMDkxYTE5MTg0NGEiLCJleHAiOjE3NTA1NDc0MDl9.q5b3356kz2zyGBcvM3sut--u_M9onURH4hBfWdPTCLw"
+            	
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.2.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_afb14a43dd0072198709163041267430af7a7f5b
+    created: 1743355180621
+    modified: 1743355180621
+environments:
+  name: Base Environment
+  meta:
+    id: env_afb14a43dd0072198709163041267430af7a7f5b
+    created: 1743355180619
+    modified: 1753656516891
+    isPrivate: false
+  data:
+    base_url: http://127.0.0.1:5000
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MzY1NjUwNSwianRpIjoiNDdiNDZlYzYtMzliNi00NDZlLTgxMGMtOGYwZjgzMzA3NWFkIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImRlZmF1bHQiLCJuYmYiOjE3NTM2NTY1MDUsImNzcmYiOiIzY2U1ODEwMC1iYmIyLTQ4MTEtYmIxOS00YTFkNmY0OWE1ZGEiLCJleHAiOjE3NTM2NjAxMDV9.UHWSxxxsPyR_kCWc5b3uAPoaYVZRJeySv6mDKiLLf0s

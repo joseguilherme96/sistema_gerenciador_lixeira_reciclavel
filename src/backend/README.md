@@ -15,6 +15,250 @@ Foi desenvolvido API em Flask para recebimento de dados do usuário que usa o si
 - API WEBSOCKET para comunicação em tempo real com Flask-SocketIO
 - Proteção de rotas com Flask-JWT-Extended’s, criação e validação de tokens JWT.
 
+## Rotas das APIs
+
+O arquivo de importação das APIs se encontra-se na pasta [insomnia](insomnia/Insomnia_2025-07-27.yaml).
+E abaixo rotas detalhadas com dados que são enviados, estão organizadas por grupos de APIs.
+
+### Login
+
+| Método |        URL       |
+| ------ | ---------------- |
+| POST   | `/login`         |
+| POST   | `/validar_token` |
+
+POST /login
+```json
+{
+  "email": "default",
+  "senha": "default"
+}
+
+```
+
+POST /validar_token
+```json
+{
+	
+"usuario":"default",
+"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MDU0NzM0OSwianRpIjoiMmQwZTNmYzQtODJhMy00MjliLWI2MzYtNzBmYTllNDRmMjc5IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImRlZmF1bHQiLCJuYmYiOjE3NTA1NDczNDksImNzcmYiOiIwZDJmNzI3Zi1jMWQ3LTQ5MTUtOGE4Yi0zMDkxYTE5MTg0NGEiLCJleHAiOjE3NTA1NDc0MDl9.q5b3356kz2zyGBcvM3sut--u_M9onURH4hBfWdPTCLw"
+	
+}
+
+```
+
+### GrupoLixeira
+
+| Método | URL                        |
+| ------ | -------------------------- |
+| POST   | `/grupo_lixeira`           |
+| POST   | `/cadastrar_grupo_lixeira` |
+
+POST /cadastrar_grupo_lixeira
+```json
+{
+  "nome": "Grupo Y",
+  "descricao": "Lixeiras para coleta de metais",
+  "cep": "18909999",
+  "endereco": "Avenida de Minas",
+  "cidade": "Sorocaba",
+  "bairro": "Jardim",
+  "estado": "Minas Gerais"
+}
+```
+### Lixeira
+
+| Método | URL                        |
+| ------ | -------------------------- |
+| PUT    | `/atualizar_nivel_lixeira` |
+| POST   | `/cadastrar_lixeira`       |
+| POST   | `/get_lixeira`             |
+| POST   | `/lixeira_grupo_lixeira`   |
+
+PUT /atualizar_nivel_lixeira
+```json
+{
+  "lixeira_id": 1,
+  "nivel_lixeira": 20,
+  "esta_aberta": true
+}
+```
+
+POST /cadastrar_lixeira
+
+```json
+[
+  {
+    "tets": "ss",
+    "mat_colet_id": 1,
+    "grupo_lixeira_id": 1,
+    "ponto_lixo_id": "5",
+    "cor_id": 1,
+    "descricao": "Lixeira 1",
+    "capacidade": "100",
+    "nivel_lixeira": "10",
+    "observacao": ""
+  }
+]
+
+```
+
+### InformativoPontoLixo
+
+| Método | URL                              |
+| ------ | -------------------------------- |
+| POST   | `/cadastrar_informativo_lixeira` |
+| POST   | `/get_informativo_lixeira`       |
+
+POST /cadastrar_informativo_lixeira
+```json
+{
+  "ponto_lixo_id": "6",
+  "informado_por_id": "1",
+  "nivel_lixeira": 1,
+  "observacao": "Lixeira começou a encher"
+}
+
+```
+
+### PontoLixo
+
+| Método | URL                     |
+| ------ | ----------------------- |
+| POST   | `/cadastrar_ponto_lixo` |
+| POST   | `/ponto_lixo`           |
+
+POST /cadastrar_ponto_lixo
+```json
+{
+  
+}
+```
+POST /ponto_lixo
+```json
+{
+  "ponto_lixo_id": "",
+  "data": "",
+  "hora": ""
+}
+```
+
+
+### MaterialColetado
+
+| Método | URL                            |
+| ------ | ------------------------------ |
+| POST   | `/cadastrar_material_coletado` |
+| POST   | `/material_coletado`           |
+
+POST /cadastrar_material_coletado
+```json
+{
+  "nome": "Metal"
+}
+
+```
+### Cor
+
+| Método | URL              |
+| ------ | ---------------- |
+| POST   | `/cor`           |
+| POST   | `/cadastrar_cor` |
+
+POST /cor
+```json
+{
+	
+	"cor_id":"",
+	"nome":""
+	
+}
+
+```
+POST /cadastrar_cor
+```json
+{
+  "nome": ""
+}
+
+```
+
+### GrupoLixeiraPontoLixoLixeira
+
+| Método | URL                                           |
+| ------ | --------------------------------------------- |
+| POST   | `/cadastrar_grupo_lixeira_ponto_lixo_lixeira` |
+
+POST /cadastrar_grupo_lixeira_ponto_lixo_lixeira
+```json
+{
+    "cep": "181200000",
+    "endereco": "Rua Figueiredo Nº 25",
+    "cidade": "Mairinque",
+    "estado": "SP",
+    "descricao": "",
+    "nome": "ddddddddddd",
+    "bairro": "sss",
+    "lixeiras": [
+        {
+        "material": "Plástico",
+        "descricao": "",
+        "capacidade": "10",
+        "cor": "Verde",
+        "observacao": "",
+        "nivel_lixeira": "1",
+        "cor_id": 1,
+        "mat_colet_id": 2
+        },
+        {
+        "material": "Metal",
+        "descricao": "",
+        "capacidade": "10",
+        "cor": "Verde",
+        "observacao": "",
+        "nivel_lixeira": "25",
+        "cor_id": 1,
+        "mat_colet_id": 1
+        }
+    ],
+}
+````
+
+
+### Logs
+
+| Método | URL                    |
+| ------ | ---------------------- |
+| POST   | `/cadastrar_log_esp32` |
+
+POST /cadastrar_log_esp32
+```json
+[
+  {
+    "message": "-----------------",
+    "label": "SUCCESS",
+    "time_execucao": "12"
+  },
+  {
+    "message": "Iniciando loop !",
+    "label": "SUCCESS",
+    "time_execucao": "12"
+  },
+  {
+    "message": "Aguardando conexão...",
+    "label": "",
+    "time_execucao": "1"
+  }
+]
+
+```
+
+### Estado
+
+| Método | URL        |
+| ------ | ---------- |
+| GET    | `/estados` |
+
 
 ## Instalação
 
